@@ -40,6 +40,9 @@
         <%CargaCombosO consulta = new CargaCombosO();%>
         <form id="form" action="Guarda_organo" method="post">
             <br>
+            <div style="display: none">
+                <input type="text" id="campoFechaHora" name="campoFechaHora" readonly>
+            </div>
               <fieldset>
                 <legend>Datos del órgano jurisdiccional</legend>
             <table cellspacing="3" cellpadding="3" border="0" >               

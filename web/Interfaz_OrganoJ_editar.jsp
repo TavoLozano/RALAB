@@ -75,6 +75,10 @@
                 
             }
         %>
+        
+        <div ">
+                <input type="text" id="campoFechaHora" name="campoFechaHora" readonly>
+            </div>
         <form id="form" action="Actualiza_organo" method="post">
             <br>
             <div style="display: none">
@@ -274,4 +278,13 @@ request.setAttribute("horaFin", horaFin);
         </form>
                  
     </body>
+    <script>
+        function mostrarFechaHora() {
+           const fecha = new Date();
+            const campoTexto = document.getElementById("campoFechaHora");
+            campoTexto.value = fecha.toLocaleString();
+        }
+      
+        setInterval(mostrarFechaHora,1000)
+    </script>
 </html>

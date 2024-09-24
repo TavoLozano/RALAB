@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 
 public class Sentencia_actualizar_organo {
-    public boolean registrar(String id, String nombre, String sede, int idEM, String colonia, String latitud, String longitud, int circunscripcion, int jurisdiccion, String horario, String esp) {
+    public boolean registrar(String id, String nombre, String sede, int idEM, String colonia, String latitud, String longitud, int circunscripcion, int jurisdiccion, String horario, String esp, String fechaMod) {
         Connection conn = null;
         PreparedStatement stm = null;
 
@@ -30,6 +30,7 @@ public class Sentencia_actualizar_organo {
             System.out.println("Jurisdicción: " + jurisdiccion);
             System.out.println("Horario: " + horario);
             System.out.println("Descripción especial: " + esp);
+            
 
             if (circunscripcion == 4) {
                 CargaCombosO cargar = new CargaCombosO();

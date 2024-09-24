@@ -215,3 +215,13 @@ function confirmarGuardar() {
         return false; // Cancelar el envío del formulario
     }
 }
+
+ function mostrarFechaHora() {
+           const fecha = new Date();
+            const campoTexto = document.getElementById("campoFechaHora");
+            campoTexto.value = fecha.toLocaleString();
+        }
+      
+        setInterval(mostrarFechaHora,1000)
+   
+// Ejecutar la función al cargar la página y cada segundo

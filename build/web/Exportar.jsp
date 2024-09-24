@@ -16,7 +16,7 @@
 <script defer src="js/fecha.js"></script>
     </head>
     <body>
-        <--!<!-- comment -->
+     
         <header id="main-header1">
     <a id="logo-header" href="index.jsp"><img src="IMAGENES/LOGO RALAB largo blanco.png" height="110"> &nbsp;&nbsp;&nbsp; ESTATAL</a>
     <nav> 

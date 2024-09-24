@@ -80,7 +80,7 @@ public class Guarda_organo extends HttpServlet
           
             //Obtiene el valor de otra circunscripcion en caso de ser seleccionada dicha opcion
             String OtraCir=request.getParameter("OtraCir");
-            
+            String fechaG = request.getParameter("campoFechaHora");
            
           
             //Obtiene el id interno de la entidad municipio en el catalog
@@ -93,7 +93,7 @@ public class Guarda_organo extends HttpServlet
             
             
             //Se invoca al metodo que realiza el registro en la BD
-            if (gestorBD.registrar(id, nombre, sede, idEM, colonia, latitud, longitud, circunscripcion, jurisdiccion, horario, OtraCir))
+            if (gestorBD.registrar(id, nombre, sede, idEM, colonia, latitud, longitud, circunscripcion, jurisdiccion, horario, OtraCir, fechaG))
             {
                  
                 response.sendRedirect("/Proyecto_RALAB/Interfaz_Expediente.jsp");

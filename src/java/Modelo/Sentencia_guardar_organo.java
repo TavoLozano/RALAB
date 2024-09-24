@@ -6,7 +6,7 @@ import java.sql.Statement;
 
 public class Sentencia_guardar_organo 
 {
-    public boolean registrar(String id, String nombre, String sede, int idEM, String colonia, String latitud, String longitud, int circunscripcion, int jurisdiccion, String horario, String esp)
+    public boolean registrar(String id, String nombre, String sede, int idEM, String colonia, String latitud, String longitud, int circunscripcion, int jurisdiccion, String horario, String esp, String fecha_guardado)
     {
     Connection conn;
     Statement stm;
@@ -27,8 +27,8 @@ public class Sentencia_guardar_organo
                                                                                                        +" VALUES ("+id_cir+", '"+esp+"')");
            circunscripcion=id_cir;
         }
-        resultUpdate = stm.executeUpdate("insert into TR_ORGANOJ (id_organoj, nombre_organoj, sede_organoj, id_ent_mpio, colonia, latitud, longitud, id_circunscripcion, id_jurisdiccion, hr_atencion) "
-                                                      + " VALUES ('"+id+"', '"+nombre+"', '"+sede+"', "+idEM+", '"+colonia+"', '"+latitud+"', '"+longitud+"', "+circunscripcion+", "+jurisdiccion+", '"+horario+"')");
+        resultUpdate = stm.executeUpdate("insert into TR_ORGANOJ (id_organoj, nombre_organoj, sede_organoj, id_ent_mpio, colonia, latitud, longitud, id_circunscripcion, id_jurisdiccion, hr_atencion, fecha_guardado) "
+                                                      + " VALUES ('"+id+"', '"+nombre+"', '"+sede+"', "+idEM+", '"+colonia+"', '"+latitud+"', '"+longitud+"', "+circunscripcion+", "+jurisdiccion+", '"+horario+"', '"+fecha_guardado+"')");
        
         if(resultUpdate != 0)
         {
