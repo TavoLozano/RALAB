@@ -44,52 +44,52 @@
                   ResultSet rs;
                   obj.conectar();
                   
-                  String clave_org = request.getParameter("cve_org");
-                  ps=obj.con.prepareStatement("SELECT juez_individua_h, juez_individual_m, juez_colectivo_h, juez_colectivo_m, juez_mixto_h, juez_mixtos_m, subtotal_juez_h, subtotal_juez_m, total_jueces, total_individual, total_colectivo, total_huelga, total_col_nat_econ, total_paraprocesal, total_tercerias, total_pref_cred, total_ejecucion FROM TR_GENERAL where id_organoj = ?");
-                  ps.setString(1, clave_org);
+                  String clave_org = request.getParameter("cve");
+                  ps=obj.con.prepareStatement("SELECT juez_individua_h, juez_individual_m, juez_colectivo_h, juez_colectivo_m, juez_mixto_h, juez_mixtos_m, subtotal_juez_h, subtotal_juez_m, total_jueces, total_ordinario, total_individual, total_colectivo, total_huelga, total_col_nat_econ, total_paraprocesal, total_tercerias, total_pref_cred, total_ejecucion FROM TR_GENERAL where id_organoj = '1304801' ");
+                 // ps.setString(1, valor);
                   rs=ps.executeQuery();
                   
                   if(rs.next())
                   {
-                        String jihE = rs.getString(" juez_individua_h");
-                        String jimE = rs.getString("juez_individual_m");
-                        String jchE = rs.getString("juez_colectivo_h");
-                        String jcmE = rs.getString("juez_colectivo_m");
-                        String jmhE = rs.getString("juez_mixto_h");
-                        String jmmE = rs.getString("juez_mixtos_m");
-                        String jhsE = rs.getString("subtotal_juez_h");
-                        String jmsE = rs.getString("subtotal_juez_m");
-                        String tjE = rs.getString("total_jueces");
-                        String ordE = rs.getString("total_ordinario");
-                        String indE = rs.getString("total_individual");
-                        String colE = rs.getString("total_colectivo");
-                        String hueE = rs.getString("total_huelga");
-                        String cneE = rs.getString("total_col_nat_econ");
-                        String pvE = rs.getString("total_paraprocesal");
-                        String terE = rs.getString("total_tercerias");
-                        String pcE = rs.getString("total_pref_cred");
-                        String ejeE = rs.getString("total_ejecucion");
+                        String juez_individua_h = rs.getString("juez_individua_h");
+                        String juez_individual_m = rs.getString("juez_individual_m");
+                        String juez_colectivo_h = rs.getString("juez_colectivo_h");
+                        String juez_colectivo_m = rs.getString("juez_colectivo_m");
+                        String juez_mixto_h = rs.getString("juez_mixto_h");
+                        String juez_mixtos_m = rs.getString("juez_mixtos_m");
+                        String subtotal_juez_h = rs.getString("subtotal_juez_h");
+                        String subtotal_juez_m = rs.getString("subtotal_juez_m");
+                        String total_jueces = rs.getString("total_jueces");
+                        String total_ordinario = rs.getString("total_ordinario");
+                        String total_individual = rs.getString("total_individual");
+                        String total_colectivo = rs.getString("total_colectivo");
+                        String total_huelga = rs.getString("total_huelga");
+                        String total_col_nat_econ = rs.getString("total_col_nat_econ");
+                        String total_paraprocesal = rs.getString("total_paraprocesal");
+                        String total_tercerias = rs.getString("total_tercerias");
+                        String total_pref_cred = rs.getString("total_pref_cred");
+                        String total_ejecucion = rs.getString("total_ejecucion");
                 
 
                 // Guardar en el request
-                request.setAttribute("juez_individua_h", jihE);
-                request.setAttribute("juez_individual_m", jimE);
-                request.setAttribute("juez_colectivo_h", jchE);
-                request.setAttribute("juez_colectivo_m", jcmE);
-                request.setAttribute("juez_mixto_h", jmhE);
-                request.setAttribute("juez_mixtos_m", jmmE);
-                request.setAttribute("subtotal_juez_h", jhsE);
-                request.setAttribute("subtotal_juez_m", jmsE);
-                request.setAttribute("total_jueces", tjE);
-                request.setAttribute("total_ordinario", ordE);
-                request.setAttribute("total_individual", indE);
-                request.setAttribute("total_colectivo", colE);
-                request.setAttribute("total_huelga", hueE);
-                request.setAttribute("total_col_nat_econ", cneE);
-                request.setAttribute("total_paraprocesal", pvE);
-                request.setAttribute("total_tercerias", terE);
-                request.setAttribute("total_pref_cred", pcE);
-                request.setAttribute("total_ejecucion", ejeE);
+                request.setAttribute("juez_individua_h", juez_individua_h);
+                request.setAttribute("juez_individual_m", juez_individual_m);
+                request.setAttribute("juez_colectivo_h", juez_colectivo_h);
+                request.setAttribute("juez_colectivo_m", juez_colectivo_m);
+                request.setAttribute("juez_mixto_h", juez_mixto_h);
+                request.setAttribute("juez_mixtos_m", juez_mixtos_m);
+                request.setAttribute("subtotal_juez_h", subtotal_juez_h);
+                request.setAttribute("subtotal_juez_m", subtotal_juez_m);
+                request.setAttribute("total_jueces", total_jueces);
+                request.setAttribute("total_ordinario", total_ordinario);
+                request.setAttribute("total_individual", total_individual);
+                request.setAttribute("total_colectivo", total_colectivo);
+                request.setAttribute("total_huelga", total_huelga);
+                request.setAttribute("total_col_nat_econ", total_col_nat_econ);
+                request.setAttribute("total_paraprocesal", total_paraprocesal);
+                request.setAttribute("total_tercerias", total_tercerias);
+                request.setAttribute("total_pref_cred", total_pref_cred);
+                request.setAttribute("total_ejecucion", total_ejecucion);
               
                   }
     
@@ -105,38 +105,38 @@
         <table cellspacing="3" cellpadding="3" border="0" > 
         <tr>
             <td><label for="jih">Jueces individuales<span class="req">*</label></td>
-            <td><input type="number" id="jih" name="jih" oninput="validarEntero(this)" value="${jihE}" onkeyup="sumarValores()" onchange="funcionNegA()" required min="0" oninput="validarNumeroPositivo(this)"></td>
+            <td><input type="number" id="jih" name="jih" oninput="validarEntero(this)" value="${juez_individua_h}" onkeyup="sumarValores()" onchange="funcionNegA()" required min="0" oninput="validarNumeroPositivo(this)"></td>
              <td><label for="jim">Juezas individuales <span class="req">*</label></td>
-            <td><input type="number" id="jim" name="jim" oninput="validarEntero(this)" valu="${jimE}" onkeyup="sumarValores()" onchange="funcionNegB()"  required min="0" oninput="validarNumeroPositivo(this)"></td>
+            <td><input type="number" id="jim" name="jim" oninput="validarEntero(this)" value="${juez_individual_m}" onkeyup="sumarValores()" onchange="funcionNegB()"  required min="0" oninput="validarNumeroPositivo(this)"></td>
           
         </tr>
            
          <tr>
              <td><label for="jch">Jueces colectivos<span class="req">*</label></td>
-            <td><input type="number" id="jch" name="jch" oninput="validarEntero(this)" value="${jchE}" onkeyup="sumarValores()" onchange="funcionNegC()"  required min="0" oninput="validarNumeroPositivo(this)"></td>
+            <td><input type="number" id="jch" name="jch" oninput="validarEntero(this)" value="${juez_colectivo_h}" onkeyup="sumarValores()" onchange="funcionNegC()"  required min="0" oninput="validarNumeroPositivo(this)"></td>
             <td><label for="jcm">Juezas colectivas<span class="req">*</label></td>
-            <td><input type="number" id="jcm" name="jcm" oninput="validarEntero(this)" value="${jcmE}" onkeyup="sumarValores()" onchange="funcionNegD()"  required min="0" oninput="validarNumeroPositivo(this)"></td>
+            <td><input type="number" id="jcm" name="jcm" oninput="validarEntero(this)" value="${juez_colectivo_m}" onkeyup="sumarValores()" onchange="funcionNegD()"  required min="0" oninput="validarNumeroPositivo(this)"></td>
         </tr>
         
          <tr>
             <td><label for="jmh">Jueces mixtos (hombres)<span class="req">*</label></td>
-            <td><input type="number" id="jmh" name="jmh" oninput="validarEntero(this)" value="${jmhE}" onkeyup="sumarValores()" onchange="funcionNegE()"   onblur="sumarValores()"  required min="0" oninput="validarNumeroPositivo(this)"></td>
+            <td><input type="number" id="jmh" name="jmh" oninput="validarEntero(this)" value="${juez_mixto_h}" onkeyup="sumarValores()" onchange="funcionNegE()"   onblur="sumarValores()"  required min="0" oninput="validarNumeroPositivo(this)"></td>
              <td><label for="jmm">Juezas mixtas (mujeres) <span class="req">*</label></td>
-             <td><input type="number" id="jmm" name="jmm" oninput="validarEntero(this)" value="${jmhE}" onkeyup="sumarValores()" onchange="funcionNegF()"  onblur="sumarValores()" required min="0" oninput="validarNumeroPositivo(this)"></td>
+             <td><input type="number" id="jmm" name="jmm" oninput="validarEntero(this)" value="${juez_mixtos_m}" onkeyup="sumarValores()" onchange="funcionNegF()"  onblur="sumarValores()" required min="0" oninput="validarNumeroPositivo(this)"></td>
         </tr>          
         
          <tr>
            <td><label for="sjh">Subtotal jueces</label></td>
-            <td><input type="number" id="sjh" name="sjh" value="${jhsE}" readonly ></td>
+            <td><input type="number" id="sjh" name="sjh" value="${subtotal_juez_h}" readonly ></td>
              <td><label for="sjm">Subtotal juezas</label></td>
-            <td><input type="number" id="sjm" name="sjm" value="${jhsE}" readonly></td>
+            <td><input type="number" id="sjm" name="sjm" value="${subtotal_juez_m}" readonly></td>
         </tr>
     </table>
             
             
        <table cellspacing="3" cellpadding="3" border="0" class="out" >
       <td><label for="tj" class="out">Total de jueces y juezas</label></td>
-           <td><input type="number" id="tj" name="tj" value="${tjE}" readonly class="out"></td>
+           <td><input type="number" id="tj" name="tj" value="${total_jueces}" readonly class="out"></td>
            </table>
                 
             </fieldset>
@@ -163,36 +163,36 @@
           <table cellspacing="3" cellpadding="3" border="0" >
         <tr>
            <td><label for="ord">Ordinario <span class="req">*</label></td>
-           <td><input type="number" id="ord" name="ord" value="${ordE}" required min="-2"  onblur="sumarExpedientes()" onchange="funcionNeg1()" oninput="validarNumeroPositivo(this); validarEntero(this)"></td>
+           <td><input type="number" id="ord" name="ord" value="${total_ordinario}" required min="-2"  onblur="sumarExpedientes()" onchange="funcionNeg1()" oninput="validarNumeroPositivo(this); validarEntero(this)"></td>
             <td><label for="ind">Individual <span class="req">*</label></td>
-            <td><input type="number" id="ind" name="ind" value="${indE}" required min="-2" onchange="funcionNeg2()" onblur="sumarExpedientes()" oninput="validarNumeroPositivo(this)"></td>
+            <td><input type="number" id="ind" name="ind" value="${total_individual}" required min="-2" onchange="funcionNeg2()" onblur="sumarExpedientes()" oninput="validarNumeroPositivo(this)"></td>
         </tr>
        
          <tr>
            <td><label for="col">Colectivo <span class="req">*</label></td>
-            <td><input type="number" id="col" name="col" value="${colE}" required min="-2" onchange="funcionNeg3()" onblur="sumarExpedientes()" oninput="validarNumeroPositivo(this)"></td>
+            <td><input type="number" id="col" name="col" value="${total_colectivo}" required min="-2" onchange="funcionNeg3()" onblur="sumarExpedientes()" oninput="validarNumeroPositivo(this)"></td>
              <td><label for="huelga">Huelga <span class="req">*</label></td>
-            <td><input type="number" id="huelga"name="huelga" value="${hueE}" required min="-2" onchange="funcionNeg4()" onblur="sumarExpedientes()" oninput="validarNumeroPositivo(this)"></td>
+            <td><input type="number" id="huelga"name="huelga" value="${total_huelga}" required min="-2" onchange="funcionNeg4()" onblur="sumarExpedientes()" oninput="validarNumeroPositivo(this)"></td>
         </tr>
        
          <tr>
            <td><label for="cne">Colectivo de naturaleza económica<span class="req">*</label></td>
-            <td><input type="number" id="cne" name="cne" value="${cne}" required min="-2" onchange="funcionNeg5()" onblur="sumarExpedientes()" oninput="validarNumeroPositivo(this)"></td>
+            <td><input type="number" id="cne" name="cne" value="${total_col_nat_econ}" required min="-2" onchange="funcionNeg5()" onblur="sumarExpedientes()" oninput="validarNumeroPositivo(this)"></td>
             <td><label for="pv">Paraprocesal o voluntario <span class="req">*</label></td>
-            <td><input type="number" id="pv" name="pv" value="${pvE}" required min="-2" onchange="funcionNeg6()" onblur="sumarExpedientes()" oninput="validarNumeroPositivo(this)"></td>
+            <td><input type="number" id="pv" name="pv" value="${total_paraprocesal}" required min="-2" onchange="funcionNeg6()" onblur="sumarExpedientes()" oninput="validarNumeroPositivo(this)"></td>
         </tr>
          <tr>
            
         </tr>
          <tr>
            <td><label for="ter">Tercerías <span class="req">*</label></td>
-            <td><input type="number" id="ter" name="ter" value="${terE}" required min="-2" onchange="funcionNeg7()" onblur="sumarExpedientes()" oninput="validarNumeroPositivo(this)"></td>
+            <td><input type="number" id="ter" name="ter" value="${total_tercerias}" required min="-2" onchange="funcionNeg7()" onblur="sumarExpedientes()" oninput="validarNumeroPositivo(this)"></td>
             <td><label for="cred">Preferencia de crédito <span class="req">*</label></td>
-            <td><input type="number" id="cred" name="cred" value="${pcE}" required min="-2" onchange="funcionNeg8()" onblur="sumarExpedientes()" oninput="validarNumeroPositivo(this)"></td>
+            <td><input type="number" id="cred" name="cred" value="${total_pref_cred}" required min="-2" onchange="funcionNeg8()" onblur="sumarExpedientes()" oninput="validarNumeroPositivo(this)"></td>
         </tr>
             <tr>
            <td><label for="eje">Ejecución <span class="req">*</label></td>
-            <td><input type="number" id="eje" name="eje" value="${ejeE}" required min="-2" onchange="funcionNeg9()" onblur="sumarExpedientes()" oninput="validarNumeroPositivo(this)"></td>
+            <td><input type="number" id="eje" name="eje" value="${total_ejecucion}" required min="-2" onchange="funcionNeg9()" onblur="sumarExpedientes()" oninput="validarNumeroPositivo(this)"></td>
         </tr>
     </table> 
               <table cellspacing="3" cellpadding="3" border="0" class="out" >

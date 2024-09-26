@@ -91,12 +91,14 @@ public class SQL_Generales {
         try
         {
             conn=conexion.conectar();
-            consulta="SELECT id_organoj FROM TR_ORGANOJ";
+            consulta="SELECT id_organoj, nombre_organoj FROM TR_ORGANOJ";
             stmt = conn.prepareStatement(consulta);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                String dato = rs.getString("id_organoj"); // Cambia "columna" al nombre de tu columna en la tabla
-                resultados.add(dato);
+                String dato = rs.getString("id_organoj");
+                String dato2 =rs.getString("nombre_organoj");// Cambia "columna" al nombre de tu columna en la tabla
+                resultados.add(dato + " --> "+ dato2);
+   
             }
         }
         catch (SQLException e) {
@@ -128,6 +130,38 @@ public class SQL_Generales {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 String dato = rs.getString("nombre_organoj"); // Cambia "columna" al nombre de tu columna en la tabla
+                resultados.add(dato);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar las conexiones y recursos
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+         return resultados;
+     } 
+         public List<String> consultaOrganos3()
+     {
+        List<String> resultados=new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String consulta;
+        try
+        {
+            conn=conexion.conectar();
+            consulta="SELECT id_organoj FROM TR_ORGANOJ";
+            stmt = conn.prepareStatement(consulta);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String dato = rs.getString("id_organoj"); // Cambia "columna" al nombre de tu columna en la tabla
                 resultados.add(dato);
             }
         }

@@ -76,15 +76,24 @@
             }
         %>
         
-        <div ">
-                <input type="text" id="campoFechaHora" name="campoFechaHora" readonly>
-            </div>
+       
         <form id="form" action="Actualiza_organo" method="post">
             <br>
-            <div style="display: none">
-                  <input type="text"  id="cve" name="cve" value="<%= expedienteSeleccionado %>" hidden>
+             <div style="display: none">
+                <input type="text" id="campoFechaHora" name="campoFechaHora" readonly>
             </div>
+            
+                <table>
+                    <tr>
+                        <td> <label>Clave del órgano jurisdiccional:</label></td>
+                        <td> <input type="text" style="width: 150px" id="cve" name="cve" value="<%= expedienteSeleccionado %>" readonly></td>
+                    </tr>
+                </table>
+                 
+                 
+
            
+         
               <fieldset>
                 <legend>Datos del órgano jurisdiccional</legend>
                 
@@ -104,26 +113,34 @@
                 <table cellspacing="3" cellpadding="3"  border="0" >      
                 <tr>
                     <td><label for="E">Entidad <span class="req">*</label></td>
-                    <td> <select  id="E" name="E" readonly required>
+                    <td> 
+                        <input type="text" id="E1" name="E1" value="${entidad}" readonly>
+                            <!--
+                                <select  id="E" name="E"  >
                             
                             <%
-                                 String entidadSeleccionada = (String) request.getAttribute("entidad");
-                                List<String> resultadosEnt = consulta.consultaEntidad();
-                                for (String dato : resultadosEnt) {
+                             //    String entidadSeleccionada = (String) request.getAttribute("entidad");
+                               // List<String> resultadosEnt = consulta.consultaEntidad();
+                                //for (String dato : resultadosEnt) {
                             %>
-                            <option <%= dato.equals(entidadSeleccionada) ? "value='"+entidadSeleccionada+"' selected" : "" %>><%= dato %></option>
+                            <option <%//= dato.equals(entidadSeleccionada) ? "value='"+entidadSeleccionada+"' selected" : "" %>><%//= dato %></option>
 
-                            <% } %>
+                            <%// } %>
                             
                         </select>
+                            -->
                     </td>
                     
                      <td><label for="mun">Municipio <span class="req">*</label></td>
                     <td>
-                        <select id="M" name="M" required>
-                            <option value="${municipio}" selected>${municipio}</option>
+                        <input type="text" id="M1" name="M1" value="${municipio}" readonly>
+                        <!--
+                            <select id="M" name="M" >
+                            <option value="$//{municipio}" selected>$//{municipio}</option>
                             
                         </select>
+                         -->
+                        
                     </td>
                     
                      <td><label for="colonia">Colonia <span class="req">* </label></td>

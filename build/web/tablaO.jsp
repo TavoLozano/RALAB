@@ -80,14 +80,44 @@
                   ResultSet rs;
                   obj.conectar();
               %>
-            
-
-        <form action="Interfaz_OrganoJ.jsp" method='get'>
-            <input type='submit' value='+ Nuevo'/>
-        </form>
+             
+              <table>
+                  <tr>
+                      <td>
+                           <form action="Interfaz_OrganoJ.jsp" method='get'>
+                           <input type='submit' value='+ Nuevo'/>
+                           </form>
+                      </td>
+                      <td>
+                           <form action="Interfaz_OrganoJ_editar.jsp" method='get'>
+                               <select name="valor" id="valor" style="width: 600px" required>
+                                  <option value="">---Seleccione organo---</option>
+                                 <%
+                                   SQL_Generales consulta = new SQL_Generales();
+                                   List<String> resultadosOrg = consulta.consultaOrganos();
+                                   List<String> valores = consulta.consultaOrganos3();
+                                   int i=0;
+                                   String val;
+                                   for (String datos : resultadosOrg) {
+                                        val = valores.get(i);
+                                        i++;
+                                   %>
+                                  <option value="<%= val%>"><%= datos%></option>
+                                  <%
+                                    }
+                                  %>
+                             </select> 
+                 
+                             <input type='submit' value='Editar'/>
+                         </form>
+                   </td>
+                 </tr>
+              </table>
+       
+             
        
             <BR>
-             <%SQL_Generales consulta = new SQL_Generales();
+             <%
              %>
               
              
@@ -137,19 +167,7 @@
          
         <div>
             
-             <form action="Interfaz_OrganoJ_editar.jsp" method='get'>
-                 <select name="valor" id="valor" required>
-                             <option value="">---Seleccione organo---</option>
-                            <%
-                                List<String> resultadosOrg = consulta.consultaOrganos();
-                                for (String datos : resultadosOrg) {
-                            %>
-                            <option value="<%= datos%>"><%= datos%></option>
-                            <% } %>
-                        </select> 
-                 
-             <input type='submit' value='Editar'/>
-        </form>
+             
         </div>
         
     </body>

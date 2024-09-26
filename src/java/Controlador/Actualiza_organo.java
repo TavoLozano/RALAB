@@ -59,9 +59,9 @@ public class Actualiza_organo extends HttpServlet
                     +request.getParameter("horario1")+" a "+request.getParameter("horario2");
             
             //Obtiene el consecutivo concatenando las claves de la entidad, el municipio y el consecutivo
-            String entidad = request.getParameter("E");
-            String E=request.getParameter("E");
-            String municipio= request.getParameter("M");
+            String entidad = request.getParameter("E1");
+            String E=request.getParameter("E1");
+            String municipio= request.getParameter("M1");
             
             int consecutivo=obj.consecutivoOrgano(entidad, municipio)+1;
             String cons=""+consecutivo;
@@ -83,7 +83,7 @@ public class Actualiza_organo extends HttpServlet
           */
             //Obtiene el valor de otra circunscripcion en caso de ser seleccionada dicha opcion
             String OtraCir=request.getParameter("OtraCir");
-            
+            String fechaM = request.getParameter("campoFechaHora");
            
           
             //Obtiene el id interno de la entidad municipio en el catalog
@@ -96,7 +96,7 @@ public class Actualiza_organo extends HttpServlet
             
             
             //Se invoca al metodo que realiza el registro en la BD
-            if (gestorBD.registrar(id, nombre, sede, idEM, colonia, latitud, longitud, circunscripcion, jurisdiccion, horario, OtraCir))
+            if (gestorBD.registrar(id, nombre, sede, idEM, colonia, latitud, longitud, circunscripcion, jurisdiccion, horario, OtraCir, fechaM))
             {
                  //Si la sentencia se ejecuta, muestra el jsp con el mensaje de que el registro se guardó
 //                request.getRequestDispatcher("/Interfaz_Expediente.jsp").forward(request, response);

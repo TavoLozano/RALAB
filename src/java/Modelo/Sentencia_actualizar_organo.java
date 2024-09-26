@@ -30,7 +30,7 @@ public class Sentencia_actualizar_organo {
             System.out.println("Jurisdicción: " + jurisdiccion);
             System.out.println("Horario: " + horario);
             System.out.println("Descripción especial: " + esp);
-            
+            System.out.println("Fecha de modificacion: "+ fechaMod);
 
             if (circunscripcion == 4) {
                 CargaCombosO cargar = new CargaCombosO();
@@ -43,7 +43,7 @@ public class Sentencia_actualizar_organo {
                 circunscripcion = id_cir;
             }
 
-            String sqlOrganoj = "UPDATE TR_ORGANOJ SET nombre_organoj = ?, sede_organoj = ?, id_ent_mpio = ?, colonia = ?, latitud = ?, longitud = ?, id_circunscripcion = ?, id_jurisdiccion = ?, hr_atencion = ? WHERE id_organoj = '"+id+"' ";
+            String sqlOrganoj = "UPDATE TR_ORGANOJ SET nombre_organoj = ?, sede_organoj = ?, id_ent_mpio = ?, colonia = ?, latitud = ?, longitud = ?, id_circunscripcion = ?, id_jurisdiccion = ?, hr_atencion = ?, fecha_modificacion = ?  WHERE id_organoj = '"+id+"' ";
             stm = conn.prepareStatement(sqlOrganoj);
             stm.setString(1, nombre);
             stm.setString(2, sede);
@@ -54,6 +54,7 @@ public class Sentencia_actualizar_organo {
             stm.setInt(7, circunscripcion);
             stm.setInt(8, jurisdiccion);
             stm.setString(9, horario);
+            stm.setString(10, fechaMod);
             //stm.setString(10, id); // Suponiendo que `id_organoj` es la clave primaria
             resultUpdate = stm.executeUpdate();
 

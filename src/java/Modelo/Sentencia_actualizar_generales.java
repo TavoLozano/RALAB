@@ -40,7 +40,7 @@ public class Sentencia_actualizar_generales {
             System.out.println("Ejecución " + eje);
 
            
-            String sqlOrganoj = "UPDATE TR_GENERAL SET id_organoj=?, juez_individua_h = ?,juez_individual_m = ?,  juez_colectivo_h = ?, juez_colectivo_m = ?, juez_mixto_h = ?, juez_mixtos_m = ?, subtotal_juez_h = ?, subtotal_juez_m = ?, total_jueces= ?, total_ordinario = ?, total_individual = ?, total_colectivo = ?, total_huelga = ?, total_col_nat_econ = ?, total_paraprocesal = ?, total_tercerias = ?, total_pref_cred = ?, total_ejecucion = ? WHERE id_organoj = '"+id_org+"' ";
+            String sqlOrganoj = "UPDATE TR_GENERAL SET id_organoj=?, juez_individua_h = ?,juez_individual_m = ?,  juez_colectivo_h = ?, juez_colectivo_m = ?, juez_mixto_h = ?, juez_mixtos_m = ?, subtotal_juez_h = ?, subtotal_juez_m = ?, total_jueces= ?, total_ordinario = ?, total_individual = ?, total_colectivo = ?, total_huelga = ?, total_col_nat_econ = ?, total_paraprocesal = ?, total_tercerias = ?, total_pref_cred = ?, total_ejecucion = ? WHERE id_organoj = ? ";
             stm = conn.prepareStatement(sqlOrganoj);
             stm.setString(1,  id_org);
             stm.setInt(2,  juezIndH);
@@ -61,7 +61,7 @@ public class Sentencia_actualizar_generales {
             stm.setInt(17, ter);
             stm.setInt(18, cred);
             stm.setInt(19, eje);
-            //stm.setString(10, id); // Suponiendo que `id_organoj` es la clave primaria
+            stm.setString(20, id_org); // Suponiendo que `id_organoj` es la clave primaria
             resultUpdate = stm.executeUpdate();
 
             if (resultUpdate != 0) {

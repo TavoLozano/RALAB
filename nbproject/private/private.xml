@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/RALAB_OPEN_JAVA/Proyecto_RALAB/src/java/Combos/CargaCombosO.java</file>
-            <file>file:/D:/RALAB_OPEN_JAVA/Proyecto_RALAB/web/Interfaz_Expediente.jsp</file>
-            <file>file:/D:/RALAB_OPEN_JAVA/Proyecto_RALAB/web/Interfaz_main.jsp</file>
-            <file>file:/D:/RALAB_OPEN_JAVA/Proyecto_RALAB/web/js/ValidacionesActores.js</file>
-            <file>file:/D:/RALAB_OPEN_JAVA/Proyecto_RALAB/src/java/Combos/CargaCombosActores.java</file>
-            <file>file:/D:/RALAB_OPEN_JAVA/Proyecto_RALAB/web/Expediente_procedimientos.jsp</file>
-            <file>file:/D:/RALAB_OPEN_JAVA/Proyecto_RALAB/src/java/Modelo/Sentencia_guarda_procedimiento.java</file>
-            <file>file:/D:/RALAB_OPEN_JAVA/Proyecto_RALAB/src/java/Controlador/GuardaActor.java</file>
+            <file>file:/D:/KRAKEN/RALAB/src/java/Modelo/Sentencia_actualizar_organo.java</file>
+            <file>file:/D:/KRAKEN/RALAB/web/Interfaz_OrganoJ_editar.jsp</file>
+            <file>file:/D:/KRAKEN/RALAB/src/java/Modelo/Sentencia_actualizar_generales.java</file>
+            <file>file:/D:/KRAKEN/RALAB/src/java/Controlador/Actualiza_generales.java</file>
+            <file>file:/D:/KRAKEN/RALAB/src/java/Controlador/Actualiza_organo.java</file>
+            <file>file:/D:/KRAKEN/RALAB/web/tablaO.jsp</file>
+            <file>file:/D:/KRAKEN/RALAB/web/Interfaz_Expediente_editar.jsp</file>
         </group>
     </open-files>
 </project-private>
