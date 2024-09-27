@@ -133,7 +133,7 @@
                         
                                 <label>Sector de la rama o materia industrial involucrada </label>     
                           
-                                <select id="sector" name="sector" onchange="sectorSubsector('sector', 'subsector');" style="width: 300px" required>
+                                <select id="sector" name="sector" onchange="sectorSubsector('sector', 'subsector');" style="width: 300px" >
                                     <option value="">---Seleccione sector---</option>
                                     <%
                                         List<String> sectorS = obj.sector();
@@ -148,7 +148,7 @@
                         <p>
                                 <label>Subsector de la rama o materia industrial involucrada </label>      
                           
-                                <select id="subsector" name="subsector" style="width: 420px" required>
+                                <select id="subsector" name="subsector" style="width: 420px" >
                                     <option value="">---Seleccione subsector---</option>
                                 </select>
                         </p>
@@ -157,7 +157,7 @@
                         <p>
                                 <label>Entidad donde se sucitó el conflicto </label>     
                          
-                                <select id="entidad" name="entidad" style="width: 420px" onchange="entiMunicipio('entidad', 'municipio')" required>
+                                <select id="entidad" name="entidad" style="width: 420px" onchange="entiMunicipio('entidad', 'municipio') " >
                                     <option value="">---Seleccione entidad---</option>
                                     <%
                                         List<String> entidad = cco.consultaEntidad();
@@ -168,7 +168,7 @@
                                 </select>
                                 <br>
                                 <label >Municipio donde se sucitó el conflicto</label> 
-                                <select id="municipio" name="municipio" style="width: 300px" required>
+                                <select id="municipio" name="municipio" style="width: 300px" >
                                     <option value="">---Seleccione Municipio---</option>
                                 </select>
                         </p>

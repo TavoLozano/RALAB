@@ -44,8 +44,8 @@
                   ResultSet rs;
                   obj.conectar();
                   
-                  String clave_org = request.getParameter("cve");
-                  ps=obj.con.prepareStatement("SELECT juez_individua_h, juez_individual_m, juez_colectivo_h, juez_colectivo_m, juez_mixto_h, juez_mixtos_m, subtotal_juez_h, subtotal_juez_m, total_jueces, total_ordinario, total_individual, total_colectivo, total_huelga, total_col_nat_econ, total_paraprocesal, total_tercerias, total_pref_cred, total_ejecucion FROM TR_GENERAL where id_organoj = '1304801' ");
+                  String clave_org = (String) session.getAttribute("id");
+                  ps=obj.con.prepareStatement("SELECT juez_individua_h, juez_individual_m, juez_colectivo_h, juez_colectivo_m, juez_mixto_h, juez_mixtos_m, subtotal_juez_h, subtotal_juez_m, total_jueces, total_ordinario, total_individual, total_colectivo, total_huelga, total_col_nat_econ, total_paraprocesal, total_tercerias, total_pref_cred, total_ejecucion FROM TR_GENERAL where id_organoj = '"+clave_org+"' ");
                  // ps.setString(1, valor);
                   rs=ps.executeQuery();
                   
@@ -95,7 +95,7 @@
     
     %>
     
-<form action="Guarda_generales" method="post">
+<form action="Actualiza_generales" method="post">
     
   <table cellspacing="3" cellpadding="3" border="0" class="out" >
       <td><label for="id_org" class="out">CLAVE DEL ÓRGANO JURISDICCIONAL  </label></td>

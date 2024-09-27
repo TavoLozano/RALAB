@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "Guarda_generales", urlPatterns = {"/Guarda_generales"})
+@WebServlet(name = "Actualiza_generales", urlPatterns = {"/Actualiza_generales"})
 public class Actualiza_generales extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
@@ -27,7 +27,7 @@ public class Actualiza_generales extends HttpServlet {
         {
             SQL_Generales obj=new SQL_Generales();
             //int id_g = obj.consecutivoG()+1;
-            String id_organoj = request.getParameter("cajaTexto");
+            String id_organoj = request.getParameter("cve_org");
             int juezIndH = Integer.parseInt(request.getParameter("jih"));
             int juezIndM = Integer.parseInt(request.getParameter("jim"));
             int juezColH = Integer.parseInt(request.getParameter("jch"));

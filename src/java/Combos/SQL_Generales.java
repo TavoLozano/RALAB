@@ -97,7 +97,7 @@ public class SQL_Generales {
             while (rs.next()) {
                 String dato = rs.getString("id_organoj");
                 String dato2 =rs.getString("nombre_organoj");// Cambia "columna" al nombre de tu columna en la tabla
-                resultados.add(dato + " --> "+ dato2);
+                resultados.add(dato + " --- "+ dato2);
    
             }
         }

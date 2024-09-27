@@ -5,6 +5,9 @@
         <group>
             <file>file:/D:/KRAKEN/RALAB/src/java/Modelo/Sentencia_actualizar_organo.java</file>
             <file>file:/D:/KRAKEN/RALAB/web/Interfaz_OrganoJ_editar.jsp</file>
+            <file>file:/D:/KRAKEN/RALAB/src/java/Controlador/GuardaProcedimiento.java</file>
+            <file>file:/D:/KRAKEN/RALAB/web/Interfaz_main.jsp</file>
+            <file>file:/D:/KRAKEN/RALAB/web/Expediente_procedimientos.jsp</file>
             <file>file:/D:/KRAKEN/RALAB/src/java/Modelo/Sentencia_actualizar_generales.java</file>
             <file>file:/D:/KRAKEN/RALAB/src/java/Controlador/Actualiza_generales.java</file>
             <file>file:/D:/KRAKEN/RALAB/src/java/Controlador/Actualiza_organo.java</file>
