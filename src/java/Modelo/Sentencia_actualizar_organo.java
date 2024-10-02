@@ -4,7 +4,7 @@ import Combos.CargaCombosO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 
 
 public class Sentencia_actualizar_organo {

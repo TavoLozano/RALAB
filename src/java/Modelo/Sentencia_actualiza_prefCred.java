@@ -1,32 +1,50 @@
 package Modelo;
 
-
 import Combos.CargaCombosProcedimientos;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 
-public class Sentencia_actualiza_prefCred 
-{  
-
-     public boolean registrarProcedimiento(Integer id_expediente, Integer id_tipo_expediente, String id_organoj, String clave_expediente, String fecha_apertura_exped, String fecha_present_promo, String fecha_admision_promo, Integer id_promovente, Integer id_estatus_exped,  String fecha_dicto_solucion, String comentarios)
-    {
+public class Sentencia_actualiza_prefCred {  
+     public boolean registrarProcedimiento(Integer id_tipo_expediente, String clave_expediente, String fecha_apertura_exped, String fecha_present_promo, String fecha_admision_promo, Integer id_promovente, Integer id_estatus_exped,  String fecha_dicto_solucion, String comentarios) {
          Connection conn;
-         Statement stm;
+          PreparedStatement stm = null;
+         
          ConectaBD obj=new ConectaBD();
          CargaCombosProcedimientos combosPro=new CargaCombosProcedimientos();
          int resultUpdate = 0;
                 
-         try
-        {
+         try {
              conn = obj.conectar();
-             stm = conn.createStatement(); 
-        
-             resultUpdate = stm.executeUpdate("INSERT INTO TR_EXPEDIENTE  (id_expediente, id_tipo_expediente, id_organoj, clave_expediente, fecha_apertura_exped, fecha_present_promo, fecha_admision_promo, id_promovente, id_estatus_exped, fecha_dicto_solucion, comentarios) "
-                                                                                              + "VALUES ("+id_expediente+","+id_tipo_expediente+",'"+id_organoj+"','"+clave_expediente+"', '"+fecha_apertura_exped+"', '"+fecha_present_promo+"','"+fecha_admision_promo+"',"+id_promovente+", "+id_estatus_exped+", '"+fecha_dicto_solucion+"', '"+comentarios+"')");
-         
+            conn.setAutoCommit(false); // Inicia una transacción
+            System.out.println("Valores:");
+            System.out.println("Clave: " + clave_expediente );
+            System.out.println("Procedimiento: " + id_tipo_expediente);
+            System.out.println("Fecha de apertura: " + fecha_apertura_exped);
+            System.out.println("Fecha presentacion promocion: " + fecha_present_promo);
+            System.out.println("Fecha admision promocion: " + fecha_admision_promo);
+            System.out.println("Promovente: " + id_promovente);
+            System.out.println("Estatus expediemte: " + id_estatus_exped);
+            System.out.println("Fecha solucion: " + fecha_dicto_solucion);
+            System.out.println("Comentarios: " + comentarios);
+            
+             String sqlOrganoj = "UPDATE TR_EXPEDIENTE SET id_tipo_expediente = ?, clave_expediente = ?, fecha_apertura_exped = ?, fecha_present_promo = ?, fecha_admision_promo = ?, id_promovente = ?, id_estatus_exped = ?, fecha_dicto_solucion = ?, comentarios = ?  WHERE id_tipo_expediente = '"+id_tipo_expediente+"' AND clave_expediente = '"+clave_expediente+"' ";
+            stm = conn.prepareStatement(sqlOrganoj);
+            stm.setInt(1, id_tipo_expediente);
+            stm.setString(2, clave_expediente);
+            stm.setString(3, fecha_apertura_exped);
+            stm.setString(4, fecha_present_promo);
+            stm.setString(5, fecha_admision_promo);
+            stm.setInt(6, id_promovente);
+            stm.setInt(7, id_estatus_exped);
+            stm.setString(8, fecha_dicto_solucion);
+            stm.setString(9, comentarios);
+            
+            resultUpdate = stm.executeUpdate();
+                       
             if(resultUpdate != 0)
            {
                 obj.cerrar();

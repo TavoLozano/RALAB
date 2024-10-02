@@ -106,6 +106,40 @@ public class CargaCombosProcedimientos {
         }
          return resultados;
      }
+//*************************************************************
+           public List<String> listaExpedientes()
+     {
+         
+        List<String> resultados=new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String consulta;
+        try
+        {
+            conn=conexion.conectar();
+            consulta="SELECT clave_expediente FROM TR_EXPEDIENTE ";
+            stmt = conn.prepareStatement(consulta);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String dato = rs.getString("clave_expediente"); 
+                resultados.add(dato);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar las conexiones y recursos
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+         return resultados;
+     }
 //*************************************************************         
       public List<String> sector()
      {

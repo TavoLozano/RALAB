@@ -43,6 +43,7 @@
                   ResultSet rs;
                   obj.conectar();
                   
+                  
                   String expedienteSeleccionado = request.getParameter("valor");
                   
                    ps=obj.con.prepareStatement("SELECT TR_ORGANOJ.ID_ORGANOJ,tr_organoj.nombre_organoj,TR_ORGANOJ.SEDE_ORGANOJ,TC_ENTIDAD_MPIO.ENTIDAD,TC_ENTIDAD_MPIO.MUNICIPIO, TR_ORGANOJ.COLONIA,TR_ORGANOJ.LONGITUD, TR_ORGANOJ.LATITUD,TC_CIRCUNSCRIPCION.DESCRIPCION AS CIRCUNSCRIPCION,TC_JURISDICCION.DESCRIPCION AS JURISDICCION,TR_ORGANOJ.HR_ATENCION FROM TR_ORGANOJ inner join tc_entidad_mpio on tc_entidad_mpio.id_ent_mpio=TR_ORGANOJ.id_ent_mpio inner join tc_circunscripcion on tc_circunscripcion.id_circunscripcion=TR_ORGANOJ.id_circunscripcion inner join tc_jurisdiccion on tc_jurisdiccion.id_jurisdiccion=TR_ORGANOJ.id_jurisdiccion where tr_organoj.id_organoj=?" );
