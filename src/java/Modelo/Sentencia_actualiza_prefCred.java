@@ -8,7 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-public class Sentencia_actualiza_prefCred {  
+public class Sentencia_actualiza_prefCred { 
+    
      public boolean registrarProcedimiento(Integer id_tipo_expediente, String clave_expediente, String fecha_apertura_exped, String fecha_present_promo, String fecha_admision_promo, Integer id_promovente, Integer id_estatus_exped,  String fecha_dicto_solucion, String comentarios) {
          Connection conn;
           PreparedStatement stm = null;
@@ -20,7 +21,7 @@ public class Sentencia_actualiza_prefCred {
          try {
              conn = obj.conectar();
             conn.setAutoCommit(false); // Inicia una transacción
-            System.out.println("Valores:");
+          /*  System.out.println("Valores:");
             System.out.println("Clave: " + clave_expediente );
             System.out.println("Procedimiento: " + id_tipo_expediente);
             System.out.println("Fecha de apertura: " + fecha_apertura_exped);
@@ -29,9 +30,9 @@ public class Sentencia_actualiza_prefCred {
             System.out.println("Promovente: " + id_promovente);
             System.out.println("Estatus expediemte: " + id_estatus_exped);
             System.out.println("Fecha solucion: " + fecha_dicto_solucion);
-            System.out.println("Comentarios: " + comentarios);
+            System.out.println("Comentarios: " + comentarios);*/
             
-             String sqlOrganoj = "UPDATE TR_EXPEDIENTE SET id_tipo_expediente = ?, clave_expediente = ?, fecha_apertura_exped = ?, fecha_present_promo = ?, fecha_admision_promo = ?, id_promovente = ?, id_estatus_exped = ?, fecha_dicto_solucion = ?, comentarios = ?  WHERE id_tipo_expediente = '"+id_tipo_expediente+"' AND clave_expediente = '"+clave_expediente+"' ";
+            String sqlOrganoj = "UPDATE TR_EXPEDIENTE SET id_tipo_expediente = ?, clave_expediente = ?, fecha_apertura_exped = ?, fecha_present_promo = ?, fecha_admision_promo = ?, id_promovente = ?, id_estatus_exped = ?, fecha_dicto_solucion = ?, comentarios = ?  WHERE id_tipo_expediente = '"+id_tipo_expediente+"' AND clave_expediente = '"+clave_expediente+"' ";
             stm = conn.prepareStatement(sqlOrganoj);
             stm.setInt(1, id_tipo_expediente);
             stm.setString(2, clave_expediente);

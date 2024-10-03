@@ -92,15 +92,15 @@
                            <form action="Expediente_8_editar.jsp" method='get'>
                                <select name="expEdit" id="expEdit" style="width: 300px" required>
                                    <option>---Seleccione un procedimiento---</option>
-                                   <option>Ordinario</option>
-                                   <option>Especial individual</option>
-                                   <option>Especial colectivo</option>
-                                   <option>Huelga</option>
-                                   <option>Colectivo de naturaleza económica</option>
-                                   <option>Paraprocesal</option>
-                                   <option>Tercerías</option>
-                                   <option>Preferencia de crédito</option>
-                                   <option>Ejecución</option>
+                                   <option value="1">Ordinario</option>
+                                   <option value="2">Especial individual</option>
+                                   <option value="3">Especial colectivo</option>
+                                   <option value="4">Huelga</option>
+                                   <option value="5">Colectivo de naturaleza económica</option>
+                                   <option value="6">Paraprocesal</option>
+                                   <option value="7">Tercerías</option>
+                                   <option value="8">Preferencia de crédito</option>
+                                   <option value="9">Ejecución</option>
                                </select>
                                <select name="valor" id="valor" style="width: 300px" required>
                                   <option value="">---Seleccione organo---</option>

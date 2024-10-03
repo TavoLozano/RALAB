@@ -13,13 +13,13 @@
                   ResultSet rs;
                   conexion.conectar();
                   
-                  String procedimientoSeleccionado = request.getPrameter("expEdit");
+                  int procedimientoSeleccionado = Integer.parseInt(request.getParameter("expEdit"));
                   String expedienteSeleccionado = request.getParameter("valor");
                   
-                ps=conexion.con.prepareStatement("SELECT TR_EXPEDIENTE.ID_EXPEDIENTE, TR_EXPEDIENTE.CLAVE_EXPEDIENTE, TR_EXPEDIENTE.FECHA_APERTURA_EXPED, TR_EXPEDIENTE.FECHA_PRESENT_PROMO, TR_EXPEDIENTE.FECHA_ADMISION_PROMO, TC_PROMOVENTE.DESCRIPCION AS PROMOVENTE, TC_ESTATUS_EXPEDIENTE.DESCRIPCION AS ESTATUS_EXPEDIENTE, TR_EXPEDIENTE.FECHA_DICTO_SOLUCION FROM TR_ORGANOJ inner join tc_entidad_mpio on tc_entidad_mpio.id_ent_mpio=TR_ORGANOJ.id_ent_mpio inner join tc_circunscripcion on tc_circunscripcion.id_circunscripcion=TR_ORGANOJ.id_circunscripcion inner join tc_jurisdiccion on tc_jurisdiccion.id_jurisdiccion=TR_ORGANOJ.id_jurisdiccion where tr_expediente.id_tipo_expediente=? AND tr_expediente.clave_expediente=?" );
-                ps.setString(1, procedimientoSeleccionado);
+                ps=conexion.con.prepareStatement("SELECT e.id_tipo_expediente, e.clave_expediente, e.fecha_apertura_exped, e.fecha_present_promo, e.fecha_admision_promo, p.descripcion AS promovente, es.descripcion AS estatus_expediente, e.fecha_dicto_solucion, e.comentarios FROM tr_expediente e INNER JOIN tc_promovente p ON e.id_promovente = p.id_promovente INNER JOIN tc_estatus_expediente es ON e.id_estatus_exped = es.id_estatus_expediente WHERE e.id_tipo_expediente = ? AND e.clave_expediente = ?" );
+                ps.setInt(1, procedimientoSeleccionado);
                 ps.setString(2, expedienteSeleccionado);
-                   rs=ps.executeQuery();
+                rs=ps.executeQuery();
           
                 if (rs.next()) {
                 String id_tipo_expediente = rs.getString("id_tipo_expediente");
@@ -27,11 +27,11 @@
                 String fecha_apertura_exped = rs.getString("fecha_apertura_exped");
                 String fecha_present_promo = rs.getString("fecha_present_promo");
                 String fecha_admision_promo = rs.getString("fecha_admision_promo");
-                String id_promovente = rs.getString("id_promovente");
-                String id_estatus_exped = rs.getString("id_estatus_exped");
+                String promovente = rs.getString("promovente");
+                String estatus_expediente = rs.getString("estatus_expediente");
                 String fecha_dicto_solucion = rs.getString("fecha_dicto_solucion");
                 String comentarios = rs.getString("comentarios");
-                String hr_atencion = rs.getString("hr_atencion");
+               
 
                 // Guardar en el request
                 request.setAttribute("id_tipo_expediente", id_tipo_expediente);
@@ -39,21 +39,25 @@
                 request.setAttribute("fecha_apertura_exped", fecha_apertura_exped);
                 request.setAttribute("fecha_present_promo", fecha_present_promo);
                 request.setAttribute("fecha_admision_promo", fecha_admision_promo);
-                request.setAttribute("id_promovente", id_promovente);
-                request.setAttribute("id_estatus_exped", id_estatus_exped);
+                request.setAttribute("promovente", promovente);
+                request.setAttribute("estatus_expediente", estatus_expediente);
                 request.setAttribute("fecha_dicto_solucion", fecha_dicto_solucion);
                 request.setAttribute("comentarios", comentarios);
             
                 
             }
 %>
-<link REL="stylesheet" href="css/notas.css">
 
+ <link REL="stylesheet" href="css/estiloProcedimiento.css">
+        
+        <link REL="stylesheet" href="css/estiloOrganoJ.css">
+        
+     
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="tabWrap">
    
     <article class="tabContent">
-        <h1>VÍA DE TRAMITACIÓN</h1>
+        <CENTER><h1>PREFERENCIA DE CRÉDITO</h1></center>
      
         <!--form principal-->
         <form action="GuardaProcedimiento" method="post" id="principal" >
@@ -69,11 +73,11 @@
                 </tr>
                 <tr>        
                     <td><label>Número / clave del expediente </label></td>   
-                    <td><input type="text" id="claveExp" name="claveExp" style="width: 500px" required></td>
+                    <td><input type="text" id="claveExp" name="claveExp" value="${clave_expediente}" style="width: 500px" required></td>
 
                     <!-- FECHA DE APERTURA -->
                     <td><label >Fecha de apertura del expediente: </label> </td>     
-                    <td><input type="date" id="fecha"  name="fecha" style="width: 150px" onfocus="fechaMax(this)" onkeypress="fechaMax(this)" required></td></tr>
+                    <td><input type="date" id="fecha"  name="fecha" value="${fecha_apertura_exped}" style="width: 150px" onfocus="fechaMax(this)" onkeypress="fechaMax(this)" required></td></tr>
             </table>
             
         
@@ -95,13 +99,13 @@
                     <legend>Solicitud o promoción</legend>
                     <p>
                 <label>Fecha de presentación de la solicitud o promoción </label>      
-                <input type="date" id="fechaPresProm"  name="fechaPresProm" style="width: 950px" onfocus="fechaMax(this)" onkeypress="fechaMax(this)"> 
+                <input type="date" id="fechaPresProm" value="${fecha_present_promo}" name="fechaPresProm" style="width: 950px" onfocus="fechaMax(this)" onkeypress="fechaMax(this)"> 
                     </p>
 
                
                 <p>
                 <label>Fecha de admisión de la solicitud o promoción </label>      
-                <input type="date" id="fechaAdmProm" name="fechaAdmProm" style="width: 950px" onfocus="fechaMax(this)" onkeypress="fechaMax(this)">
+                <input type="date" id="fechaAdmProm" value="${fecha_admision_promo}" name="fechaAdmProm" style="width: 950px" onfocus="fechaMax(this)" onkeypress="fechaMax(this)">
                 </p>
                 </fieldset>
 
@@ -113,10 +117,11 @@
                 <select id="promovente" name="promovente" style="width: 950px" onchange="mostrarPromoventeEspecifique()" >
                     <option value="">---Seleccione promovente---</option>
                     <%
+                        String promovente = (String) request.getAttribute("promovente");
                         List<String> resultadosPromovente = obj.listaPromoventes();
                         for (String dato : resultadosPromovente) {
                     %>
-                    <option value="<%= dato%>"><%= dato%></option>
+                    <option value="<%= dato%>" <%= dato.equals(promovente) ? "selected" : ""%>><%= dato%></option>
                     <% } %>
                 </select>
                     </p>
@@ -134,17 +139,22 @@
                     <legend>Datos procesales</legend>
                     <p>
                 <label>Estatus del expediente </label>
-                <select id="estExp" name="estExp" style="width: 950px" onchange = "mostrarEstatusFecha()">
-                    <option value="">--- Seleccione estatus ---</option>
-                    <option value="Solucionado">Solucionado</option>
-                    <option value="En proceso de resolución">En proceso de resolución</option>
-                </select>
+               <select id="estExp" name="estExp" style="width: 950px" onchange="mostrarEstatusFecha()">
+               <option value="">--- Seleccione estatus ---</option>
+
+               <%
+                  String estatus_expediente = (String) request.getAttribute("estatus_expediente");
+              %>
+
+              <option value="Solucionado" <%= "Solucionado".equals(estatus_expediente) ? "selected" : "" %>>Solucionado</option>
+              <option value="En proceso de resolución" <%= "En proceso de resolución".equals(estatus_expediente) ? "selected" : "" %>>En proceso de resolución</option>
+              </select>
                     </p>
                     
-                <div id="divFechaDicResPC" style="display: none">
+                <div id="divFechaDicResPC" >
                     <p>
                     <label>Fecha en la que se dictó la resolución </label>      
-                    <input type="date" id="fechaDictRes" name="fechaDictRes" style="width: 950px" onfocus="fechaMax(this)" onkeypress="fechaMax(this)">
+                    <input type="date" id="fechaDictRes" value="${fecha_dicto_solucion}" name="fechaDictRes" style="width: 950px" onfocus="fechaMax(this)" onkeypress="fechaMax(this)">
                     </p>
                 </div>
                 
