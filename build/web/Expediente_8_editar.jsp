@@ -5,7 +5,15 @@
 <%@page import="java.sql.*"%>
 <%@page import="Combos.CargaCombosProcedimientos"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+ <header id="main-header1">
+    <a id="logo-header" href="index.jsp"><img src="IMAGENES/LOGO RALAB blanco.png" height="110"> &nbsp;&nbsp;&nbsp; ESTATAL</a>
+    <nav> 
+        <ul>
+            <li><a href="index.jsp"><img src="IMAGENES/home.png" height="40"></a></li>
+            <li><a href="index.jsp"><img src="IMAGENES/contacto.png" height="40">&nbsp;&nbsp; Contacto</a></li>
+        </ul>
+    </nav>
+</header>
 <%ConectaBD conexion=new ConectaBD();
     CargaCombosProcedimientos obj = new CargaCombosProcedimientos();
     CargaCombosO cco = new CargaCombosO();
@@ -13,7 +21,7 @@
                   ResultSet rs;
                   conexion.conectar();
                   
-                  int procedimientoSeleccionado = Integer.parseInt(request.getParameter("expEdit"));
+                  int procedimientoSeleccionado = obj.indiceProcedimiento(request.getParameter("expEdit"));
                   String expedienteSeleccionado = request.getParameter("valor");
                   
                 ps=conexion.con.prepareStatement("SELECT e.id_tipo_expediente, e.clave_expediente, e.fecha_apertura_exped, e.fecha_present_promo, e.fecha_admision_promo, p.descripcion AS promovente, es.descripcion AS estatus_expediente, e.fecha_dicto_solucion, e.comentarios FROM tr_expediente e INNER JOIN tc_promovente p ON e.id_promovente = p.id_promovente INNER JOIN tc_estatus_expediente es ON e.id_estatus_exped = es.id_estatus_expediente WHERE e.id_tipo_expediente = ? AND e.clave_expediente = ?" );
@@ -60,7 +68,7 @@
         <CENTER><h1>PREFERENCIA DE CRÉDITO</h1></center>
      
         <!--form principal-->
-        <form action="GuardaProcedimiento" method="post" id="principal" >
+        <form action="Actualiza_pref_cred" method="post" id="principal" >
            
             <br><br>
             <table cellspacing="3" cellpadding="3" border="0" >               

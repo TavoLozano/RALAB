@@ -841,9 +841,25 @@ public class CargaCombosProcedimientos {
             }
             return valor;        
      }
+      
+      public int indiceProcedimiento(String proced) throws SQLException
+     {
+         ConectaBD c=new ConectaBD();
+        c.conectar();
+        int valor = 0;
+            // Consulta SQL para obtener los datos
+            String sql = "SELECT id_tipo_procedimiento FROM TC_PROCEDIMIENTO where descripcion= '"+proced+"'";
+            Statement stmt = c.con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            if(rs.next())
+            {
+                valor=rs.getInt(1);
+            }
+            return valor;        
+     }
 
 }
-
+//////////
 
  
 

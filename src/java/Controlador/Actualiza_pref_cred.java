@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-@WebServlet(name = "GuardaProcedimiento", urlPatterns = {"/GuardaProcedimiento"})
+@WebServlet(name = "Actualiza_pref_cred", urlPatterns = {"/Actualiza_pref_cred"})
 public class Actualiza_pref_cred extends HttpServlet {
      
                Sentencia_actualiza_prefCred gestorBD=new Sentencia_actualiza_prefCred();
@@ -36,7 +36,7 @@ public class Actualiza_pref_cred extends HttpServlet {
         HttpSession se= request.getSession();
         try 
         {
-              String procedimiento=request.getParameter("procedimientos");
+              //String procedimiento=request.getParameter("procedimientos");
                id_expediente=combos.consecutivoExpediente()+1; 
                id_organoj=request.getParameter("clave");
                clave_expediente=request.getParameter("claveExp");
@@ -45,8 +45,7 @@ public class Actualiza_pref_cred extends HttpServlet {
                /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                                                                                       PREFERENCIA DE CREDITO
                ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-               if(procedimiento.equals("Preferencia de Credito"))
-               {
+             
                      id_tipo_expediente=8;
                      fecha_present_promo=request.getParameter("fechaPresProm");
                      fecha_admision_promo=request.getParameter("fechaAdmProm");
@@ -60,7 +59,7 @@ public class Actualiza_pref_cred extends HttpServlet {
                      {
                          fecha_dicto_solucion=request.getParameter("fechaDictRes");
                      }                   
-               }          
+                       
                 comentarios=request.getParameter("comentarios");
          
                 /* #################################SE REALIZA LA INSERCIÓN #######################################*/                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            // ----ORDINARIO---------ORDINARIO---------ORDINARIO---------ORDINARIO---------ORDINARIO---------ORDINARIO---------ORDINARIO---------|| 

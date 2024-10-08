@@ -21,7 +21,7 @@ public class Sentencia_actualiza_prefCred {
          try {
              conn = obj.conectar();
             conn.setAutoCommit(false); // Inicia una transacción
-          /*  System.out.println("Valores:");
+           System.out.println("Valores:");
             System.out.println("Clave: " + clave_expediente );
             System.out.println("Procedimiento: " + id_tipo_expediente);
             System.out.println("Fecha de apertura: " + fecha_apertura_exped);
@@ -30,30 +30,34 @@ public class Sentencia_actualiza_prefCred {
             System.out.println("Promovente: " + id_promovente);
             System.out.println("Estatus expediemte: " + id_estatus_exped);
             System.out.println("Fecha solucion: " + fecha_dicto_solucion);
-            System.out.println("Comentarios: " + comentarios);*/
+            System.out.println("Comentarios: " + comentarios);
             
-            String sqlOrganoj = "UPDATE TR_EXPEDIENTE SET id_tipo_expediente = ?, clave_expediente = ?, fecha_apertura_exped = ?, fecha_present_promo = ?, fecha_admision_promo = ?, id_promovente = ?, id_estatus_exped = ?, fecha_dicto_solucion = ?, comentarios = ?  WHERE id_tipo_expediente = '"+id_tipo_expediente+"' AND clave_expediente = '"+clave_expediente+"' ";
-            stm = conn.prepareStatement(sqlOrganoj);
-            stm.setInt(1, id_tipo_expediente);
-            stm.setString(2, clave_expediente);
-            stm.setString(3, fecha_apertura_exped);
-            stm.setString(4, fecha_present_promo);
-            stm.setString(5, fecha_admision_promo);
-            stm.setInt(6, id_promovente);
-            stm.setInt(7, id_estatus_exped);
-            stm.setString(8, fecha_dicto_solucion);
-            stm.setString(9, comentarios);
-            
+           String sqlOrganoj = "UPDATE TR_EXPEDIENTE SET  fecha_apertura_exped = ?, fecha_present_promo = ?, fecha_admision_promo = ?, id_promovente = ?, id_estatus_exped = ?, fecha_dicto_solucion = ?, comentarios = ? WHERE  clave_expediente = ? ";
+           stm = conn.prepareStatement(sqlOrganoj);
+//stm.setInt(1, id_tipo_expediente);
+//stm.setString(2, clave_expediente);
+            stm.setString(1, fecha_apertura_exped);
+            stm.setString(2, fecha_present_promo);
+            stm.setString(3, fecha_admision_promo);
+            stm.setInt(4, id_promovente);
+            stm.setInt(5, id_estatus_exped);
+            stm.setString(6, fecha_dicto_solucion);
+            stm.setString(7, comentarios);
+            stm.setString(8, clave_expediente); 
+            System.out.println("Valores:" + stm.toString());
+       
             resultUpdate = stm.executeUpdate();
                        
             if(resultUpdate != 0)
            {
-                obj.cerrar();
+                conn.commit();
+               // obj.cerrar();
                 return true;
            }
            else
           {
-               obj.cerrar();
+              conn.rollback();
+              // obj.cerrar();
                return false;
           }
       }

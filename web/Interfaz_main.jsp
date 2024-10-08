@@ -68,7 +68,7 @@
                     </div>
                 </li>
                 <li class="menu-item" title="EXPEDIENTES" style="background: darkcyan;">
-                    <a href="Interfaz_main.jsp"><img src="IMAGENES/expediente.png" height="30">EXPEDIENTES</a>
+                    <a href="tablaP.jsp"><img src="IMAGENES/expediente.png" height="30">EXPEDIENTES</a>
                 </li>
                 <li class="menu-item" title="EXPORTAR">
                     <a href="Exportar.jsp"><img src="IMAGENES/base_datos.png" height="30">BASE DE DATOS</a>

@@ -41,18 +41,17 @@
         <p id="current-date"></p>
     </div>  
 
-    <div style="margin-bottom: 30px;">
+      <div style="margin-bottom: 30px;">
         <nav class="menu">
             <ul class="menu">
-                <li class="menu-item" title="ÓRGANOS JURISDICCIONALES"  style="background: darkcyan;">
+                <li class="menu-item" title="ÓRGANOS JURISDICCIONALES" >
                     <a href="tablaO.jsp"><img src="IMAGENES/banco.png" height="30">ÓRGANOS JURISDICCIONALES</a>
-                   
-                </li>
-                <li class="menu-item" title="EXPEDIENTES">
-                    <a href="Interfaz_main.jsp"><img src="IMAGENES/expediente.png" height="30">EXPEDIENTES</a>
                     <div class="submenu">
                         <p>Agrega, edita, consulta o elimina los Órganos Jurisdiccionales almacenados en la base de datos.</p>
                     </div>
+                </li>
+                <li class="menu-item" title="EXPEDIENTES" style="background: darkcyan;">
+                    <a href="tablaP.jsp"><img src="IMAGENES/expediente.png" height="30">EXPEDIENTES</a>
                 </li>
                 <li class="menu-item" title="EXPORTAR">
                     <a href="Exportar.jsp"><img src="IMAGENES/base_datos.png" height="30">BASE DE DATOS</a>
@@ -90,20 +89,21 @@
                       </td>
                       <td>
                            <form action="Expediente_8_editar.jsp" method='get'>
+                                
                                <select name="expEdit" id="expEdit" style="width: 300px" required>
                                    <option>---Seleccione un procedimiento---</option>
-                                   <option value="1">Ordinario</option>
-                                   <option value="2">Especial individual</option>
-                                   <option value="3">Especial colectivo</option>
-                                   <option value="4">Huelga</option>
-                                   <option value="5">Colectivo de naturaleza económica</option>
-                                   <option value="6">Paraprocesal</option>
-                                   <option value="7">Tercerías</option>
-                                   <option value="8">Preferencia de crédito</option>
-                                   <option value="9">Ejecución</option>
+                                   <option >Ordinario</option>
+                                   <option >Especial individual</option>
+                                   <option >Especial colectivo</option>
+                                   <option >Huelga</option>
+                                   <option >Colectivo de naturaleza económica</option>
+                                   <option >Paraprocesal</option>
+                                   <option >Tercerías</option>
+                                   <option >Preferencia de crédito</option>
+                                   <option >Ejecución</option>
                                </select>
                                <select name="valor" id="valor" style="width: 300px" required>
-                                  <option value="">---Seleccione organo---</option>
+                                  <option value="">---Seleccione un expediente---</option>
                                  <%
                                    //SQL_Generales consulta = new SQL_Generales();
                                    List<String> resultadosOrg = obj2.listaExpedientes();
