@@ -82,7 +82,7 @@ function mostrarProcedimientos() {
         document.getElementById("divTerceria").style.display = "none";
         document.getElementById("divPrefCred").style.display = "none";
         document.getElementById("divEjecucion").style.display = "none";
-    } else if (seleccion === "Individual") {
+    } else if (seleccion === "Especial individual") {
         document.getElementById("divOrdinario").style.display = "none";
         document.getElementById("divIndividual").style.display = "block";
         document.getElementById("divColectivo").style.display = "none";
@@ -92,7 +92,7 @@ function mostrarProcedimientos() {
         document.getElementById("divTerceria").style.display = "none";
         document.getElementById("divPrefCred").style.display = "none";
         document.getElementById("divEjecucion").style.display = "none";
-    } else if (seleccion === "Colectivo") {
+    } else if (seleccion === "Especial colectivo") {
         document.getElementById("divOrdinario").style.display = "none";
         document.getElementById("divIndividual").style.display = "none";
         document.getElementById("divColectivo").style.display = "block";
@@ -1728,7 +1728,8 @@ function mostrarEstatusFecha() {
     }
 }
 
-function mostrarPromoventeEspecifique() {
+function mostrarPromoventeEspecifique() 
+{
     var seleccion = document.getElementById("promovente").value;
     var cajaTexto = document.getElementById("divPromoventeEspecifiquePC");
 
@@ -1856,3 +1857,6 @@ function validarYConvertir(input) {
   }
 }
 
+//////////////////////////////////////////metodos para edicion////////////////////////////////////
+
+//------------------------------preferencia de credito---------------------------

@@ -69,6 +69,42 @@ public class Sentencia_actualiza_prefCred {
       }
   }
      
+      public int actualizaMotivos(String clave_expediente) throws SQLException
+            {
+                 ConectaBD c=new ConectaBD();
+                 c.conectar();
+                 int valor = 0;
+                 // Consulta SQL para obtener los datos
+                 String sql = "SELECT id_expediente FROM TR_EXPEDIENTE where clave_expediente= '"+clave_expediente+"'";
+                 Statement stmt = c.con.createStatement();
+                 ResultSet rs = stmt.executeQuery(sql);
+                 if(rs.next())
+                {
+                    valor=rs.getInt(1);
+                 }
+                 return valor;        
+            }
+     
+      public void borrarMotivos(int id_expediente) throws SQLException
+      {
+                 ConectaBD c=new ConectaBD();
+                 c.conectar();
+                 int valor = 0;
+                 // Consulta SQL para obtener los datos
+                 String sql = "DELETE FROM tr_exp_motivo_solic WHERE id_expediente = "+id_expediente+"";
+                 System.out.println(sql);
+                 Statement stmt = c.con.createStatement();
+                  stmt.executeUpdate(sql);
+                  
+//                 if(rs.next())
+//                {
+//                    valor=rs.getInt(1);
+//                 }      
+      }
+     
+     
+     
+     
      //----------------------------------------------------------------------------------pref credito y ejecucion-----------------------------
      public boolean registraMotivoEje(Integer id_motivo_sol_promo, Integer id_expediente)
      {

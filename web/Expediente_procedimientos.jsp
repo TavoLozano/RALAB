@@ -27,8 +27,8 @@
                 <select name="procedimientos" id="procedimientos" onchange = "mostrarProcedimientos(); habilitarTER(); habilitar2TER();" required>
                     <option value="">---Seleccione un procedimiento---</option>
                     <option value="Ordinario">Ordinario</option>
-                    <option value="Individual">Individual</option>
-                    <option value="Colectivo">Colectivo</option>
+                    <option value="Especial individual">Especial individual</option>
+                    <option value="Especial colectivo">Especial colectivo</option>
                     <option value="Huelga">Huelga</option>
                     <option value="Colectivo de Naturaleza Economica">Colectivo de Naturaleza Económica</option>
                     <option value="Paraprocesal">Paraprocesal</option>
@@ -362,8 +362,8 @@
                     <label data-title="INEGI: Si en la fila ''Incompetencia'', seleccionan ''Sí'', se deberá llenar la fila ''Tipo de incompetencia'' y terminar con el registro de información.">Tipo de incompetencia</label>
                     <select id="incompOrd" name="incompOrd" style="width: 200%">
                         <option>---Seleccione una incompetencia---</option>
-                        <option>Por ser competencia federal</option>
-                        <option>Por ser competencia de otra jurisdicción local</option>
+                        <option>Por ser competencia estatal</option>
+                        <option>Por ser competencia de otro órgano jurisdiccional federal en materia laboral</option>
                         <option>Por corresponder a otra circunscripción territorial (región, partido o distrito)</option>
                         <option>Otro tipo de incompetencia (especifique)</option>
                     </select>
@@ -830,8 +830,8 @@
                                <label >Tipo de incompetencia</label>
                                <select id="incompInd" name="incompInd" style="width: 950px" onchange="incompetenciaEspIND()">
                                  <option>---Seleccione una incompetencia---</option>
-                                 <option>Por ser competencia federal</option>
-                                 <option>Por ser competencia de otra jurisdicción local</option>
+                                 <option>Por ser competencia estatal</option>
+                                 <option>Por ser competencia de otro órgano jurisdiccional federal en materia laboral</option>
                                  <option>Por corresponder a otra circunscripción territorial (región, partido o distrito)</option>
                                  <option>Otro tipo de incompetencia (especifique)</option>
                                </select>
@@ -1230,8 +1230,8 @@
                                <label >Tipo de incompetencia</label>
                                <select id="incompeCOL" name="incompeCOL" style="width: 950px" onchange="espIncompCOL()">
                                  <option>---Seleccione una incompetencia---</option>
-                                 <option>Por ser competencia federal</option>
-                                 <option>Por ser competencia de otra jurisdicción local</option>
+                                 <option>Por ser competencia estatal</option>
+                                 <option>Por ser competencia de otro órgano jurisdiccional federal en materia laboral</option>
                                  <option>Por corresponder a otra circunscripción territorial (región, partido o distrito)</option>
                                  <option>Otro tipo de incompetencia (especifique)</option>
                                </select>
@@ -1535,8 +1535,8 @@
                                <label >Tipo de incompetencia</label>
                                <select id="incompeHUE" name="incompeHUE" style="width: 950px" onchange="espIncompHUE()">
                                  <option>---Seleccione una incompetencia---</option>
-                                 <option>Por ser competencia federal</option>
-                                 <option>Por ser competencia de otra jurisdicción local</option>
+                                  <option>Por ser competencia estatal</option>
+                                  <option>Por ser competencia de otro órgano jurisdiccional federal en materia laboral</option>
                                  <option>Por corresponder a otra circunscripción territorial (región, partido o distrito)</option>
                                  <option>Otro tipo de incompetencia (especifique)</option>
                                </select>
@@ -1856,8 +1856,8 @@
                             <label>Tipo de incompetencia</label>
                             <select id="tipoIncompetenciaCNE" name="tipoIncompetenciaCNE" style="width: 950px" onchange="incompEspCNE()">
                                 <option>---Seleccione un tipo de incompetencia---</option>
-                                <option>Por ser competencia federal</option>
-                                <option>Por ser competencia de otra jurisdicción local</option>
+                               <option>Por ser competencia estatal</option>
+                        <option>Por ser competencia de otro órgano jurisdiccional federal en materia laboral</option>
                                 <option>Por corresponder a otra circunscripción territorial (región, partido o distrito)</option>
                                 <option>Otro tipo de incompetencia (especifique)</option>
                             </select>
@@ -2113,8 +2113,8 @@
                         <label>Tipo de incompetencia</label>
                         <select id="tipoIncompPARA" name="tipoIncompPARA" style="width: 950px" onchange="otraIncPARA()">
                             <option>---Seleccione una incompetencia---</option>
-                            <option>Por ser competencia federal</option>
-                            <option>Por ser competencia de otra jurisdicción local</option>
+                            <option>Por ser competencia estatal</option>
+                        <option>Por ser competencia de otro órgano jurisdiccional federal en materia laboral</option>
                             <option>Por corresponder a otra circunscripción territorial (región, partido o distrito)</option>
                             <option>Otro tipo de incompetencia (especifique)</option>
                         </select>

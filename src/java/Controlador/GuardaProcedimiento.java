@@ -900,7 +900,7 @@ public class GuardaProcedimiento extends HttpServlet {
                                 }
                             }
                         }                          
-                      response.sendRedirect("/Proyecto_RALAB/Interfaz_main.jsp"); 
+                      response.sendRedirect("/Proyecto_RALAB/Interfaz_main.jsp?completado=si"); 
                       }
                }
               //reiniciando las variabkles

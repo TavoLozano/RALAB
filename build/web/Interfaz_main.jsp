@@ -38,6 +38,8 @@
         CargaCombosProcedimientos obj = new CargaCombosProcedimientos();
         CargaCombosO cco = new CargaCombosO();
         CargaCombosActores cca = new CargaCombosActores();
+        
+
     %>
 
     <body>
@@ -132,8 +134,8 @@
                               <td> <select name="procedimientosACT" id="procedimientosACT" onchange = "funProcedimiento(); funProcedimiento2(); funProcedimiento3(); funProcedimiento4(); funProcedimiento5(); funMenuACT1();" required>                                        
                                 <option value="">---Seleccione un procedimiento---</option>
                                 <option value="Ordinario">Ordinario</option>
-                                <option value="Especial individual">Individual</option>
-                                <option value="Especial colectivo">Colectivo</option>
+                                <option value="Especial individual">Especial individual</option>
+                                <option value="Especial colectivo">Especial colectivo</option>
                                 <option value="Huelga">Huelga</option>
                                 <option value="Colectivo de naturaleza económica">Colectivo de Naturaleza Económica</option>                  
                                   </select></td>
@@ -859,8 +861,8 @@
                               <td> <select name="procedimientosDEM" id="procedimientosDEM" onchange = "funProcDem();funOrdDEM();funProcDem2(); funColDEM();funProcDem3();funHueDem();funProcDem4();funCneDEM();">                                        
                                 <option value="">---Seleccione un procedimiento---</option>
                                 <option value="Ordinario">Ordinario</option>
-                                <option value="Especial individual">Individual</option>
-                                <option value="Especial colectivo">Colectivo</option>
+                                <option value="Especial individual">Especial individual</option>
+                                <option value="Especial colectivo">Especial colectivo</option>
                                 <option value="Huelga">Huelga</option>
                                 <option value="Colectivo de naturaleza económica">Colectivo de Naturaleza Económica</option>                  
                                   </select></td>

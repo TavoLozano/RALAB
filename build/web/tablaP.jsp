@@ -22,6 +22,27 @@
         <link REL="stylesheet" href="css/tabla_resumen.css">
         <link REL="stylesheet" href="css/postit.css">
         <script defer src="js/fecha.js"></script>
+          <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+           <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+          <%
+              out.println(request.getParameter("actualiza"));
+              String actualiza = request.getParameter("actualiza");
+              if(actualiza !=null)
+              {
+                   if(actualiza.equals("Si"))
+                    {
+                         out.println("<SCRIPT>");
+                         out.println("Swal.fire({");
+                         out.println("  position: 'top-end',"); // Use single quotes for string literals
+                         out.println("  icon: 'success',"); // Consistent indentation and single quotes
+                         out.println("  title: 'Los datos fueron guardados exitosamente',"); // Clear message
+                         out.println("  showConfirmButton: false,"); // Disable confirmation button
+                         out.println("  timer: 5000"); // Timer in milliseconds
+                         out.println("});");
+                         out.println("</SCRIPT>");
+                    }
+               }
+          %>
     </head>
     <body>
         
@@ -90,7 +111,24 @@
                       <td>
                            <form action="Expediente_8_editar.jsp" method='get'>
                                 
-                               <select name="expEdit" id="expEdit" style="width: 300px" required>
+                                <select name="organo" id="organo" style="width: 600px" required>
+                                  <option value="">---Seleccione organo---</option>
+                                 <%
+                                   SQL_Generales consulta = new SQL_Generales();
+                                   List<String> result = consulta.consultaOrganos();
+                                   List<String> valores = consulta.consultaOrganos3();
+                                   int i=0;
+                                   String val;
+                                   for (String datos : result) {
+                                        val = valores.get(i);
+                                        i++;
+                                   %>
+                                  <option value="<%= val%>"><%= datos%></option>
+                                  <%
+                                    }
+                                  %>
+                             </select> 
+                               <select name="expEdit" id="expEdit" style="width: 300px" onchange="busqueda('organo', 'expEdit', 'valor')" required>
                                    <option>---Seleccione un procedimiento---</option>
                                    <option >Ordinario</option>
                                    <option >Especial individual</option>
@@ -115,9 +153,13 @@
                                     }
                                   %>
                              </select> 
-                 
+                        
                              <input type='submit' value='Editar'/>
+                             
                          </form>
+                   </td>
+                   <td>
+                       
                    </td>
                  </tr>
               </table>
@@ -155,20 +197,45 @@
         </tr>
           <% } %>
         </table>
-             
+           
             </center>
-        </div>
-         
-        <div>
-            
-             
-        </div>
-        
+        </div> 
     </body>
     <script>
-        document.getElementById("comboBuscart").addEventListener("change", function() {
-            var selectedValue = this.value;
-            window.location.href = "muestraOrgano.jsp?valorSeleccionado=" + selectedValue;
-        });
+        
+          function busqueda(org, exp, valor ) {
+            var organo = $('#' + org).val();
+            var expEdit = $('#' + exp).val();
+             
+             if(organo==='')
+             {
+                 alert("FAVOR DE CAPTURAR ORGANO");
+                 return false;
+             }
+
+       $.ajax({
+        type: 'post',
+        url: 'ObtenValoresBusqueda',
+        data: {
+            organo: organo,
+            expEdit: expEdit
+        
+        },
+        success: function (response) {
+            console.log("Respuesta del servidor al buscar: ", response);
+            $('#' + valor).html(response);
+            console.log('response');
+        },
+        error: function (response) {
+            console.log("Respuesta del servidor error al borrar: ", response);
+            alert('Error al eliminar, vuelva a intentarlo o cunsulte al administrador');
+        }
+    });
+}
+        
+//        document.getElementById("comboBuscart").addEventListener("change", function() {
+//            var selectedValue = this.value;
+//            window.location.href = "muestraOrgano.jsp?valorSeleccionado=" + selectedValue;
+//        });
     </script>
 </html>
