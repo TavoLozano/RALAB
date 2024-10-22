@@ -112,7 +112,7 @@ function mostrarProcedimientos() {
         document.getElementById("divTerceria").style.display = "none";
         document.getElementById("divPrefCred").style.display = "none";
         document.getElementById("divEjecucion").style.display = "none";
-    } else if (seleccion === "Colectivo de Naturaleza Economica") {
+    } else if (seleccion === "Colectivo de naturaleza económica") {
         document.getElementById("divOrdinario").style.display = "none";
         document.getElementById("divIndividual").style.display = "none";
         document.getElementById("divColectivo").style.display = "none";
@@ -122,7 +122,7 @@ function mostrarProcedimientos() {
         document.getElementById("divTerceria").style.display = "none";
         document.getElementById("divPrefCred").style.display = "none";
         document.getElementById("divEjecucion").style.display = "none";
-    } else if (seleccion === "Paraprocesal") {
+    } else if (seleccion === "Paraprocesal o voluntario") {
         document.getElementById("divOrdinario").style.display = "none";
         document.getElementById("divIndividual").style.display = "none";
         document.getElementById("divColectivo").style.display = "none";
@@ -132,7 +132,7 @@ function mostrarProcedimientos() {
         document.getElementById("divTerceria").style.display = "none";
         document.getElementById("divPrefCred").style.display = "none";
         document.getElementById("divEjecucion").style.display = "none";
-    } else if (seleccion === "Terceria") {
+    } else if (seleccion === "Tercerías") {
         document.getElementById("divOrdinario").style.display = "none";
         document.getElementById("divIndividual").style.display = "none";
         document.getElementById("divColectivo").style.display = "none";
@@ -142,7 +142,7 @@ function mostrarProcedimientos() {
         document.getElementById("divTerceria").style.display = "block";
         document.getElementById("divPrefCred").style.display = "none";
         document.getElementById("divEjecucion").style.display = "none";
-    } else if (seleccion === "Preferencia de Credito") {
+    } else if (seleccion === "Preferencia de crédito") {
         document.getElementById("divOrdinario").style.display = "none";
         document.getElementById("divIndividual").style.display = "none";
         document.getElementById("divColectivo").style.display = "none";
@@ -152,7 +152,7 @@ function mostrarProcedimientos() {
         document.getElementById("divTerceria").style.display = "none";
         document.getElementById("divPrefCred").style.display = "block";
         document.getElementById("divEjecucion").style.display = "none";
-    } else if (seleccion === "Ejecucion") {
+    } else if (seleccion === "Ejecución") {
         document.getElementById("divOrdinario").style.display = "none";
         document.getElementById("divIndividual").style.display = "none";
         document.getElementById("divColectivo").style.display = "none";
@@ -1671,7 +1671,7 @@ function habilitarTER() {
     var seleccion = document.getElementById("procedimientos").value;
     var cajaTexto = document.getElementById("claveExp");
 
-    if (seleccion === "Terceria") {
+    if (seleccion === "Tercerías") {
         cajaTexto.style.display = "none";
         $('#claveExp').prop("required", false);
     } else {
@@ -1684,7 +1684,7 @@ function habilitar2TER() {
     var seleccion = document.getElementById("procedimientos").value;
     var cajaTexto = document.getElementById("fecha");
 
-    if (seleccion === "Terceria") {
+    if (seleccion === "Tercerías") {
         cajaTexto.style.display = "none"
         $('#fecha').prop("required", false);
     } else {

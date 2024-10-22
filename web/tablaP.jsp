@@ -37,7 +37,7 @@
                          out.println("  icon: 'success',"); // Consistent indentation and single quotes
                          out.println("  title: 'Los datos fueron guardados exitosamente',"); // Clear message
                          out.println("  showConfirmButton: false,"); // Disable confirmation button
-                         out.println("  timer: 5000"); // Timer in milliseconds
+                         out.println("  timer: 3000"); // Timer in milliseconds
                          out.println("});");
                          out.println("</SCRIPT>");
                     }
@@ -111,7 +111,7 @@
                       <td>
                            <form action="Expediente_8_editar.jsp" method='get'>
                                 
-                                <select name="organo" id="organo" style="width: 600px" required>
+                                <select name="organo" id="organo" style="width: 600px" onchange="busqueda('organo', 'expEdit', 'valor')" required>
                                   <option value="">---Seleccione organo---</option>
                                  <%
                                    SQL_Generales consulta = new SQL_Generales();
@@ -155,6 +155,7 @@
                              </select> 
                         
                              <input type='submit' value='Editar'/>
+                              <input type="reset" value="Limpiar">
                              
                          </form>
                    </td>
@@ -163,16 +164,8 @@
                    </td>
                  </tr>
               </table>
-       
-             
-       
             <BR>
-             <%
-             %>
-              
-             
-        
-            
+          
         <table border="1" style="float: center;" width="30%" class="summary_table">
         <tr>
             <th>No. </th>
@@ -232,10 +225,10 @@
         }
     });
 }
-        
-//        document.getElementById("comboBuscart").addEventListener("change", function() {
-//            var selectedValue = this.value;
-//            window.location.href = "muestraOrgano.jsp?valorSeleccionado=" + selectedValue;
-//        });
+document.getElementById("comboBuscart").addEventListener("change", function() {
+            var selectedValue = this.value;
+            window.location.href = "muestraOrgano.jsp?valorSeleccionado=" + selectedValue;
+        });
+ 
     </script>
 </html>

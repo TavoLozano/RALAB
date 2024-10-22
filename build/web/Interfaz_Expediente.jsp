@@ -17,6 +17,25 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <link REL="stylesheet" href="css/estiloOrganoJ.css">
   <link REL="stylesheet" href="css/menu.css">
+   <%
+              out.println(request.getParameter("actualiza"));
+              String actualiza = request.getParameter("actualiza");
+              if(actualiza !=null)
+              {
+                   if(actualiza.equals("Si"))
+                    {
+                         out.println("<SCRIPT>");
+                         out.println("Swal.fire({");
+                         out.println("  position: 'top-end',"); // Use single quotes for string literals
+                         out.println("  icon: 'success',"); // Consistent indentation and single quotes
+                         out.println("  title: 'Los datos fueron guardados exitosamente',"); // Clear message
+                         out.println("  showConfirmButton: false,"); // Disable confirmation button
+                         out.println("  timer: 3000"); // Timer in milliseconds
+                         out.println("});");
+                         out.println("</SCRIPT>");
+                    }
+               }
+          %>
 </head>
 <body>
        <header id="main-header1">

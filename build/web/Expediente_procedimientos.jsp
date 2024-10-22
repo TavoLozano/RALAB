@@ -22,19 +22,16 @@
      
         <!--form principal-->
         <form action="GuardaProcedimiento" method="post" id="principal" >
-            <center>
-                <label >Procedimiento a registrar</label>
+            <center><br>
+<!--                <label >Procedimiento a registrar</label>-->
                 <select name="procedimientos" id="procedimientos" onchange = "mostrarProcedimientos(); habilitarTER(); habilitar2TER();" required>
                     <option value="">---Seleccione un procedimiento---</option>
-                    <option value="Ordinario">Ordinario</option>
-                    <option value="Especial individual">Especial individual</option>
-                    <option value="Especial colectivo">Especial colectivo</option>
-                    <option value="Huelga">Huelga</option>
-                    <option value="Colectivo de Naturaleza Economica">Colectivo de Naturaleza Económica</option>
-                    <option value="Paraprocesal">Paraprocesal</option>
-                    <option value="Terceria">Terceria</option>
-                    <option value="Preferencia de Credito">Preferencia de Credito</option>
-                    <option value="Ejecucion">Ejecucion</option>
+                    <%
+                                        List<String> pro=obj.listaProcedimientos();
+                                        for(String proced: pro){
+                                    %>
+                                    <option value="<%= proced%>"><%= proced%></option>
+                                    <% } %>
                 </select>
             </center>
             <br><br>
@@ -68,8 +65,12 @@
                             <label>Tipo de asunto</label>
                             <select name="asunto" id="asunto" style="width: 400px" onchange = "mostrarOcultarMotCirConcepPrest(); mostrarOcultarContrato(); mostrarOcultarMotCol();mostrarOcultarConceptos(); mostrarNat1(); mostrarNat2()">
                                     <option value="">--Seleccione un tipo de asunto--</option>
-                                    <option value="Individual">Individual</option>
-                                    <option value="Colectivo">Colectivo</option>
+                                    <%
+                                        List<String> asuntos=obj.listaAsuntos();
+                                        for(String asunto: asuntos){
+                                    %>
+                                    <option value="<%= asunto%>"><%= asunto%></option>
+                                    <% } %>                                  
                             </select>
                             <div id="nota" class="nota">Esta es la nota que aparece al pasar el cursor sobre el label.</div>
                     </p>
@@ -80,8 +81,12 @@
                           <label data-title="INEGI: En caso de seleccionar en la fila Tipo de asunto Colectivo solo podrá seleccionar en Naturaleza de conflicto la opción Jurídico">Naturaleza del conflicto </label>
                           <select name="naturaleza" id="naturaleza" style="width: 700px">
                                <option value="">---Seleccione opción---</option>
-                               <option value="Jurídico" >Jurídico</option>
-                               <option value="Económico">Económico</option>
+                               <%
+                                   List<String> nat=obj.listaNaturaleza();
+                                   for(String natu: nat){
+                               %>
+                              <option value="<%= natu%>"><%= natu%></option>
+                              <% } %>
                          </select>
                     </p>
                     </div>
@@ -98,16 +103,17 @@
                         <label data-title="INEGI: Esta fila solo deberá captarse cuando en la fila Tipo de asunto se haya seleccionado individual.">¿El trabajador contó con contrato escrito? </label>    
                         <select name="contrato" id="contrato" style="width: 300px" onchange="mostrarOcultarTipoContrato()">
                                <option value="">--Seleccione una opción--</option>
-                               <option value="Sí">Sí</option>
-                               <option value="No">No</option>
+                              <%
+                                  List<String> respuesta = obj.listaRespuestaSimple2();
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                          </select>
                          </P>
-                         </div> 
+                         </div>  
                          
-                      
-
-                           <!-- TIPÓ DE CONTRATO -->
-
+                         <!-- TIPÓ DE CONTRATO -->
                             <div id="divTipoContrato" style = "display: none"> 
                                 <p>
                              
@@ -115,8 +121,12 @@
                                     
                                         <select name="tipoContrato" id="tipoContrato" style="width: 500px">
                                             <option value="">--Seleccione tipo de contrato--</option>
-                                            <option value="Individual">Individual</option>
-                                            <option value="Colectivo">Colectivo</option>
+                                            <%
+                                 List<String> asu=obj.listaContrato();
+                                  for(String asun: asu){
+                              %>
+                               <option value="<%= asun%>"><%= asun%></option>
+                               <% } %>
                                         </select>
                                 </p>
                             </div>
@@ -182,10 +192,13 @@
                       <p>
                             <label >¿El conflicto laboral se encuentra vinculado al esquema de subcontratación (outsourcing)? </label> 
                            <select id="outsourcing" name="outsourcing" style="width: 950px">
-                                    <option value="">---Seleccione opcion---</option>
-                                    <option value="Sí">Sí</option>
-                                    <option value="No">No</option>
-                                    <option value="No identificado">No identificado</option>
+                                    <option value="">--Seleccione una opción--</option>
+                              <%
+                                  List<String> rsIden=obj.listaRespuestaSimple();
+                                  for(String respSim: rsIden){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                 </select>
                         </p>
                         </fieldset>
@@ -228,8 +241,12 @@
                              <label data-title="INEGI: En caso de que se haya seleccionado ''No'' en la fila ''¿Aplican circunstancias vinculadas al motivo del conflicto?'', continúe con la siguiente variable">¿Aplican circunstancias vinculadas al motivo del conflicto?</label>
                              <select id="circuns"  name="circuns" style="width: 950px" onchange="mostrarOcultarCirc()">
                                 <option>---Seleccione una opcion---</option>
-                                <option value="Sí">Sí</option>
-                                <option value="No">No</option>
+                                <%
+                                 List<String> res=obj.listaRespuestaSimple2();
+                                 for(String respSim: res){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                             </select> 
                             </p>
                         </fieldset>
@@ -352,8 +369,12 @@
                              <label >Incompetencia</label>
                 <select id="incompetenciaOrd" name="incompetenciaOrd" style="width: 1150px" onchange="mostrarOcultarIncompOrd(); mostrarOcultarNoIncomp();">
                     <option>---Seleccione una opción---</option>
-                    <option>Sí</option>
-                    <option>No</option>
+                    <%
+                        
+                                 for(String respSim: res){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                 </select>
                             </p>
                
@@ -362,10 +383,12 @@
                     <label data-title="INEGI: Si en la fila ''Incompetencia'', seleccionan ''Sí'', se deberá llenar la fila ''Tipo de incompetencia'' y terminar con el registro de información.">Tipo de incompetencia</label>
                     <select id="incompOrd" name="incompOrd" style="width: 200%">
                         <option>---Seleccione una incompetencia---</option>
-                        <option>Por ser competencia estatal</option>
-                        <option>Por ser competencia de otro órgano jurisdiccional federal en materia laboral</option>
-                        <option>Por corresponder a otra circunscripción territorial (región, partido o distrito)</option>
-                        <option>Otro tipo de incompetencia (especifique)</option>
+                        <%
+                                 List<String> incomp=obj.listaIncompetencia();
+                                 for(String inc: incomp){
+                              %>
+                               <option value="<%= inc%>"><%= inc%></option>
+                               <% } %>
                     </select>
                     </p>
                 </div>
@@ -395,8 +418,11 @@
                     <label ">¿Se anexó constancia de no conciliación expedida por el Centro Conciliación?</label>
                     <select id="constanciaCon" name="constanciaCon" style="width: 80%" onchange="mostrarOcultarClaveConsOrd(); mostrarOcultarClaveConsOrd2();">
                         <option>---Seleccione una opción---</option>
-                        <option>Sí</option>
-                        <option>No</option>
+                         <%                        
+                                 for(String respSim: res){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                     </select>
                     </p>
                     
@@ -413,8 +439,11 @@
                         <label data-title="INEGI Solo debe llenarse cuando en la fila ''¿Se anexó constancia de no conciliación expedida por el Centro de Conciliación?'' se haya seleccionado  ''No''.">¿El asunto se encuentra vinculado a los supuestos de excepción de la conciliación prejudicial?</label>
                         <select id="asuVincPerj" name="asuVincPerj" style="width: 80%">
                             <option>---Seleccione una opción---</option>
-                            <option>Sí</option>
-                            <option>No</option>
+                            <%                        
+                                 for(String respSim: res){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                         </select>
                         </p>
                     </div>
@@ -424,8 +453,11 @@
                         <label >¿Se formuló prevención a la demanda?	</label>
                         <select id="prevDemand" name="prevDemand" style="width: 400%" onchange="mostrarOcultarDesahogo()">
                             <option>---Seleccione una opción---</option>
-                            <option>Sí</option>
-                            <option>No</option>
+                           <%                        
+                                 for(String respSim: res){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                         </select>
                     </p>
                     
@@ -434,8 +466,11 @@
                         <label>¿Se desahogó la prevención de la demanda?</label>
                         <select id="desahogoDemanda" name="desahogoDemanda" style="width: 350%">
                             <option>---Seleccione una opción---</option>
-                            <option>Sí</option>
-                            <option>No</option>
+                            <%                        
+                                 for(String respSim: res){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                         </select>
                         </p>
                     </div>
@@ -447,10 +482,12 @@
                         <label data-title="INEGI: En caso de seleccionar las opciones ''Desechada'', ''Archivo'' o ''No se dio trámite al escrito de demanda'', no deberá de continuar con el llenado de información por haberse concluido el expediente.">Estatus de la demanda</label>
                         <select id="estatusDemOrd" name="estatusDemOrd" style="width: 300%" onchange="mostrarOcultarCauImpDem(); mostrarOcultarAdmitida();">
                            <option>---Seleccione un estatus---</option>
-                           <option>Admitida</option>
-                           <option>Desechada</option>
-                           <option>Archivo</option>
-                           <option>No se dio trámite al escrito de demanda</option>
+                              <%              
+                                 List<String> dem=obj.listaEstatusDemanda();
+                                 for(String dema: dem){
+                              %>
+                               <option value="<%= dema%>"><%= dema%></option>
+                               <% } %>
                        </select>
                         </p>
                         
@@ -459,9 +496,12 @@
                         <label>Causas que impiden la admisión de la demanda</label>
                         <select id="causasImpDem" name="causasImpDem" style="width: 950px">
                             <option>---Seleccione un estatus---</option>
-                            <option>Falta de requisitos de procedibilidad</option>
-                            <option>Remisión al Centro Federal de Conciliación y Registro Laboral (por no haber agotado la instancia conciliatoria)</option>
-                            <option>Otra causa que impide la admisión de la demanda</option>
+                           <%              
+                                 List<String> cau=obj.listaCausasDesechada();
+                                 for(String causa: cau){
+                              %>
+                               <option value="<%= causa%>"><%= causa%></option>
+                               <% } %>
                         </select>
                         </p>
                         </div>
@@ -490,8 +530,11 @@
                                 <label>¿Hubo celebración de audiencia preliminar?</label>
                                 <select id="preliminarOrd" name="preliminarOrd" style="width: 950px" onchange="mostrarOcultarFechaAudPrel()">
                                   <option>---Seleccione una opción---</option>
-                                  <option>Sí</option>
-                                  <option>No</option>
+                                   <%                        
+                                 for(String respSim: res){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                </select>
                              </p>
 
@@ -506,8 +549,11 @@
                                 <label>¿Hubo celebración de audiencia de juicio?</label>
                                 <select id="juicioOrd" name="juicioOrd" style="width: 950px" onchange="mostrarOcultarFechaAudJui()">
                                    <option>---Seleccione una opción---</option>
-                                   <option>Sí</option>
-                                   <option>No</option>
+                                  <%                        
+                                 for(String respSim: res){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                 </select>
                              </p>
 
@@ -525,9 +571,13 @@
                           <p>
                         <label>Estatus del expediente</label>
                         <select id="estatusExpOrd" name="estatusExpOrd" style="width: 950px" onchange="mostrarOcultarUltActProcOrd(); mostrarOcultarSolucionado();">
-                            <option>---Seleccione estatus---</option>
-                            <option>Solucionado</option>
-                            <option>En proceso de resolución</option>
+                            <option>---Seleccione un estatus---</option> 
+                          <%              
+                                 List<String> ee=obj.listaEstatusExpediente();
+                                 for(String esex: ee){
+                              %>
+                               <option value="<%= esex%>"><%= esex%></option>
+                               <% } %>
                         </select>
                         </p>
                         
@@ -545,9 +595,12 @@
                             <label>Fase en la que se solucionó el expediente</label>
                             <select id="faseSolOrd"  name="faseSolOrd" style="width: 950px" onchange="mostrarOcultarFechaSolForma();mostrarOcultarEspSolucion();mostrarOcultarEscritaPreliminar(); mostrarOcultarAudJuicio();">
                                 <option>---Seleccione fase---</option>
-                                <option>Fase escrita</option>
-                                <option>Audiencia preliminar</option>
-                                <option>Audiencia de juicio</option>                            
+                                 <%              
+                                 List<String> fase=obj.listaFaseSolucionORD();
+                                 for(String fSORD: fase){
+                              %>
+                               <option value="<%= fSORD%>"><%= fSORD%></option>
+                               <% } %>            
                             </select>
                             </p>
                                                    
@@ -558,10 +611,12 @@
                                  <label>Forma de solución</label>
                                  <select id="formaSolOrd" name="formaSolOrd" style="width: 950px" onchange="mostrarOcultarMontoOrd();mostrarOcultarEspSolucion();">
                                 <option>---Seleccione solución---</option>
-                                <option>Convenio conciliatorio</option>
-                                <option>Desistimiento</option>
-                                <option>Caducidad</option>   
-                                <option>Otra forma de solución (especifique) </option>
+                               <%              
+                                 List<String> forma=obj.listaFormaSolucionORD();
+                                 for(String formaORD: forma){
+                              %>
+                               <option value="<%= formaORD%>"><%= formaORD%></option>
+                               <% } %>            
                             </select>
                                 </p>
                                 
@@ -601,11 +656,12 @@
                                 <label>Forma de solucion</label>
                                 <select id="formaSolOrd2" name="formaSolOrd2" style="width: 950px" onchange="mostrarOcultarMontoOrd2();mostrarOcultarEspSolucion2(); mostrarOcultarTipoSent();">
                                 <option>---Seleccione solución---</option>
-                                <option>Sentencia</option>
-                                <option>Convenio conciliatorio</option>
-                                <option>Desistimiento</option>
-                                <option>Caducidad</option>   
-                                <option>Otra forma de solución (especifique) </option>
+                                <%              
+                                 List<String> forma2=obj.listaFormaSolucionORD2();
+                                 for(String forma2ORD: forma2){
+                              %>
+                               <option value="<%= forma2ORD%>"><%= forma2ORD%></option>
+                               <% } %>     
                             </select>
                                 </p>
                                 
@@ -619,10 +675,13 @@
                                 <p>
                                 <label>Tipo de sentencia</label>
                                 <select id="tipoSentencia" name="tipoSentencia" style="width: 950px" onchange="mostrarOcultarCondMix()">
-                                    <option>---Seleccione sentencia---</option>
-                                    <option>Absolutoria</option>
-                                    <option>Condenatoria</option>
-                                    <option>Mixta</option>                            
+                                    <option>---Seleccione tipo de sentencia---</option>
+                                  <%              
+                                 List<String> sen=obj.listaTipoSentencia();
+                                 for(String sentenciaORD: sen){
+                              %>
+                               <option value="<%= sentenciaORD%>"><%= sentenciaORD%></option>
+                               <% } %>                  
                                 </select>
                                 </p>
                             </div>
@@ -673,8 +732,12 @@
                            <label>Naturaleza del conflicto</label>
                            <select id="naturalezaInd" name="naturalezaInd" style="width: 950px">
                                <option>---Seleccione una opcion---</option>
-                               <option>Jurídico</option>
-                               <option>Económico</option>
+                               <%
+                                
+                                   for(String natu: nat){
+                               %>
+                              <option value="<%= natu%>"><%= natu%></option>
+                              <% } %>
                            </select>
                       </p>
                       
@@ -686,10 +749,12 @@
                         <p>
                              <label>¿El trabajador contó con contrato escrito?</label>
                              <select id="contratoEscritoIND" name="contratoEscritoIND" style="width: 950px" onchange="tipoContratoIND()">
-                                  <option>---Seleccione una opcion---</option>
-                                  <option>Sí</option>
-                                  <option>No</option>
-                                  <option>No aplica</option>
+                                  <%
+                                  List <String> respSimple=obj.listaRespuestaSimple3();
+                                   for(String rsim: respSimple){
+                               %>
+                              <option value="<%= rsim%>"><%= rsim%></option>
+                              <% } %>
                              </select>
                         </p>
                          
@@ -698,8 +763,12 @@
                                  <label>Tipo de contrato</label>
                                  <select id="tipoContratoInd" name="tipoContratoInd" style="width: 950px">
                                     <option>---Seleccione un tipo de contrato---</option>
-                                    <option>Individual</option>
-                                    <option>Colectivo</option>
+                                    <%
+                             
+                                  for(String asun: asu){
+                              %>
+                               <option value="<%= asun%>"><%= asun%></option>
+                               <% } %>
                                  </select>
                             </p>
                        </div>
@@ -754,9 +823,12 @@
                             <label >¿El conflicto laboral se encuentra vinculado al esquema de subcontratación (outsourcing)? </label> 
                            <select id="outsourcing2" name="outsourcing2" style="width: 950px">
                                     <option value="">---Seleccione opcion---</option>
-                                    <option value="Sí">Sí</option>
-                                    <option value="No">No</option>
-                                    <option value="No identificado">No identificado</option>
+                                     <%
+                            
+                                  for(String respSim: rsIden){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                 </select>
                         </p>
                      </div>
@@ -820,8 +892,12 @@
                            <label>Incompetencia</label>
                            <select id="incompetenciaInd" name="incompetenciaInd" style="width: 950px" onchange="incompetenciaIND();noIncompetenciaEspIND();">
                                <option>---Seleccione incompetencia</option>
-                               <option>Sí</option>
-                               <option>No</option>
+                               <%
+                               
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                            </select>
                            </p>
                            
@@ -830,10 +906,12 @@
                                <label >Tipo de incompetencia</label>
                                <select id="incompInd" name="incompInd" style="width: 950px" onchange="incompetenciaEspIND()">
                                  <option>---Seleccione una incompetencia---</option>
-                                 <option>Por ser competencia estatal</option>
-                                 <option>Por ser competencia de otro órgano jurisdiccional federal en materia laboral</option>
-                                 <option>Por corresponder a otra circunscripción territorial (región, partido o distrito)</option>
-                                 <option>Otro tipo de incompetencia (especifique)</option>
+                                   <%
+                                
+                                 for(String inc: incomp){
+                              %>
+                               <option value="<%= inc%>"><%= inc%></option>
+                               <% } %>
                                </select>
                           </p>
                         </div>
@@ -858,8 +936,12 @@
                               <label>¿Se anexó constancia de no conciliación expedida por el Centro de Conciliación?</label>
                               <select id="conciliacionIND" name="conciliacionIND" style="width: 950px" onchange="asuntoConcIND();constConcil();">
                                   <option>---Seleccione una opción---</option>
-                                  <option>Sí</option>
-                                  <option>No</option>
+                                  <%
+                                  
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                               </select>
                           </p>
                           
@@ -875,8 +957,12 @@
                                   <label>¿El asunto se encuentra vinculado a los supuestos de excepción de la conciliación prejudicial?</label>
                                   <select id="asuntoConci" name="asuntoConci" style="width: 950px">
                                       <option>---Seleccione una opción</option>
-                                      <option>Sí</option>
-                                      <option>No</option>
+                                   <%
+                               
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                   </select>
                               </P>
                           </div>
@@ -885,8 +971,12 @@
                               <label>¿Se formuló prevención a la demanda?</label>
                               <select id="formuloPrevIND" name="formuloPrevIND" style="width: 950px" onchange="desahogoIND();">
                                    <option>---Seleccione una opción---</option>
-                                   <option>Sí</option>
-                                  <option>No</option>
+                                  <%
+                              
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                               </select>
                           </p>
                           
@@ -895,8 +985,12 @@
                               <label>¿Se desahogó la prevención de la demanda?</label>
                               <select id="desahogosIND" name="desahogosIND" style="width: 950px">
                                    <option>---Seleccione una opción---</option>
-                                   <option>Sí</option>
-                                   <option>No</option>
+                                 <%
+                                  
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                               </select>
                               </P>
                           </div>
@@ -908,10 +1002,12 @@
                                   <label>Estatus de la demanda</label>
                                   <select id="estDemIND" name="estDemIND" style="width: 950px" onchange="causaImpIND();admitida();admitida2();">
                                       <option>---Selecione un estatus---</option>
-                                      <option>Admitida </option>
-                                      <option>Desechada</option>
-                                      <option>Archivo</option>
-                                      <option>No se dio trámite el escrito de demanda</option>
+                                      <%              
+                                
+                                 for(String dema: dem){
+                              %>
+                               <option value="<%= dema%>"><%= dema%></option>
+                               <% } %>
                                   </select>
                                   </p>
                               </div>
@@ -920,10 +1016,12 @@
                                   <p>
                                       <label>Causas que impiden la admisión de la demanda</label>
                                       <select id="causasImpIND" name="causasImpIND" style="width: 950px">
-                                          <option>---Seleccione una causa</option>
-                                          <option>Falta de requisitos de procedibilidad</option>
-                                          <option>Remisión al Centro de Conciliación (por no haber agotado la instancia conciliatoria)</option>
-                                          <option>Otra causa que impide la admisión de la demanda</option>
+                                            <%              
+                                
+                                 for(String causa: cau){
+                              %>
+                               <option value="<%= causa%>"><%= causa%></option>
+                               <% } %>
                                       </select>
                                   </p>
                               </div>
@@ -948,8 +1046,12 @@
                                       <label>¿Hubo tramitación por auto de depuración?</label>
                                       <select id="tramitacionIND" name="tramitacionIND" style="width: 950px" onchange="tramitacion()">
                                           <option>---Seleccione una opción</option>
-                                          <option>Sí</option>
-                                          <option>No</option>
+                                         <%
+                               
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                       </select>
                                   </p>
                                   
@@ -964,8 +1066,12 @@
                                       <label>¿Hubo celebración de audiencia preliminar?</label>
                                       <select id="audPreliminarIND" name="audPreliminarIND" style="width: 950px" onchange="preliminar()">
                                           <option>---Seleccione una opción</option>
-                                          <option>Sí</option>
-                                          <option>No</option>
+                                         <%
+                                 
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                       </select>
                                   </p>
                                   
@@ -980,8 +1086,12 @@
                                       <label>¿Hubo celebración de audiencia de juicio?</label>
                                       <select id="audJuicioIND" name="audJuicioIND" style="width: 950px" onchange="juicio()">
                                           <option>---Seleccione una opción</option>
-                                          <option>Sí</option>
-                                          <option>No</option>
+                                         <%
+                              
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                       </select>
                                   </p>
                                   
@@ -1001,8 +1111,12 @@
                                   <label>Estatus del expediente</label>
                                   <select id="estatusExpIND" name="estatusExpIND" style="width: 950px" onchange="procesoRes();solucionadoIND();">
                                       <option>---Seleccione un estatus---</option>
-                                      <option>Solucionado</option>
-                                      <option>En proceso de resolución</option>
+                                        <%              
+                               
+                                 for(String esex: ee){
+                              %>
+                               <option value="<%= esex%>"><%= esex%></option>
+                               <% } %>
                                   </select>
                                   </p>
                               </div>
@@ -1019,10 +1133,12 @@
                                   <label>Fase en la que se solucionó el expediente</label>
                                   <select id="faseSolIND" name="faseSolIND" style="width: 950px" onchange="solucionadoIND1();solucionadoIND2();">
                                       <option>---Seleccione una fase---</option>
-                                      <option>Tramitación por auto de depuración</option>
-                                      <option>Tramitación sin audiencias</option>
-                                      <option>Audiencia preliminar</option>
-                                      <option>Audiencia de juicio</option>
+                                       <%              
+                                 List<String> faseIND=obj.listaFaseSolucionIND();
+                                 for(String fa: faseIND){ 
+                              %>
+                               <option value="<%= fa%>"><%= fa%></option>
+                               <% } %>  
                                   </select>
                                   </p>
                                   
@@ -1031,11 +1147,13 @@
                                       <label>Forma de solución</label>
                                       <select id="solucionTramIND1" name="solucionTramIND1" style="width: 950px" onchange="sentenciaIND(); convConcIND(); solEspIND();">
                                           <option>---Seleccione una solución---</option>
-                                          <option>Sentencia</option>
-                                          <option>Convenio conciliatorio</option>
-                                          <option>Desistimiento</option>
-                                          <option>Caducidad</option>
-                                          <option>Otra forma de solución (especifique)</option>
+                                          
+                               <%              
+                                
+                                 for(String formaIND: forma2){
+                              %>
+                               <option value="<%= formaIND%>"><%= formaIND%></option>
+                               <% } %>     
                                       </select>
                                   </p>
                                   </div>
@@ -1045,10 +1163,13 @@
                                       <label>Forma de solución</label>
                                       <select id="solucionTramIND2" name="solucionTramIND2" style="width: 950px" onchange="convConcIND2(); solEspIND2();">
                                           <option>---Seleccione una solución---</option>
-                                          <option>Convenio conciliatorio</option>
-                                          <option>Desistimiento</option>
-                                          <option>Caducidad</option>
-                                          <option>Otra forma de solución (especifique)</option>
+                                          
+                               <%              
+                                
+                                 for(String forma2IND: forma){
+                              %>
+                               <option value="<%= forma2IND%>"><%= forma2IND%></option>
+                               <% } %>     
                                       </select>
                                   </p>
                                   </div>
@@ -1058,10 +1179,12 @@
                                       <label>Tipo de sentencia</label>
                                       <select id="sentIND" name="sentIND" style="width: 950px" onchange="tipoSentIND()">
                                           <option>---Seleccione un tipo de sentencia---</option>
-                                          <option>Absolutoria</option>
-                                          <option>Condenatoria</option>
-                                          <option>Mixta</option>
-                                          <option>Declarativa (solo para los asuntos vinculados a la designación de beneficiarios por fallecimiento del trabajador)</option>
+                                           <%          
+                                                 List<String> senInd=obj.listaTipoSentencia2();
+                                                 for(String sent2: senInd){
+                                           %>
+                                           <option value="<%= sent2%>"><%= sent2%></option>
+                                           <% } %>    
                                       </select>
                                       </p>
                                   </div>
@@ -1107,8 +1230,12 @@
                         <label>Naturaleza del conflicto</label>
                         <select id="naturalezaCOL" name="naturalezaCOL" style="width: 950px">
                             <option>---Seleccione una opción---</option>
-                            <option>Jurídico</option>
-                            <option>Económico</option>
+                            <%
+                                 
+                                   for(String natu: nat){
+                               %>
+                              <option value="<%= natu%>"><%= natu%></option>
+                              <% } %>
                         </select>
                     </p>
                     
@@ -1220,8 +1347,12 @@
                            <label>Incompetencia</label>
                           <select id="incompetenciaCOL" name="incompetenciaCOL" style="width: 950px" onchange="incompCOL(); noIncompCOL()">
                                <option>---Seleccione incompetencia</option>
-                               <option>Sí</option>
-                               <option>No</option>
+                             <%
+                                 
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                            </select>
                            </p>
                            
@@ -1230,10 +1361,12 @@
                                <label >Tipo de incompetencia</label>
                                <select id="incompeCOL" name="incompeCOL" style="width: 950px" onchange="espIncompCOL()">
                                  <option>---Seleccione una incompetencia---</option>
-                                 <option>Por ser competencia estatal</option>
-                                 <option>Por ser competencia de otro órgano jurisdiccional federal en materia laboral</option>
-                                 <option>Por corresponder a otra circunscripción territorial (región, partido o distrito)</option>
-                                 <option>Otro tipo de incompetencia (especifique)</option>
+                                <%
+                                
+                                 for(String inc: incomp){
+                              %>
+                               <option value="<%= inc%>"><%= inc%></option>
+                               <% } %>
                                </select>
                           </p>
                         </div>
@@ -1258,8 +1391,12 @@
                             <label>¿Se anexó constancia de no conciliación expedida por el Centro de Conciliación?</label>
                             <select id="concilCOL" name="concilCOL" style="width: 950px" onchange="constaConcilCOL(); asuntoCOL();">
                                 <option>---Seleccione una opción---</option>
-                                <option>Sí</option>
-                                <option>No</option>
+                               <%
+                                 
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                             </select>
                         </P>
                         
@@ -1275,8 +1412,12 @@
                                 <label>¿El asunto se encuentra vinculado a los supuestos de excepción de la conciliación prejudicial?</label>
                                 <select id="asunVinCOL" name="asunVinCOL" style="width: 950px">
                                     <option>---Seleccione una opción---</option>
-                                    <option>Sí</option>
-                                    <option>No</option>
+                                   <%
+                                 
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                 </select>
                             </p>
                         </div>
@@ -1285,8 +1426,12 @@
                             <label>¿Se formuló prevención a la demanda?</label>
                             <select id="formuloCOL" name="formuloCOL" style="width: 950px" onchange="desahogoCOL()">
                                     <option>---Seleccione una opción---</option>
-                                    <option>Sí</option>
-                                    <option>No</option>
+                                   <%
+                                
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                 </select>
                         </p>
                         
@@ -1295,8 +1440,12 @@
                                 <label>¿Se desahogó la prevención de la demanda?</label>
                                 <select id="desahogosCOL" name="desahogosCOL" style="width: 950px">
                                     <option>---Seleccione una opción---</option>
-                                    <option>Sí</option>
-                                    <option>No</option>
+                                   <%
+                                 
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                 </select>
                             </P>
                         </div>                        
@@ -1307,10 +1456,12 @@
                             <label>Estatus de la demanda</label>
                             <select id="estatusDemCOL" name="estatusDemCOL" style="width: 950px" onchange="admitidaCOL(); admitidaCOL2();">
                                 <option>---Seleccione un estatus---</option>
-                                <option>Admitida</option>
-                                <option>Desechada</option>
-                                <option>Archivo</option>
-                                <option>No se dio trámite al escrito de demanda</option>
+                                <%              
+                                
+                                 for(String dema: dem){
+                              %>
+                               <option value="<%= dema%>"><%= dema%></option>
+                               <% } %>
                             </select>
                         </P>
                         
@@ -1334,8 +1485,12 @@
                                 <label>¿Hubo tramitación por auto de depuración?</label>
                                 <select id="tramitacionDepCOL" name="tramitacionDepCOL" style="width: 950px" onchange="fDepCOL()">
                                     <option>---Seleccione una opción---</option>
-                                    <option>Sí</option>
-                                    <option>No</option>
+                                    <%
+                                 
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                 </select>
                             </p>
                             
@@ -1350,8 +1505,12 @@
                                 <label>¿Hubo celebración de audiencia de juicio?</label>
                                 <select id="juicioCOL" name="juicioCOL" style="width: 950px" onchange="fJuiCOL()">
                                     <option>---Seleccione una opción---</option>
-                                    <option>Sí</option>
-                                    <option>No</option>
+                                    <%
+                                  
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                 </select>
                             </p>
                             
@@ -1371,8 +1530,12 @@
                             <label>Estatus del expediente</label>
                             <select id="estatusExpCOL" name="estatusExpCOL" style="width: 950px" onchange="procesoResolCOL(); solucionadoCOL();">
                                 <option>---Seleccione un estatus---</option>
-                                <option>Solucionado</option>
-                                <option>En proceso de resolución</option>
+                                 <%              
+                              
+                                 for(String esex: ee){
+                              %>
+                               <option value="<%= esex%>"><%= esex%></option>
+                               <% } %>
                             </select>
                         </P>
                         
@@ -1388,8 +1551,12 @@
                                 <label>Fase en la que se solucionó el expediente</label>
                                 <select id="faseSolCOL" name="faseSolCOL" style="width: 950px">
                                     <option>---Seleccione una fase---</option>
-                                    <option>Tramitación por auto de depuración</option>
-                                    <option>Audiencia de juicio</option>
+                               <%              
+                                 List <String> faseCOL=obj.listaFaseSolucionCOL();
+                                 for(String fsCOL: faseCOL){
+                              %>
+                               <option value="<%= fsCOL%>"><%= fsCOL%></option>
+                               <% } %>
                                 </select>
                             </P>
                             
@@ -1397,11 +1564,12 @@
                             <label>Forma de solución</label>
                             <select id="formaSolCOL" name="formaSolCOL" style="width: 950px" onchange="tipoSentCOL(); solEspCOL(); monto2COL();">
                                  <option>---Seleccione una solución---</option>
-                                 <option>Sentencia</option>
-                                 <option>Convenio conciliatorio</option>
-                                 <option>Desistimiento</option>
-                                 <option>Caducidad</option>
-                                 <option>Otra forma de solución (especifique)</option>
+                                <%              
+                          
+                                 for(String forma2ORD: forma2){
+                              %>
+                               <option value="<%= forma2ORD%>"><%= forma2ORD%></option>
+                               <% } %>     
                             </select>
                             </p>
                             
@@ -1415,9 +1583,12 @@
                                     <label>Tipo de sentencia</label>
                                     <select id="tipoSentenciaCOL" name="tipoSentenciaCOL" style="width: 950px" onchange="montoCOL()">
                                         <option>---Seleccione un tipo de sentencia---</option>
-                                        <option>Absolutoria</option>
-                                        <option>Condenatoria</option>
-                                        <option>Mixta</option>
+                                          <%              
+                               
+                                 for(String sentenciaORD: sen){
+                              %>
+                               <option value="<%= sentenciaORD%>"><%= sentenciaORD%></option>
+                               <% } %>      
                                     </select>
                                 </p>
                             </div>
@@ -1525,8 +1696,12 @@
                            <label>Incompetencia</label>
                           <select id="incompetenciaHUE" name="incompetenciaHUE" style="width: 950px" onchange="solEspHUE(); noIncompHUE();">
                                <option>---Seleccione incompetencia</option>
-                               <option>Sí</option>
-                               <option>No</option>
+                               <%
+                               
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                            </select>
                            </p>
                            
@@ -1535,10 +1710,12 @@
                                <label >Tipo de incompetencia</label>
                                <select id="incompeHUE" name="incompeHUE" style="width: 950px" onchange="espIncompHUE()">
                                  <option>---Seleccione una incompetencia---</option>
-                                  <option>Por ser competencia estatal</option>
-                                  <option>Por ser competencia de otro órgano jurisdiccional federal en materia laboral</option>
-                                 <option>Por corresponder a otra circunscripción territorial (región, partido o distrito)</option>
-                                 <option>Otro tipo de incompetencia (especifique)</option>
+                                   <%
+                              
+                                 for(String inc: incomp){
+                              %>
+                               <option value="<%= inc%>"><%= inc%></option>
+                               <% } %>
                                </select>
                           </p>
                         </div>
@@ -1569,8 +1746,12 @@
                            <label>¿Hubo emplazamiento a huelga?</label>
                            <select id="empHuelga" name="empHuelga" style="width: 950px" onchange="emplaHue();">
                                <option>---Seleccione una opción</option>
-                               <option>Sí</option>
-                               <option>No</option>
+                             <%
+                                 
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                            </select>
                        </p>
                        <div id="divEmpHUE" style="display: none">
@@ -1584,8 +1765,12 @@
                            <label>¿Hubo prehuelga?</label>
                            <select id="prehuelga" name="prehuelga" style="width: 950px" onchange="prehuelgaHUE();">
                                <option>---Seleccione una opción</option>
-                               <option>Sí</option>
-                               <option>No</option>
+                             <%
+                                  
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                            </select>
                        </p>
                        <div id="audConcHUE" style="display: none">
@@ -1593,8 +1778,12 @@
                               <label>¿Hubo audiencia de conciliación?</label>
                               <select id="audConHUE" name="audConHUE" style="width: 950px" onchange="concilHUE()">
                                  <option>---Seleccione una opción</option>
-                                 <option>Sí</option>
-                                 <option>No</option>
+                                <%
+                            
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                              </select>
                            </P>
                        </div>
@@ -1608,8 +1797,11 @@
                            <label>¿Hubo estallamiento de la huelga?</label>
                            <select id="huelga" name="huelga" style="width: 950px" onchange="estallaHUE()">
                                <option>---Seleccione una opción</option>
-                               <option>Sí</option>
-                               <option>No</option>
+                              <%                                 
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                            </select>
                        </p>
                        <div id="estallamientoHUE" style="display: none">
@@ -1617,16 +1809,24 @@
                            <label>Declaración de licitud de la huelga</label>
                            <select id="licitud" name="licitud" style="width: 950px">
                                <option>---Seleccione una opción</option>
-                               <option>Lícita</option>
-                               <option>Ilícita</option>
+                              <%    
+                                  List<String> lic=obj.listaLicitud();
+                                  for(String licitudH: lic){
+                              %>
+                               <option value="<%= licitudH%>"><%= licitudH%></option>
+                               <% } %>
                            </select>
                        </p>
                        <p>
                            <label>Declaración de existencia de la huelga</label>
                            <select id="exisHuelga" name="exisHuelga" style="width: 950px">
                                <option>---Seleccione una opcion---</option>
-                               <option>Existente</option>
-                               <option>Inexistente</option>
+                               <%    
+                                  List<String> ext=obj.listaExistencia();
+                                  for(String exist: ext){
+                              %>
+                               <option value="<%= exist%>"><%= exist%></option>
+                               <% } %>
                            </select>
                        </p>
                        </div>
@@ -1637,8 +1837,12 @@
                             <label>Estatus del expediente</label>
                             <select id="estatusExpHUE" name="estatusExpHUE" style="width: 950px" onchange="ultimoActProcHUE(); solucionadoHUE()">
                                 <option>---Seleccione un estatus---</option>
-                                <option>Solucionado</option>
-                                <option>En proceso de resolución</option>
+                               <%              
+                             
+                                 for(String esex: ee){
+                              %>
+                               <option value="<%= esex%>"><%= esex%></option>
+                               <% } %>
                             </select>
                         </p>
                         <div id="divFechaUltActProc" style="display: none">
@@ -1652,9 +1856,12 @@
                             <label>Fase en la que se solucionó el expediente</label>
                             <select id="faseSolHUE" name="faseSolHUE" style="width: 950px" onchange="formSolHUE(); opHuelga();">
                                 <option>---Seleccione una fase---</option>
-                                <option>Emplazamiento a huelga</option>
-                                <option>Prehuelga</option>
-                                <option>Huelga</option>
+                                <%              
+                                 List <String> faseHUE=obj.listaFaseSolucionHUE();
+                                 for(String fsHUE: faseHUE){
+                              %>
+                               <option value="<%= fsHUE%>"><%= fsHUE%></option>
+                               <% } %>
                             </select>
                             </p>
                             
@@ -1663,13 +1870,12 @@
                                 <label>Forma de solución</label>
                                 <select id="formaSolHUE" name="formaSolHUE" style="width: 950px" onchange="espSolH()">
                                     <option>---Seleccione una solucion---</option>
-                                    <option>No dar trámite al escrito de emplazamiento por no cumplir con los requisitos establecidos</option>
-                                    <option>Exigir la firma de un contrato colectivo existiendo un registro previo en el Centro Federal de Conciliación y Registro Laboral</option>
-                                    <option>Allanamiento del pliego de peticiones</option>
-                                    <option>Por no acudir el sindicato a la audiencia de conciliación</option>
-                                    <option>Convenio conciliatorio</option>
-                                    <option>Desistimiento</option>
-                                    <option>Otra forma de solución (especifique)</option>
+                                     <%              
+                                 List<String> formaH1=obj.listaFormaSolucionHUE();
+                                 for(String formaHUE: formaH1){
+                              %>
+                               <option value="<%= formaHUE%>"><%= formaHUE%></option>
+                               <% } %>   
                                 </select>
                                 </p>
                                 
@@ -1704,11 +1910,13 @@
                                 <label>Forma de solución</label>
                                 <select id="formaSolHUE2" name="formaSolHUE2" style="width: 950px" onchange="espSolH(); sentHuelga(); espSolH2(); monPorHuelga()">
                                     <option>---Seleccione una solucion---</option>
-                                    <option>Convenio conciliatorio</option>
-                                    <option>Allanamiento del pliego de peticiones</option>
-                                    <option>Sentencia</option>
-                                    <option>Desistimiento</option>
-                                    <option>Otra forma de solución (especifique)</option>
+                             
+                                     <%              
+                                 List<String> formaH2=obj.listaFormaSolucionHUE2();
+                                 for(String formaHUE2: formaH2){
+                              %>
+                               <option value="<%= formaHUE2%>"><%= formaHUE2%></option>
+                               <% } %>   
                                 </select>
                                 </p>
                               
@@ -1724,9 +1932,12 @@
                                     <label>Tipo de sentencia</label>
                                     <select id="sentenciaHUE" name="sentenciaHUE" style="width: 950px">
                                         <option>---Seleccione un tipo de sentencia---</option>
-                                        <option>Absolutoria</option>
-                                        <option>Condenatoria</option>
-                                        <option>Mixta</option>
+                                           <%              
+                                 
+                                 for(String sentenciaORD: sen){
+                              %>
+                               <option value="<%= sentenciaORD%>"><%= sentenciaORD%></option>
+                               <% } %>      
                                     </select>
                                 </p>
                                 </div>
@@ -1847,8 +2058,12 @@
                         <label>Incompetencia</label>
                         <select id="incompetenciaCNE" name="incompetenciaCNE" style="width: 950px" onchange="incompCNE(); noIncompCNE();">
                             <option>---Seleccione una opción---</option>
-                            <option>Sí</option>
-                            <option>No</option>
+                            <%
+                                 
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                         </select>
                         </p>
                         <div id="divTipoIncompetenciaCNE" style="display: none">
@@ -1856,10 +2071,12 @@
                             <label>Tipo de incompetencia</label>
                             <select id="tipoIncompetenciaCNE" name="tipoIncompetenciaCNE" style="width: 950px" onchange="incompEspCNE()">
                                 <option>---Seleccione un tipo de incompetencia---</option>
-                               <option>Por ser competencia estatal</option>
-                        <option>Por ser competencia de otro órgano jurisdiccional federal en materia laboral</option>
-                                <option>Por corresponder a otra circunscripción territorial (región, partido o distrito)</option>
-                                <option>Otro tipo de incompetencia (especifique)</option>
+                                <%
+                         
+                                 for(String inc: incomp){
+                              %>
+                               <option value="<%= inc%>"><%= inc%></option>
+                               <% } %>
                             </select>
                             </p>
                         </div>
@@ -1881,8 +2098,12 @@
                                 <label>¿Se anexó constancia de no conciliación expedida por el Centro de Conciliación?</label>
                                 <select id="constConc" name="constConc" style="width: 950px" onchange="asuCNE(); claCNE();"> 
                                     <option>--- Seleccione una opción ---</option>
-                                    <option>Sí</option>
-                                    <option>No</option>
+                                   <%
+                                
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                 </select>
                             </p>
                             <div id="divConsConcCNE" style="display: none">
@@ -1897,8 +2118,12 @@
                                 <label>¿El asunto se encuentra vinculado a los supuestos de excepción de la conciliación prejudicial?</label>
                                 <select id="asuntVinCNE" name="asuntVinCNE" style="width: 950px">
                                     <option>--- Seleccione una opción ---</option>
-                                    <option>Sí</option>
-                                    <option>No</option>
+                                    <%
+                                  
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                 </select>
                                 </p>
                             </div>
@@ -1907,8 +2132,12 @@
                                <label>¿Se formuló prevención a la demanda?</label>
                                <select id="formuloCNE" name="formuloCNE" style="width: 950px" onchange="desahogosCNE()">
                                    <option>---Seleccione una opción</option>
-                                   <option>Sí</option>
-                                   <option>No</option>
+                                    <%
+                                  
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                </select>
                             </p>
                             <div id="divDesahogoCNE" style="display: none">
@@ -1916,8 +2145,12 @@
                                 <label>¿Se desahogó la prevención de la demanda?</label>
                                 <select id="desahogoCNE" name="desahogoCNE" style="width: 950px">
                                     <option>---Seleccione una opción</option>
-                                    <option>Sí</option>
-                                    <option>No</option>
+                                  <%
+                                 
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                 </select>
                                 </p>
                             </div>
@@ -1928,10 +2161,12 @@
                             <label>Estatus de la demanda</label>
                             <select id="estatusDemandaCNE" name="estatusDemandaCNE" style="width: 950px" onchange="admitidaCNE(); admitida2CNE()">
                                 <option>---Seleccione un estatus---</option>
-                                <option>Admitida</option>
-                                <option>Desechada</option>
-                                <option>Archivo</option>
-                                <option>No se dio trámite al escrito de demanda</option>
+                                  <%              
+                             
+                                 for(String dema: dem){
+                              %>
+                               <option value="<%= dema%>"><%= dema%></option>
+                               <% } %>
                             </select>
                             </p>
                             <div id="divAdmitidaCNE" style="display: none">
@@ -1954,8 +2189,12 @@
                                 <label>¿Hubo celebración de audiencia dentro del procedimiento colectivo de naturaleza económica?</label>
                                 <select id="audCNE" name="audCNE" style="width: 950px" onchange="fechaAudienciaCNE()">
                                     <option>---Seleccione una opción</option>
-                                    <option>Sí</option>
-                                    <option>No</option>
+                                    <%
+                              
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                                 </select>
                                 </p>
                                 
@@ -1974,8 +2213,12 @@
                             <label>Estatus del expediente</label>
                             <select id="estatusExpCNE" name="estatusExpCNE" style="width: 950px" onchange="ultActCNE(); solucionadoCNE()">
                                 <option>---Seleccione un estatus---</option>
-                                <option>Solucionado</option>
-                                <option>En proceso de resolución</option>
+                                <%              
+                               
+                                 for(String esex: ee){
+                              %>
+                               <option value="<%= esex%>"><%= esex%></option>
+                               <% } %>
                             </select>
                             </p>
                             <div id="divFechaUltActCNE" style="display: none">
@@ -1993,11 +2236,12 @@
                                     <label>Forma de solución</label>
                                     <select id="formaSolCNE" name="formaSolCNE" style="width: 950px" onchange="solucionEspCNE(); tipoSentCNE();">
                                         <option>---Seleccione una forma de solución---</option>
-                                        <option>Sentencia</option>
-                                        <option>Convenio conciliatorio</option>
-                                        <option>Desistimiento</option>
-                                        <option>Caducidad</option>
-                                        <option>Otra forma de solución (especifique)</option>
+                                          <%              
+                            
+                                 for(String forma2ORD: forma2){
+                              %>
+                               <option value="<%= forma2ORD%>"><%= forma2ORD%></option>
+                               <% } %>     
                                     </select>
                                 </p>
                                 <div id="divEspSol" style="display: none">
@@ -2015,9 +2259,12 @@
                                     <label>Tipo de sentencia</label>
                                     <select id="tipoSentenciaCNE" name="tipoSentenciaCNE" style="width: 950px" onchange="efectosCNE();">
                                         <option>---Seleccione un tipo de sentencia---</option>
-                                        <option>Absolutoria</option>
-                                        <option>Condenatoria</option>
-                                        <option>Mixta</option>
+                                        <%              
+                               
+                                 for(String sentenciaORD: sen){
+                              %>
+                               <option value="<%= sentenciaORD%>"><%= sentenciaORD%></option>
+                               <% } %>      
                                     </select>
                                     </p>
                                 </div>
@@ -2060,11 +2307,11 @@
                           <label>Sector de la rama o materia industrial involucrada </label>     
                           <select id="sectorPARA" name="sectorPARA" style="width: 950px"  onchange="sectorSubsector('sectorPARA', 'subsectorPARA');">
                                <option value="">---Seleccione sector---</option>
-                                    <%
-                                        List<String> sectorS6 = obj.sector();
-                                        for (String dato : sectorS6) {
+                                   <%
+                                       
+                                        for (String dato : sectorS5) {
                                     %>
-                              <option value="<%= dato%>"><%= dato%></option>
+                                    <option value="<%= dato%>"><%= dato%></option>
                                     <% } %>
                           </select>
                      </p>                   
@@ -2078,18 +2325,12 @@
                          <label>Motivo de la solicitud o promoción</label>
                          <select id="motivoPARA" name="motivoPARA" style="width: 950px" onchange="motPARA()">
                              <option>---Seleccione un motivo---</option>
-                             <option>Aviso de rescisión de la relación laboral</option>
-                             <option>Terminación de la relación laboral por reducción de personal</option>
-                             <option>Suspensión del reparto adicional de utilidades</option>
-                             <option>Aprobación de convenios o liquidaciones</option>
-                             <option>Sustitución patronal</option>
-                             <option>Otorgamiento de depósito o fianza</option>
-                             <option>Autorización para laborar a personas mayores de 14 años y menores de 16 años</option>
-                             <option>Constancia de trabajo (días trabajados y salario percibido)</option>
-                             <option>Declaración de beneficiarios</option>
-                             <option>Cancelación de fianza o devolución de depósito</option>
-                             <option>Pago de Indemnización (art.49 LFT)</option>
-                             <option>Otro motivo de la solicitud o promoción (especifique)</option>
+                           <%
+                                       List<String> motivo=obj.listaMotivos();
+                                         for (String mot : motivo) {
+                                    %>
+                                    <option value="<%= mot%>"><%= mot%></option>
+                                    <% } %>
                          </select>
                      </p>   
                      <div id="divEspMotPARA" style="display: none">
@@ -2104,8 +2345,12 @@
                         <label>Incompetencia</label>
                         <select id="incompPARA" name="incompPARA" style="width: 950px" onchange="incPARA();noIncPARA();">
                             <option>---Seleccione una incompetencia---</option>
-                            <option>Sí</option>
-                            <option>No</option>
+                           <%
+                                 
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                         </select>
                     </P>  
                     <div id="divTipoIncompetenciaPARA" style="display: none">
@@ -2113,10 +2358,12 @@
                         <label>Tipo de incompetencia</label>
                         <select id="tipoIncompPARA" name="tipoIncompPARA" style="width: 950px" onchange="otraIncPARA()">
                             <option>---Seleccione una incompetencia---</option>
-                            <option>Por ser competencia estatal</option>
-                        <option>Por ser competencia de otro órgano jurisdiccional federal en materia laboral</option>
-                            <option>Por corresponder a otra circunscripción territorial (región, partido o distrito)</option>
-                            <option>Otro tipo de incompetencia (especifique)</option>
+                             <%
+                                 
+                                 for(String inc: incomp){
+                              %>
+                               <option value="<%= inc%>"><%= inc%></option>
+                               <% } %>
                         </select>
                         </P>
                         </div>
@@ -2141,11 +2388,12 @@
                         <label>Promovente</label>
                         <select id="promoventePARA" name="promoventePARA" style="width: 950px" onchange="promPARA()" >
                             <option>---Seleccione un tipo de promovente---</option>
-                            <option>Trabajador</option>
-                            <option>Sindicato</option>
-                            <option>Patrón</option>
-                            <option>Beneficiario</option>
-                            <option>Otro tipo de promovente (especifique)</option>
+                           <%
+                                 List<String> prom=obj.listaPromovente();
+                                 for(String pr: prom){
+                              %>
+                               <option value="<%= pr%>"><%= pr%></option>
+                               <% } %>
                         </select>
                     </P>
                     <div id="divEspPromPARA" style="display: none">
@@ -2158,8 +2406,12 @@
                         <label>Estatus del expediente</label>
                         <select id="estatusExpPARA" name="estatusExpPARA" style="width: 950px" onchange="estatusPARA()">
                             <option>---Estatus del expediente---</option>
-                            <option>Solucionado</option>
-                            <option>En proceso de resolución</option>
+                          <%              
+                               
+                                 for(String esex: ee){
+                              %>
+                               <option value="<%= esex%>"><%= esex%></option>
+                               <% } %>
                         </select>
                     </P>
                     <div id="divFechaConclExp" style="display: none">
@@ -2199,16 +2451,24 @@
                         <label>Tipo de incidente</label>
                         <select id="tipoIncidente" name="tipoIncidente" style="width: 950px">
                             <option>---Seleccione tipo de incidente---</option>
-                            <option>Tercería excluyente de dominio</option>
-                            <option>Tercería excluyente de preferencia</option>
+                              <%
+                                 List<String> inc=obj.listaIncidente();
+                                  for(String inci: inc){
+                              %>
+                               <option value="<%= inci%>"><%= inci%></option>
+                               <% } %>
                         </select>
                     </p>
                     <p>
                         <label>¿Hubo celebración de audiencia?</label>
                         <select id="audTER" name="audTER" style="width: 950px" onchange="audienciaTER()">
                             <option>---Seleccione una opción---</option>
-                            <option>Sí</option>
-                            <option>No</option>
+                             <%
+                                 
+                                  for(String respSim: respuesta){
+                              %>
+                               <option value="<%= respSim%>"><%= respSim%></option>
+                               <% } %>
                         </select>
                     </p>
                     <div id="divAudienciaTER" style="display: none">
@@ -2224,18 +2484,24 @@
                         <label>Estatus del expediente</label>
                         <select id="estatusExpTER" name="estatusExpTER" style="width: 950px"  onchange="estatusTER()">
                             <option>---Seleccione un estatus---</option>
-                            <option>Solucionado</option>
-                            <option>En proceso de resolución</option>
+                            <%              
+                                
+                                 for(String esex: ee){
+                              %>
+                               <option value="<%= esex%>"><%= esex%></option>
+                               <% } %>
                         </select>
                     </p>
                     <div id="divSentTER" style="display: none">
                         <p>
                         <label>Sentencia interlocutoria (incidental)</label>
                         <select id="sentenciaTER" name="sentenciaTER" style="width: 950px">
-                            <option>---Seleccione una sentencia---</option>
-                            <option>Tercería procedente</option>
-                            <option>Tercería improcedente</option>
-                            <option>Mixta</option>
+                             <%              
+                                List<String> sent3=obj.listaTipoSentencia3();
+                                 for(String s3: sent3){
+                              %>
+                               <option value="<%= s3%>"><%= s3%></option>
+                               <% } %>
                         </select>
                         </p>
                         <p>
@@ -2310,8 +2576,7 @@
                 <label>Estatus del expediente </label>
                 <select id="estExp" name="estExp" style="width: 950px" onchange = "mostrarEstatusFecha()">
                     <option value="">--- Seleccione estatus ---</option>
-                    <option value="Solucionado">Solucionado</option>
-                    <option value="En proceso de resolución">En proceso de resolución</option>
+                   
                 </select>
                     </p>
                     
@@ -2356,8 +2621,12 @@
         <label >Estatus del expediente </label>
         <select id="estExpE" name="estExpE" style="width: 950px" onchange = "mostrarEstatusFechaFaseEj()" >
         <option value="">--- Seleccione estatus ---</option>
-        <option value="Solucionado">Solucionado</option>
-        <option value="En proceso de resolución">En proceso de resolución</option>
+         <%              
+                               
+                                 for(String esex: ee){
+                              %>
+                               <option value="<%= esex%>"><%= esex%></option>
+                               <% } %>
         </select>
        </p>               
                 
@@ -2369,9 +2638,12 @@
     <label >Fase en la que se concluyó el procedimiento de ejecución</label>
     <select id="faseConEj" name="faseConEj" style="width: 950px">
     <option value="">--- Selecione una fase ---</option>
-    <option value="Requerimiento de pago y embargo">Requerimiento de pago y embargo</option>
-    <option value="Remate">Remate</option>
-    <option value="No identificado">No identificado</option>
+    <%              
+              List <String> faseEJE=obj.listaFaseSolucionEJE();
+              for(String fsEJE: faseEJE){
+   %>
+             <option value="<%= fsEJE%>"><%= fsEJE%></option>
+   <% } %>
     </select>
     </p>
     </div>

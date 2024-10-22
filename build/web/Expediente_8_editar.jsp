@@ -201,7 +201,7 @@
             
             <center>
                 <input type="submit" value="Actualizar" id="guardaPro" >
-                <input type="reset" value="Limpiar">
+               
             </center>
             </form>
             

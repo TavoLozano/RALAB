@@ -10,6 +10,7 @@
 <%@page import="java.sql.*"%>
 <%@page import="Combos.CargaCombosProcedimientos"%>
 <%@page import="Combos.CargaCombosActores"%>
+<%@page import="Combos.CargaCombosDemandado"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -38,6 +39,7 @@
         CargaCombosProcedimientos obj = new CargaCombosProcedimientos();
         CargaCombosO cco = new CargaCombosO();
         CargaCombosActores cca = new CargaCombosActores();
+        CargaCombosDemandado ccd = new CargaCombosDemandado();
         
 
     %>
@@ -169,10 +171,12 @@
                                <label>Actor</label>                              
                                <select id="comboActor"  name="comboActor"   onchange="funTrabajador(); funSindicato(); funCantidadTrabajadores(); funTrabajador2(); funSindicato2()">
                                    <option>---Seleccione un actor---</option>                         
-                                  <option>Trabajador</option>
-                                  <option>Sindicato</option>
-                                  <option>Coalición de trabajadores</option>              
-                                  <option>Otro</option>
+                                 <%
+                                        List<String> actor1 = cca.listaActor();
+                                        for(String a1: actor1){
+                                    %>
+                                    <option value="<%= a1%>"><%= a1%></option>
+                                    <% } %>
                                 </select>
                              
                                 </p>       
@@ -183,9 +187,12 @@
                                  <label>Actor</label>                              
                                  <select id="comboActor2" name="comboActor2"  onchange="funTrabajador(); funSindicato(); funCantidadTrabajadores(); funTrabajador2(); funSindicato2()">
                                   <option>---Seleccione un actor---</option>                         
-                                  <option>Trabajador</option>
-                                  <option>Beneficiario</option>                                        
-                                  <option>Otro</option>
+                                 <%
+                                        List<String> actor2 = cca.listaActor2();
+                                        for(String a2: actor2){
+                                    %>
+                                    <option value="<%= a2%>"><%= a2%></option>
+                                    <% } %>
                                 </select> 
                                 </p>    
                             </div>
@@ -195,10 +202,12 @@
                                  <label>Actor</label>                              
                                  <select id="comboActor3" name="comboActor3"  onchange="funCantidadTrabajadores2(); funSindicato2(); funPatron()">
                                   <option>---Seleccione un actor---</option>  
-                                  <option>Sindicato</option>
-                                  <option>Coalición de trabajadores</option>
-                                  <option>Patrón</option>                                                                     
-                                  <option>Otro</option>
+                                  <%
+                                        List<String> actor3 = cca.listaActor3();
+                                        for(String a3: actor3){
+                                    %>
+                                    <option value="<%= a3%>"><%= a3%></option>
+                                    <% } %>
                                 </select> 
                                 </p> 
                             </div>
@@ -208,9 +217,12 @@
                                  <label>Actor</label>                              
                                  <select id="comboActor4" name="comboActor4"  onchange="funSindicato3(); funTrabajadorHue()">
                                   <option>---Seleccione un actor---</option>  
-                                  <option>Sindicato</option>
-                                  <option>Mayoría de trabajadores</option>                                                                                             
-                                  <option>Otro</option>
+                                   <%
+                                        List<String> actor4 = cca.listaActor4();
+                                        for(String a4: actor4){
+                                    %>
+                                    <option value="<%= a4%>"><%= a4%></option>
+                                    <% } %>
                                 </select> 
                                 </p> 
                             </div>
@@ -220,10 +232,12 @@
                                  <label>Actor</label>                              
                                  <select id="comboActor5" name="comboActor5"  onchange="funSindicatoCNE(); funMayoriaTrabajadoresCNE();funPatronCNE();">
                                   <option>---Seleccione un actor---</option>  
-                                  <option>Sindicato</option>
-                                  <option>Mayoría de trabajadores</option>
-                                  <option>Patrón</option>                                                                     
-                                  <option>Otro</option>
+                                  <%
+                                        List<String> actor5 = cca.listaActor5();
+                                        for(String a5: actor5){
+                                    %>
+                                    <option value="<%= a5%>"><%= a5%></option>
+                                    <% } %>
                                 </select> 
                                 </p> 
                             </div>
@@ -233,11 +247,12 @@
                              <label>Defensa</label>
                              <select id="defensa" name="defensa" style="width: 350px " required>  
                                 <option>---Seleccione una defensa---</option>
-                                <option>Defensa pública (gratuita)</option>
-                                <option>Defensa privada</option>
-                                <option>Defensa pública y privada</option>
-                                <option>No contaron con representación legal (defensa)</option>
-                                <option>No identificado</option>
+                                  <%
+                                        List<String> defen = cca.listaDefensa();
+                                        for(String def: defen){
+                                    %>
+                                    <option value="<%= def%>"><%= def%></option>
+                                    <% } %>
                             </select>
                           </p>
 
@@ -252,9 +267,12 @@
                                      <label>Sexo</label>
                                      <select id="sexoAct" name="sexoAct" >
                                         <option>---Seleccione un sexo---</option>
-                                        <option>Hombre</option>
-                                        <option>Mujer</option>
-                                        <option>No identificado</option>
+                                        <%
+                                        List<String> sexo = cca.listaSexo();
+                                        for(String sex: sexo){
+                                    %>
+                                    <option value="<%= sex%>"><%= sex%></option>
+                                    <% } %>
                                      </select>
                                      </p>
                                      <p>
@@ -290,10 +308,12 @@
                                        <label>Jornada</label>
                                        <select id="comboJornada" name="comboJornada">
                                            <option>---Selecciona una jornada---</option>
-                                           <option>Diurna</option>
-                                           <option>Nocturna</option>
-                                           <option>Mixta</option>
-                                           <option>No identificado</option>
+                                              <%
+                                        List<String> jorna = cca.listaJornada();
+                                        for(String jor: jorna){
+                                    %>
+                                    <option value="<%= jor%>"><%= jor%></option>
+                                    <% } %>
                                        </select>
                                    </p>
                                 </div>
@@ -311,12 +331,12 @@
                                         <label>Tipo de sindicato</label>
                                         <select id="tipoSindicato" name="tipoSindicato" onchange="funTipoSindicato()">
                                             <option>--- Seleccione un tipo de sindicato ---</option>
-                                            <option>Gremial</option>
-                                            <option>De empresa</option>
-                                            <option>Industrial</option>
-                                            <option>Nacional de industria</option>
-                                            <option>De oficios varios</option>
-                                            <option>Otro tipo de sindicato (especifique)</option>
+                                           <%
+                                        List<String> sindic = cca.listaSindicato();
+                                        for(String sin: sindic){
+                                    %>
+                                    <option value="<%= sin%>"><%= sin%></option>
+                                    <% } %>
                                         </select>
                                     </p>
                                     <div id="divEspSindicato" style="display: none">
@@ -329,8 +349,12 @@
                                         <label>¿El sindicato pertenece a alguna organización obrera?</label>
                                         <select id="sindictaOrgObr" name="sindictaOrgObr" onchange="funOrgObr()">
                                             <option>--- Seleccione una opción ---</option>
-                                            <option>Sí</option>
-                                            <option>No</option>
+                                           <%
+                                        List<String> respSim = cca.respuestaSimple();
+                                        for(String rsim: respSim){
+                                    %>
+                                    <option value="<%= rsim%>"><%= rsim%></option>
+                                    <% } %>
                                         </select>
                                     </p>
                                     <div id="divOrgObr" style="display: none">
@@ -338,14 +362,12 @@
                                             <label>Nombre de la organización obrera</label>
                                             <select id="nombreOrgObr" name="nombreOrgObr"onchange="funEspOrgObr()">
                                                 <option>--- Seleccione un nombre ---</option>
-                                                <option>Confederación de Trabajadores de México (CTM)</option>
-                                                <option>Confederación Revolucionaria de Obreros y Campesinos (CROC)</option>
-                                                <option>Confederación Regional Obrera Mexicana (CROM)</option>
-                                                <option>Confederación Obrera Revolucionaria (COR)</option>
-                                                <option>Confederación General de Trabajadores (CGT)</option>
-                                                <option>Confederación Revolucionaria de Trabajadores (CRT)</option>
-                                                <option>Independientes</option>
-                                                <option>Otra organización obrera (especifique)</option>
+                                               <%
+                                       List<String> organizacion = cca.listaOrgObr();
+                                        for(String org: organizacion){
+                                    %>
+                                    <option value="<%= org%>"><%= org%></option>
+                                    <% } %>
                                             </select>
                                         </p>
                                         <div id="divEspOrgObr" style="display: none">
@@ -388,9 +410,12 @@
                                      <label>Sexo</label>
                                      <select id="sexoActIND" name="sexoActIND">
                                         <option>---Seleccione un sexo---</option>
-                                        <option>Hombre</option>
-                                        <option>Mujer</option>
-                                        <option>No identificado</option>
+                                     <%
+                                     
+                                        for(String sex: sexo){
+                                    %>
+                                    <option value="<%= sex%>"><%= sex%></option>
+                                    <% } %>
                                      </select>
                                    </P>
                                    <p>
@@ -425,10 +450,12 @@
                                        <label>Jornada</label>
                                        <select id="jornadaActIND" name="jornadaActIND">
                                            <option>---Selecciona una jornada---</option>
-                                           <option>Diurna</option>
-                                           <option>Nocturna</option>
-                                           <option>Mixta</option>
-                                           <option>No identificado</option>
+                                            <%
+                                    
+                                        for(String jor: jorna){
+                                    %>
+                                    <option value="<%= jor%>"><%= jor%></option>
+                                    <% } %>
                                        </select>
                                    </p>
                                 </div>
@@ -450,12 +477,12 @@
                                         <label>Tipo de sindicato</label>
                                         <select id="tipoSindicato2" name="tipoSindicato2" onchange="funTipoSindicato2()">
                                             <option>--- Seleccione un tipo de sindicato ---</option>
-                                            <option>Gremial</option>
-                                            <option>De empresa</option>
-                                            <option>Industrial</option>
-                                            <option>Nacional de industria</option>
-                                            <option>De oficios varios</option>
-                                            <option>Otro tipo de sindicato (especifique)</option>
+                                             <%
+                                       
+                                        for(String sin: sindic){
+                                    %>
+                                    <option value="<%= sin%>"><%= sin%></option>
+                                    <% } %>
                                         </select>
                                     </p>
                                     <div id="divEspSindicato2" style="display: none">
@@ -468,8 +495,12 @@
                                         <label>¿El sindicato pertenece a alguna organización obrera?</label>
                                         <select id="sindictaOrgObr2" name="sindictaOrgObr2" onchange="funOrgObr2(); funEspOrgObr2()">
                                             <option>--- Seleccione una opción ---</option>
-                                            <option>Sí</option>
-                                            <option>No</option>
+                                              <%
+                                        
+                                        for(String rsim: respSim){
+                                    %>
+                                    <option value="<%= rsim%>"><%= rsim%></option>
+                                    <% } %>
                                         </select>
                                     </p>
                                     <div id="divOrgObr2" style="display: none">
@@ -477,14 +508,12 @@
                                             <label>Nombre de la organización obrera</label>
                                             <select id="nombreOrgObr2" name="nombreOrgObr2" onchange="funEspOrgObr2();">
                                                 <option>--- Seleccione un nombre ---</option>
-                                                <option>Confederación de Trabajadores de México (CTM)</option>
-                                                <option>Confederación Revolucionaria de Obreros y Campesinos (CROC)</option>
-                                                <option>Confederación Regional Obrera Mexicana (CROM)</option>
-                                                <option>Confederación Obrera Revolucionaria (COR)</option>
-                                                <option>Confederación General de Trabajadores (CGT)</option>
-                                                <option>Confederación Revolucionaria de Trabajadores (CRT)</option>
-                                                <option>Independientes</option>
-                                                <option>Otra organización obrera (especifique)</option>
+                                                <%
+                                      
+                                        for(String org: organizacion){
+                                    %>
+                                    <option value="<%= org%>"><%= org%></option>
+                                    <% } %>
                                             </select>
                                         </p>
                                         <div id="divEspOrgObr2" style="display: none">
@@ -519,8 +548,12 @@
                                         <label>Tipo</label>
                                         <select id="comboTipo" name="comboTipo" onchange="funTipo()">
                                             <option>---Seleccione una opcion---</option>
-                                            <option>Persona física</option>
-                                            <option>Persona moral</option>
+                                            <%
+                                        List<String> patron = cca.tipoPatron();
+                                        for(String pat: patron){
+                                    %>
+                                    <option value="<%= pat%>"><%= pat%></option>
+                                    <% } %>
                                         </select>
                                     </p>
                                     <p>
@@ -601,12 +634,12 @@
                                         <label>Tipo de sindicato</label>
                                         <select id="tipoSindicato3" name="tipoSindicato3" onchange="funTipoSindicato3()">
                                             <option>--- Seleccione un tipo de sindicato ---</option>
-                                            <option>Gremial</option>
-                                            <option>De empresa</option>
-                                            <option>Industrial</option>
-                                            <option>Nacional de industria</option>
-                                            <option>De oficios varios</option>
-                                            <option>Otro tipo de sindicato (especifique)</option>
+                                           <%
+                                       
+                                        for(String sin: sindic){
+                                    %>
+                                    <option value="<%= sin%>"><%= sin%></option>
+                                    <% } %>
                                         </select>
                                     </p>
                                     <div id="divEspSindicato3" style="display: none">
@@ -619,8 +652,12 @@
                                         <label>¿El sindicato pertenece a alguna organización obrera?</label>
                                         <select id="sindictaOrgObrHue" name="sindictaOrgObrHue" onchange="funOrgObrHUE()">
                                             <option>--- Seleccione una opción ---</option>
-                                            <option>Sí</option>
-                                            <option>No</option>
+                                            <%
+                                      
+                                        for(String rsim: respSim){
+                                    %>
+                                    <option value="<%= rsim%>"><%= rsim%></option>
+                                    <% } %>
                                         </select>
                                     </p>
                                     <div id="divOrgObrHUE" style="display: none">
@@ -628,14 +665,12 @@
                                             <label>Nombre de la organización obrera</label>
                                             <select id="nombreOrgObrHue" name="nombreOrgObrHue"onchange="funEspOrgObr2HUE()">
                                                 <option>--- Seleccione un nombre ---</option>
-                                                <option>Confederación de Trabajadores de México (CTM)</option>
-                                                <option>Confederación Revolucionaria de Obreros y Campesinos (CROC)</option>
-                                                <option>Confederación Regional Obrera Mexicana (CROM)</option>
-                                                <option>Confederación Obrera Revolucionaria (COR)</option>
-                                                <option>Confederación General de Trabajadores (CGT)</option>
-                                                <option>Confederación Revolucionaria de Trabajadores (CRT)</option>
-                                                <option>Independientes</option>
-                                                <option>Otra organización obrera (especifique)</option>
+                                               <%
+                                      
+                                        for(String org: organizacion){
+                                    %>
+                                    <option value="<%= org%>"><%= org%></option>
+                                    <% } %>
                                             </select>
                                         </p>
                                         <div id="divEspOrgObrHUE" style="display: none">
@@ -683,12 +718,12 @@
                                         <label>Tipo de sindicato</label>
                                         <select id="tipoSindicatoCNE" name="tipoSindicatoCNE" onchange="funTipoSindicatoCNE()">
                                             <option>--- Seleccione un tipo de sindicato ---</option>
-                                            <option>Gremial</option>
-                                            <option>De empresa</option>
-                                            <option>Industrial</option>
-                                            <option>Nacional de industria</option>
-                                            <option>De oficios varios</option>
-                                            <option>Otro tipo de sindicato (especifique)</option>
+                                             <%
+                                       
+                                        for(String sin: sindic){
+                                    %>
+                                    <option value="<%= sin%>"><%= sin%></option>
+                                    <% } %>
                                         </select>
                                     </p>
                                     <div id="divEspSindicatoCNE" style="display: none">
@@ -701,8 +736,12 @@
                                         <label>¿El sindicato pertenece a alguna organización obrera?</label>
                                         <select id="sindictaOrgObrCNE" name="sindictaOrgObrCNE" onchange="funOrgObrCNE()">
                                             <option>--- Seleccione una opción ---</option>
-                                            <option>Sí</option>
-                                            <option>No</option>
+                                           <%
+                                      
+                                        for(String rsim: respSim){
+                                    %>
+                                    <option value="<%= rsim%>"><%= rsim%></option>
+                                    <% } %>
                                         </select>
                                     </p>
                                     <div id="divOrgObrCNE" style="display: none">
@@ -710,14 +749,12 @@
                                             <label>Nombre de la organización obrera</label>
                                             <select id="nombreOrgObrCNE" name="nombreOrgObrCNE"onchange="funEspOrgObrCNE()">
                                                 <option>--- Seleccione un nombre ---</option>
-                                                <option>Confederación de Trabajadores de México (CTM)</option>
-                                                <option>Confederación Revolucionaria de Obreros y Campesinos (CROC)</option>
-                                                <option>Confederación Regional Obrera Mexicana (CROM)</option>
-                                                <option>Confederación Obrera Revolucionaria (COR)</option>
-                                                <option>Confederación General de Trabajadores (CGT)</option>
-                                                <option>Confederación Revolucionaria de Trabajadores (CRT)</option>
-                                                <option>Independientes</option>
-                                                <option>Otra organización obrera (especifique)</option>
+                                              <%
+                                      
+                                        for(String org: organizacion){
+                                    %>
+                                    <option value="<%= org%>"><%= org%></option>
+                                    <% } %>
                                             </select>
                                         </p>
                                         <div id="divEspOrgObrCNE" style="display: none">
@@ -751,8 +788,11 @@
                                         <label>Tipo</label>
                                         <select id="comboTipoCNE" name="comboTipoCNE" onchange="funMoralCNE()">
                                             <option>---Seleccione una opcion---</option>
-                                            <option>Persona física</option>
-                                            <option>Persona moral</option>
+                                           <%                                   
+                                        for(String pat: patron){
+                                    %>
+                                    <option value="<%= pat%>"><%= pat%></option>
+                                    <% } %>
                                         </select>
                                     </p>
                                     <p>
@@ -895,8 +935,12 @@
                                <label>Demandado</label>                              
                                <select id="comboDemandado" name="comboDemandado"  onchange="funPatronOrdDEM();">
                                   <option>---Seleccione un demandado---</option>                         
-                                  <option>Patrón</option>                                            
-                                  <option>Otro</option>
+                                  <%
+                                        List<String> demanda = ccd.listaDemandado12();
+                                        for (String dema : demanda) {
+                                    %>
+                                    <option value="<%= dema%>"><%= dema%></option>
+                                    <% } %>
                                 </select>                              
                                 </p>       
                             </div>
@@ -906,10 +950,12 @@
                                  <label>Demandado</label>                              
                                  <select id="comboDemandado2" name="comboDemandado2"  onchange="funSindColDEM(); funPatronColDEM();">
                                   <option>---Seleccione un demandado---</option>  
-                                  <option>Sindicato</option>
-                                  <option>Coalición de trabajadores</option>
-                                  <option>Patrón</option>                                                                     
-                                  <option>Otro</option>
+                                    <%
+                                        List<String> demanda3 = ccd.listaDemandado3();
+                                        for (String dema : demanda3) {
+                                    %>
+                                    <option value="<%= dema%>"><%= dema%></option>
+                                    <% } %>
                                 </select> 
                                 </p> 
                             </div>
@@ -919,7 +965,12 @@
                                  <label>Demandado</label>                              
                                  <select id="comboDemandado3" name="comboDemandado3"  onchange="funPatronHueDem();">
                                   <option>---Seleccione un demandado---</option>  
-                                  <option>Patrón</option>                                 
+                                 <%
+                                        List<String> demanda4 = ccd.listaDemandado4();
+                                        for (String dema : demanda4) {
+                                    %>
+                                    <option value="<%= dema%>"><%= dema%></option>
+                                    <% } %>                             
                                 </select> 
                                 </p> 
                             </div>
@@ -929,10 +980,12 @@
                                  <label>Demandado</label>                              
                                  <select id="comboDemandado4" name="comboDemandado4"  onchange="funSindCneDEM(); funPatronCneDEM();">
                                   <option>---Seleccione un demandado---</option>  
-                                  <option>Sindicato</option>
-                                  <option>Mayoría de trabajadores</option>
-                                  <option>Patrón</option>                                                                     
-                                  <option>Otro</option>
+                                 <%
+                                        List<String> demanda5 = ccd.listaDemandado5();
+                                        for (String dema : demanda5) {
+                                    %>
+                                    <option value="<%= dema%>"><%= dema%></option>
+                                    <% } %>
                                 </select> 
                                 </p> 
                             </div>
@@ -942,11 +995,12 @@
                              <label>Defensa</label>
                              <select id="defensa_DEM" name="defensa_DEM" style="width: 350px ">  
                                 <option>---Seleccione una defensa---</option>
-                                <option>Defensa pública (gratuita)</option>
-                                <option>Defensa privada</option>
-                                <option>Defensa pública y privada</option>
-                                <option>No contaron con representación legal (defensa)</option>
-                                <option>No identificado</option>
+                               <%
+                                        List<String> defDem = ccd.listaDefensa();
+                                        for (String df : defDem) {
+                                    %>
+                                    <option value="<%= df%>"><%= df%></option>
+                                    <% } %>
                             </select>
                           </p>
 
@@ -959,8 +1013,12 @@
                                         <label>Tipo</label>
                                         <select id="comboTipoDemORD" name="comboTipoDemORD" onchange="funMoralOrdDEM()">
                                             <option>---Seleccione una opcion---</option>
-                                            <option>Persona física</option>
-                                            <option>Persona moral</option>
+                                             <%
+                                        List<String> patro = ccd.tipoPatron();
+                                        for (String pt : patro) {
+                                    %>
+                                    <option value="<%= pt%>"><%= pt%></option>
+                                    <% } %>
                                         </select>
                                         </p>
                                         <p>
@@ -1041,12 +1099,12 @@
                                         <label>Tipo de sindicato</label>
                                         <select id="tipoSindicatoColDEM" name="tipoSindicatoColDEM" onchange="funTipoSindicatoCOL()">
                                             <option>--- Seleccione un tipo de sindicato ---</option>
-                                            <option>Gremial</option>
-                                            <option>De empresa</option>
-                                            <option>Industrial</option>
-                                            <option>Nacional de industria</option>
-                                            <option>De oficios varios</option>
-                                            <option>Otro tipo de sindicato (especifique)</option>
+                                           <%
+                                        List<String> sindicatoDEM = ccd.listaSindicato();
+                                        for (String snDEM: sindicatoDEM) {
+                                    %>
+                                    <option value="<%= snDEM%>"><%= snDEM%></option>
+                                    <% } %>
                                         </select>
                                     </p>
                                     <div id="divEspSindicatoColDEM" style="display: none">
@@ -1059,8 +1117,12 @@
                                         <label>¿El sindicato pertenece a alguna organización obrera?</label>
                                         <select id="sindictaOrgObrColDEM" name="sindictaOrgObrColDEM" onchange="funOrgObrColDEM()">
                                             <option>--- Seleccione una opción ---</option>
-                                            <option>Sí</option>
-                                            <option>No</option>
+                                         <%
+                                        List<String> rsdem = ccd.respuestaSimple();
+                                        for (String rs2 : rsdem) {
+                                    %>
+                                    <option value="<%= rs2%>"><%= rs2%></option>
+                                    <% } %>
                                         </select>
                                     </p>
                                     <div id="divOrgObrColDEM" style="display: none">
@@ -1068,14 +1130,12 @@
                                             <label>Nombre de la organización obrera</label>
                                             <select id="nombreOrgObrColDEM" name="nombreOrgObrColDEM"onchange="funEspOrgObrColDEM()">
                                                 <option>--- Seleccione un nombre ---</option>
-                                                <option>Confederación de Trabajadores de México (CTM)</option>
-                                                <option>Confederación Revolucionaria de Obreros y Campesinos (CROC)</option>
-                                                <option>Confederación Regional Obrera Mexicana (CROM)</option>
-                                                <option>Confederación Obrera Revolucionaria (COR)</option>
-                                                <option>Confederación General de Trabajadores (CGT)</option>
-                                                <option>Confederación Revolucionaria de Trabajadores (CRT)</option>
-                                                <option>Independientes</option>
-                                                <option>Otra organización obrera (especifique)</option>
+                                               <%
+                                        List<String> orgObr = ccd.listaOrgObr();
+                                        for (String ob: orgObr) {
+                                    %>
+                                    <option value="<%= ob%>"><%= ob%></option>
+                                    <% } %>
                                             </select>
                                         </p>
                                         <div id="divEspOrgObrColDEM" style="display: none">
@@ -1109,8 +1169,12 @@
                                         <label>Tipo</label>
                                         <select id="comboTipoDemCOL" name="comboTipoDemCOL" onchange="funMoralColDEM()">
                                             <option>---Seleccione una opcion---</option>
-                                            <option>Persona física</option>
-                                            <option>Persona moral</option>
+                                            <%
+                                     
+                                        for (String pt : patro) {
+                                    %>
+                                    <option value="<%= pt%>"><%= pt%></option>
+                                    <% } %>
                                         </select>
                                         </p>
                                         <p>
@@ -1183,8 +1247,12 @@
                                         <label>Tipo</label>
                                         <select id="comboTipoDemHUE" name="comboTipoDemHUE" onchange="funMoralHueDEM()()">
                                             <option>---Seleccione una opcion---</option>
-                                            <option>Persona física</option>
-                                            <option>Persona moral</option>
+                                             <%
+                                     
+                                        for (String pt : patro) {
+                                    %>
+                                    <option value="<%= pt%>"><%= pt%></option>
+                                    <% } %>
                                         </select>
                                         </p>
                                         <p>
@@ -1265,12 +1333,12 @@
                                         <label>Tipo de sindicato</label>
                                         <select id="tipoSindicatoCneDEM" name="tipoSindicatoCneDEM" onchange="funTipoSindicatoCNE()">
                                             <option>--- Seleccione un tipo de sindicato ---</option>
-                                            <option>Gremial</option>
-                                            <option>De empresa</option>
-                                            <option>Industrial</option>
-                                            <option>Nacional de industria</option>
-                                            <option>De oficios varios</option>
-                                            <option>Otro tipo de sindicato (especifique)</option>
+                                           <%
+                                      
+                                        for (String snDEM: sindicatoDEM) {
+                                    %>
+                                    <option value="<%= snDEM%>"><%= snDEM%></option>
+                                    <% } %>
                                         </select>
                                     </p>
                                     <div id="divEspSindicatoCneDEM" style="display: none">
@@ -1283,8 +1351,11 @@
                                         <label>¿El sindicato pertenece a alguna organización obrera?</label>
                                         <select id="sindictaOrgObrCneDEM" name="sindictaOrgObrCneDEM" onchange="funOrgObrCneDEM()">
                                             <option>--- Seleccione una opción ---</option>
-                                            <option>Sí</option>
-                                            <option>No</option>
+                                            <%                                    
+                                        for (String rs2 : rsdem) {
+                                    %>
+                                    <option value="<%= rs2%>"><%= rs2%></option>
+                                    <% } %>
                                         </select>
                                     </p>
                                     <div id="divOrgObrCneDEM" style="display: none">
@@ -1292,14 +1363,11 @@
                                             <label>Nombre de la organización obrera</label>
                                             <select id="nombreOrgObrCneDEM" name="nombreOrgObrCneDEM"onchange="funEspOrgObrCneDEM()">
                                                 <option>--- Seleccione un nombre ---</option>
-                                                <option>Confederación de Trabajadores de México (CTM)</option>
-                                                <option>Confederación Revolucionaria de Obreros y Campesinos (CROC)</option>
-                                                <option>Confederación Regional Obrera Mexicana (CROM)</option>
-                                                <option>Confederación Obrera Revolucionaria (COR)</option>
-                                                <option>Confederación General de Trabajadores (CGT)</option>
-                                                <option>Confederación Revolucionaria de Trabajadores (CRT)</option>
-                                                <option>Independientes</option>
-                                                <option>Otra organización obrera (especifique)</option>
+                                              <%                                     
+                                                   for (String ob: orgObr) {
+                                             %>
+                                    <option value="<%= ob%>"><%= ob%></option>
+                                    <% } %>
                                             </select>
                                         </p>
                                         <div id="divEspOrgObrCneDEM" style="display: none">
@@ -1333,8 +1401,11 @@
                                         <label>Tipo</label>
                                         <select id="comboTipoDemCNE" name="comboTipoDemCNE" onchange="funMoralCneDEM()">
                                             <option>---Seleccione una opcion---</option>
-                                            <option>Persona física</option>
-                                            <option>Persona moral</option>
+                                            <%                                     
+                                        for (String pt : patro) {
+                                    %>
+                                    <option value="<%= pt%>"><%= pt%></option>
+                                    <% } %>
                                         </select>
                                         </p>
                                         <p>
@@ -1459,7 +1530,6 @@
                               
                               <br>
                               <div>
-
                                   <fieldset class="secuencial" style="line-break: loose" id="tablaAudiencia">
                                       <legend>Audiencias Registradas</legend></fieldset>
                               </div>
@@ -1474,10 +1544,12 @@
                             <label>Tipo de audiencia</label>
                             <select id="listaOrdInd" name="listaOrdInd" onchange="funEspAudiencias()">
                                 <option>---Seleccione una audiencia---</option>
-                                <option>Audiencia preliminar</option>
-                                <option>Audiencia de juicio</option>
-                                <option>Otro tipo de audiencia (especifique)</option>
-                                <option>No identificada</option>
+                                 <%
+                                        List<String> aud1 = ccd.listaAudiencia12();
+                                        for (String a1: aud1) {
+                                    %>
+                                    <option value="<%= a1%>"><%= a1%></option>
+                                    <% } %>
                             </select>
                             </p>
                         </div>
@@ -1486,9 +1558,12 @@
                             <label>Tipo de audiencia</label>
                             <select id="listaCol" name="listaCol" onchange="funEspAudiencias2()">
                                 <option>---Seleccione una audiencia---</option>                              
-                                <option>Audiencia de juicio</option>
-                                <option>Otro tipo de audiencia (especifique)</option>
-                                <option>No identificada</option>
+                              <%
+                                        List<String> aud3 = ccd.listaAudiencia3();
+                                        for (String a3: aud3) {
+                                    %>
+                                    <option value="<%= a3%>"><%= a3%></option>
+                                    <% } %>
                             </select>
                             </p>
                         </div>
@@ -1497,10 +1572,12 @@
                             <label>Tipo de audiencia</label>
                             <select id="listaHuelga" name="listaHuelga" onchange="funEspAudiencias3()">
                                 <option>---Seleccione una audiencia---</option>
-                                <option>Audiencia de conciliación</option>
-                                <option>Audiencia conforme al artículo 937 (LFT)</option>
-                                <option>Otro tipo de audiencia (especifique)</option>
-                                <option>No identificada</option>
+                              <%
+                                        List<String> aud4 = ccd.listaAudiencia4();
+                                        for (String a4: aud4) {
+                                    %>
+                                    <option value="<%= a4%>"><%= a4%></option>
+                                    <% } %>
                             </select>
                             </p>
                         </div>
@@ -1509,9 +1586,12 @@
                             <label>Tipo de audiencia</label>
                             <select id="listaCne" name="listaCne" onchange="funEspAudiencias4()">
                                 <option>---Seleccione una audiencia---</option>                              
-                                <option>Audiencia dentro del procedimiento colectivo de naturaleza economica</option>
-                                <option>Otro tipo de audiencia (especifique)</option>
-                                <option>No identificada</option>
+                              <%
+                                        List<String> aud5 = ccd.listaAudiencia5();
+                                        for (String a5: aud5) {
+                                    %>
+                                    <option value="<%= a5%>"><%= a5%></option>
+                                    <% } %>                               
                             </select>
                             </p>
                         </div>
