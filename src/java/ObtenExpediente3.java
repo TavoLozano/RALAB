@@ -1,4 +1,4 @@
-import Combos.CargaCombosActores;
+import Combos.CargaCombosAudiencias;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,10 +22,11 @@ public class ObtenExpediente3 extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            String cve_organo = request.getParameter("cve_organo");
          String expediente = request.getParameter("expediente");
-            CargaCombosActores obj = new CargaCombosActores();
+            CargaCombosAudiencias obj = new CargaCombosAudiencias();
             List<String> lista;
-            lista = obj.listaExpedientes(expediente);
+            lista = obj.listaExpedientes3(expediente, cve_organo);
             out.println("<option value=''>--- Seleccione un expediente --</option>");
             for (String ls : lista) {
                 out.println("<option value='" + ls + "'>" + ls + "</option>");

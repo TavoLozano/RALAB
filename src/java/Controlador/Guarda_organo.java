@@ -27,16 +27,16 @@ public class Guarda_organo extends HttpServlet
             CargaCombosO obj=new CargaCombosO();
             
             //Obtiene el nombre del organo jurisdiccional}
-            String nombre = request.getParameter("nombre");
+            String nombre = request.getParameter("nombre").trim();
             
             //Obtiene la sede del organo jurisdiccional
-            String sede = request.getParameter("sede");     
+            String sede = request.getParameter("sede").trim();     
             
             //Obtiene la colonia del organo jurisdcional
-            String colonia = request.getParameter("colonia");
+            String colonia = request.getParameter("colonia").trim();
             
             //Obtiene la latitud del organo jurisdiciconal
-            String latitud = request.getParameter("latitud");
+            String latitud = request.getParameter("latitud").trim();
             if(latitud.equals(""))
             {
                 latitud="0.0";
@@ -79,7 +79,7 @@ public class Guarda_organo extends HttpServlet
           }
           
             //Obtiene el valor de otra circunscripcion en caso de ser seleccionada dicha opcion
-            String OtraCir=request.getParameter("OtraCir");
+            String OtraCir=request.getParameter("OtraCir").trim();
             String fechaG = request.getParameter("campoFechaHora");
            
           

@@ -24,6 +24,7 @@
     --colorMeanTrans: rgba(1, 49, 79, 0.7);
 }
 
+
 /*Estilo hoja general*/
 * {
     font-family: Raleway, sans-serif;
@@ -394,8 +395,8 @@ fieldset{
 }
 .secuencial input{
 	display: table-cell;
-	width: auto;
-        margin: 10px;
+	width: auto !important;
+        margin: 10px !important;
         align-items: flex-end;
 }
 .secuencial select{
@@ -557,3 +558,82 @@ fieldset{
             text-decoration: none;
             cursor: pointer;
         }
+ 
+        
+    .select2-container--default .select2-selection--single {
+    position: relative; /* Para posicionar elementos hijos */
+    background-color: var(--colorLight1) !important;
+    border: none;
+    color: var(--colorMean) !important;
+    padding: 5px 15px;
+    display: inline-block;
+    font-size: 14px;
+    cursor: auto;
+    border-radius: 5px;
+    width: 90%;
+    margin: 10px !important;
+    height: auto;
+    min-height: 40px; /* Ajustar según sea necesario */
+}
+
+
+
+.select2-container--default .select2-selection__arrow {
+    position: absolute;
+    right: 15px; /* Ajustar según sea necesario */
+    top: 50%; /* Centrar verticalmente */
+    width: 0; /* Asegúrate de que no afecte la posición */
+    height: 0; /* Asegúrate de que no afecte la posición */
+    border-left: 5px solid transparent; /* Tamaño de la flecha */
+    border-right: 5px solid transparent; /* Tamaño de la flecha */
+    pointer-events: none; /* Evitar interferencia de clics */
+}
+
+.select2-container--default .select2-results {
+    background-color: var(--colorFocusBg); /* Color de fondo de la lista desplegable */
+    color: var(--colorLabel); /* Color del texto */
+    font-size: 14px;
+}
+
+/* Estilo para las opciones dentro de la lista */
+.select2-container--default .select2-results__option {
+    padding: 10px;
+    border-radius: 5px; /* Redondear bordes de las opciones individuales */
+}
+
+
+/* Cambiar el color de la opción seleccionada en el select */
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: var(--colorMean) !important; /* Color del texto de la opción seleccionada */
+    background-color: var(--colorLight1); /* Fondo del select después de seleccionar */
+}
+
+/* Alinear y estilizar la "X" (botón de limpiar) */
+.select2-container--default .select2-selection__clear {
+    position: absolute; /* Para posicionarlo dentro del contenedor */
+    top: 50%; /* Centrado verticalmente */
+    right: 10px; /* Ajusta esta distancia según sea necesario */
+    transform: translateY(-50%); /* Centrado verticalmente */
+    background-color: transparent; /* Fondo transparente */
+    color: var(--colorFocusBg); /* Color de la "X" */
+    font-size: 16px; /* Tamaño del texto de la "X" */
+    cursor: pointer; /* Cambia el cursor para indicar interactividad */
+    padding: 2px; /* Ajusta el padding si es necesario */
+}
+
+/* Cambiar color al pasar el ratón */
+.select2-container--default .select2-selection__clear:hover {
+    color: orange; /* Color de la "X" al pasar el ratón */
+}
+
+.select2-container--default .select2-dropdown {
+    border-radius: 8px; /* Ajusta el valor para redondear los bordes */
+    border: none; /* Eliminar el borde */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Opcional: sombra para un mejor efecto */
+}
+
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: var(--colorMean) !important; /* Cambiar el color del placeholder */
+    font-style: italic; /* Opcional: estilo de fuente */
+}
+

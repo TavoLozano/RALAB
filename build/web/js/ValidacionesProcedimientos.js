@@ -69,111 +69,67 @@ $().ready(function () {
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 
 
+var divsOcultosInicialmente = [];
+    // Especificar todos los divs que se pueden ocultar
+var divsProc = [
+        "divOrdinario",
+        "divIndividual",
+        "divColectivo",
+        "divHuelga",
+        "divColNatEco",
+        "divParaprocesal",
+        "divTerceria",
+        "divPrefCred",
+        "divEjecucion"
+    ];
+
+function detectarDivsOcultos() {
+ var todosLosDivs = document.querySelectorAll('div');  // Selecciona todos los divs
+    todosLosDivs.forEach(function(div) {
+        // Verificar si el div está oculto y no está en la lista de excluidos
+        if (window.getComputedStyle(div).display === 'none' && !divsProc.includes(div.id)) {
+            divsOcultosInicialmente.push(div);  // Almacenar el div si está oculto y no está excluido
+        }
+    });
+}
+
+// Llamar a esta función al cargar el JSP
+window.onload = detectarDivsOcultos;
+
+function restablecerDivsOcultos() {
+    divsOcultosInicialmente.forEach(function(div) {
+        // Evitar restablecer selects con select2
+        var elementos = div.querySelectorAll('select');
+        var tieneSelect2 = Array.from(elementos).some(function(el) {
+            return $(el).hasClass('select2-hidden-accessible');
+        });
+
+        // Si no tiene Select2, proceder con el ocultar y restablecer
+        if (!tieneSelect2) {
+            ocultarYRestablecer(div);  // Restablecer el display a 'none'
+        }
+    });
+
+}
+
+
 //MUESTRA EL FORMULARIO CON BASE AL RPOCEDIMIENTO SELECCIONADO EN EL COMBOBOX
 function mostrarProcedimientos() {
     var seleccion = document.getElementById("procedimientos").value;
-    if (seleccion === "Ordinario") {
-        document.getElementById("divOrdinario").style.display = "block";
-        document.getElementById("divIndividual").style.display = "none";
-        document.getElementById("divColectivo").style.display = "none";
-        document.getElementById("divHuelga").style.display = "none";
-        document.getElementById("divColNatEco").style.display = "none";
-        document.getElementById("divParaprocesal").style.display = "none";
-        document.getElementById("divTerceria").style.display = "none";
-        document.getElementById("divPrefCred").style.display = "none";
-        document.getElementById("divEjecucion").style.display = "none";
-    } else if (seleccion === "Individual") {
-        document.getElementById("divOrdinario").style.display = "none";
-        document.getElementById("divIndividual").style.display = "block";
-        document.getElementById("divColectivo").style.display = "none";
-        document.getElementById("divHuelga").style.display = "none";
-        document.getElementById("divColNatEco").style.display = "none";
-        document.getElementById("divParaprocesal").style.display = "none";
-        document.getElementById("divTerceria").style.display = "none";
-        document.getElementById("divPrefCred").style.display = "none";
-        document.getElementById("divEjecucion").style.display = "none";
-    } else if (seleccion === "Colectivo") {
-        document.getElementById("divOrdinario").style.display = "none";
-        document.getElementById("divIndividual").style.display = "none";
-        document.getElementById("divColectivo").style.display = "block";
-        document.getElementById("divHuelga").style.display = "none";
-        document.getElementById("divColNatEco").style.display = "none";
-        document.getElementById("divParaprocesal").style.display = "none";
-        document.getElementById("divTerceria").style.display = "none";
-        document.getElementById("divPrefCred").style.display = "none";
-        document.getElementById("divEjecucion").style.display = "none";
-    } else if (seleccion === "Huelga") {
-        document.getElementById("divOrdinario").style.display = "none";
-        document.getElementById("divIndividual").style.display = "none";
-        document.getElementById("divColectivo").style.display = "none";
-        document.getElementById("divHuelga").style.display = "block";
-        document.getElementById("divColNatEco").style.display = "none";
-        document.getElementById("divParaprocesal").style.display = "none";
-        document.getElementById("divTerceria").style.display = "none";
-        document.getElementById("divPrefCred").style.display = "none";
-        document.getElementById("divEjecucion").style.display = "none";
-    } else if (seleccion === "Colectivo de Naturaleza Economica") {
-        document.getElementById("divOrdinario").style.display = "none";
-        document.getElementById("divIndividual").style.display = "none";
-        document.getElementById("divColectivo").style.display = "none";
-        document.getElementById("divHuelga").style.display = "none";
-        document.getElementById("divColNatEco").style.display = "block";
-        document.getElementById("divParaprocesal").style.display = "none";
-        document.getElementById("divTerceria").style.display = "none";
-        document.getElementById("divPrefCred").style.display = "none";
-        document.getElementById("divEjecucion").style.display = "none";
-    } else if (seleccion === "Paraprocesal") {
-        document.getElementById("divOrdinario").style.display = "none";
-        document.getElementById("divIndividual").style.display = "none";
-        document.getElementById("divColectivo").style.display = "none";
-        document.getElementById("divHuelga").style.display = "none";
-        document.getElementById("divColNatEco").style.display = "none";
-        document.getElementById("divParaprocesal").style.display = "block";
-        document.getElementById("divTerceria").style.display = "none";
-        document.getElementById("divPrefCred").style.display = "none";
-        document.getElementById("divEjecucion").style.display = "none";
-    } else if (seleccion === "Terceria") {
-        document.getElementById("divOrdinario").style.display = "none";
-        document.getElementById("divIndividual").style.display = "none";
-        document.getElementById("divColectivo").style.display = "none";
-        document.getElementById("divHuelga").style.display = "none";
-        document.getElementById("divColNatEco").style.display = "none";
-        document.getElementById("divParaprocesal").style.display = "none";
-        document.getElementById("divTerceria").style.display = "block";
-        document.getElementById("divPrefCred").style.display = "none";
-        document.getElementById("divEjecucion").style.display = "none";
-    } else if (seleccion === "Preferencia de Credito") {
-        document.getElementById("divOrdinario").style.display = "none";
-        document.getElementById("divIndividual").style.display = "none";
-        document.getElementById("divColectivo").style.display = "none";
-        document.getElementById("divHuelga").style.display = "none";
-        document.getElementById("divColNatEco").style.display = "none";
-        document.getElementById("divParaprocesal").style.display = "none";
-        document.getElementById("divTerceria").style.display = "none";
-        document.getElementById("divPrefCred").style.display = "block";
-        document.getElementById("divEjecucion").style.display = "none";
-    } else if (seleccion === "Ejecucion") {
-        document.getElementById("divOrdinario").style.display = "none";
-        document.getElementById("divIndividual").style.display = "none";
-        document.getElementById("divColectivo").style.display = "none";
-        document.getElementById("divHuelga").style.display = "none";
-        document.getElementById("divColNatEco").style.display = "none";
-        document.getElementById("divParaprocesal").style.display = "none";
-        document.getElementById("divTerceria").style.display = "none";
-        document.getElementById("divPrefCred").style.display = "none";
-        document.getElementById("divEjecucion").style.display = "block";
-    } else {
-        document.getElementById("divOrdinario").style.display = "none";
-        document.getElementById("divIndividual").style.display = "none";
-        document.getElementById("divColectivo").style.display = "none";
-        document.getElementById("divHuelga").style.display = "none";
-        document.getElementById("divColNatEco").style.display = "none";
-        document.getElementById("divParaprocesal").style.display = "none";
-        document.getElementById("divTerceria").style.display = "none";
-        document.getElementById("divPrefCred").style.display = "none";
-        document.getElementById("divEjecucion").style.display = "none";
-    }
+
+    // Ocultar y restablecer todos los divs que no son seleccionados
+    divsProc.forEach(function(divId) {
+        var divElement = document.getElementById(divId);
+
+        if (divId !== "div" + seleccion) {
+            ocultarYRestablecer(divElement);  // Ocultar y restablecer los no seleccionados
+        } else {
+            divElement.style.display = "block";  // Mostrar el div seleccionado
+        }
+    });
 }
+
+
 
 // -------------------------------------------------------VALIDACIONES PARA EL PROCEDIMIENTO ORDINARIO --------------------------------------------------------------------------------------
 
@@ -189,11 +145,11 @@ function mostrarOcultarMotCirConcepPrest() {
         $('.nondisplay').fadeIn('slow');
 
     } else if (seleccion === "Colectivo") {
-        cajaTexto.style.display = "none";
+         ocultarYRestablecer(cajaTexto);  
 //                caja.style.display = "none";
         $('.nondisplay').fadeOut('slow');
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -205,23 +161,23 @@ function mostrarOcultarContrato() {
         cajaTexto.style.display = "block";
 
     } else if (seleccion === "Colectivo") {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
 
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
 function mostrarNat1()
 {
     var seleccion = document.getElementById("asunto").value;
-    var cajaTexto = document.getElementById("divNat1ORD")
+    var cajaTexto = document.getElementById("divNat1ORD");
     if(seleccion === "Individual")
     {
         cajaTexto.style.display = "block";
     }
     else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -234,7 +190,7 @@ function mostrarNat2()
         cajaTexto.style.display = "block";
     }
     else {
-        cajaTexto.style.display = "none";
+       ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -243,13 +199,13 @@ function mostrarOcultarMotCol() {
     var cajaTexto = document.getElementById("divMotConfCol");
 
     if (seleccion === "Individual") {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
 
     } else if (seleccion === "Colectivo") {
         cajaTexto.style.display = "block";
 
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -260,10 +216,10 @@ function mostrarOcultarTipoContrato() {
     if (seleccion === "Sí") {
         cajaTexto.style.display = "block";
     } else if (seleccion === "No") {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     } else
     {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -282,7 +238,7 @@ function mostrarOcultarEspMotOrd() {
         div.style.display = "block";
     } else
     {
-        div.style.display = "none";
+       ocultarYRestablecer(div);  
     }
 }
 
@@ -293,7 +249,7 @@ function mostrarOcultarCirc() {
     if (seleccion === "Sí") {
         cajaTexto.style.display = "block";
     } else if (seleccion === "No") {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -312,7 +268,7 @@ function mostrarOcultarEspCir() {
         div.style.display = "block";
     } else
     {
-        div.style.display = "none";
+        ocultarYRestablecer(div);  
     }
 }
 
@@ -323,10 +279,10 @@ function mostrarOcultarConceptos() {
     if (seleccion === "Individual") {
         cajaTexto.style.display = "block";
     } else if (seleccion === "Colectivo") {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     } else
     {
-        cajaTexto.style.display = "none";
+       ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -345,7 +301,7 @@ function mostrarOcultarEspConc() {
         div.style.display = "block";
     } else
     {
-        div.style.display = "none";
+        ocultarYRestablecer(div);  
     }
 }
 
@@ -364,7 +320,7 @@ function mostrarOcultarPrest() {
         div.style.display = "block";
     } else
     {
-        div.style.display = "none";
+        ocultarYRestablecer(div);  
     }
 }
 
@@ -383,21 +339,25 @@ function mostrarOcultarEspPrest() {
         div.style.display = "block";
     } else
     {
-        div.style.display = "none";
+        ocultarYRestablecer(div);  
     }
 }
 
 function mostrarOcultarIncompOrd() {
     var seleccion = document.getElementById("incompetenciaOrd").value;
     var cajaTexto = document.getElementById("divIncompetencia");
+    var tipo = document.getElementById("incompOrd");
 
     if (seleccion === "Sí") {
         cajaTexto.style.display = "block";
     } else if (seleccion === "No") {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
+        tipo.value='';
+        
     } else
     {
         cajaTexto.style.display = "none";
+        tipo.value='';
     }
 }
 
@@ -408,9 +368,9 @@ function mostrarOcultarNoIncomp() {
     if (seleccion === "No") {
         cajaTexto.style.display = "block";
     } else if (seleccion === "Sí") {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -421,9 +381,9 @@ function mostrarOcultarEspIncompOrd() {
     if (seleccion === "Otro tipo de incompetencia (especifique)") {
         cajaTexto.style.display = "block";
     } else if (seleccion === "No") {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -434,9 +394,9 @@ function mostrarOcultarClaveConsOrd() {
     if (seleccion === "Sí") {
         cajaTexto.style.display = "block";
     } else if (seleccion === "No") {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -447,9 +407,9 @@ function mostrarOcultarClaveConsOrd2() {
     if (seleccion === "No") {
         cajaTexto.style.display = "block";
     } else if (seleccion === "Sí") {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -460,9 +420,9 @@ function mostrarOcultarDesahogo() {
     if (seleccion === "Sí") {
         cajaTexto.style.display = "block";
     } else if (seleccion === "No") {
-        cajaTexto.style.display = "none";
+       ocultarYRestablecer(cajaTexto);  
     } else {
-        cajaTexto.style.display = "none";
+       ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -473,7 +433,7 @@ function mostrarOcultarCauImpDem() {
     if (seleccion === "Desechada" || seleccion === "Archivo" || seleccion === "No se dio trámite al escrito de demanda") {
         cajaTexto.style.display = "block";
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 function mostrarOcultarAdmitida() {
@@ -483,7 +443,7 @@ function mostrarOcultarAdmitida() {
     if (seleccion === "Admitida") {
         cajaTexto.style.display = "block";
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -496,9 +456,9 @@ function mostrarOcultarFechaAudPrel() {
         cajaTexto.style.display = "block";
     } else if (seleccion === "No")
     {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -511,9 +471,9 @@ function mostrarOcultarFechaAudJui() {
         cajaTexto.style.display = "block";
     } else if (seleccion === "No")
     {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -525,7 +485,7 @@ function mostrarOcultarUltActProcOrd() {
     {
         cajaTexto.style.display = "block";
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -537,7 +497,7 @@ function mostrarOcultarSolucionado() {
     {
         cajaTexto.style.display = "block";
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -554,7 +514,7 @@ function mostrarOcultarEscritaPreliminar() {
         cajaTexto.style.display = "block";
     } else
     {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -566,7 +526,7 @@ function mostrarOcultarMontoOrd() {
     {
         cajaTexto.style.display = "block";
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -578,7 +538,7 @@ function mostrarOcultarEspSolucion() {
     {
         cajaTexto.style.display = "block";
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -596,26 +556,27 @@ function mostrarOcultarFechaSolForma() {
 function mostrarOcultarAudJuicio() {
     var seleccion = document.getElementById("faseSolOrd").value;
     var cajaTexto = document.getElementById("divAudJuicio");
-
+    console.log(seleccion); 
 
     if (seleccion === "Audiencia de juicio")
     {
         cajaTexto.style.display = "block";
     } else
     {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
 function mostrarOcultarMontoOrd2() {
     var seleccion = document.getElementById("formaSolOrd2").value;
     var cajaTexto = document.getElementById("divConConcOrd2");
+    console.log(seleccion); 
 
-    if (seleccion === "Convenio conciliatorio")
+    if (seleccion.trim() === "Convenio conciliatorio")
     {
         cajaTexto.style.display = "block";
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -628,7 +589,7 @@ function mostrarOcultarEspSolucion2() {
     {
         cajaTexto.style.display = "block";
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
@@ -640,22 +601,22 @@ function mostrarOcultarTipoSent() {
     {
         cajaTexto.style.display = "block";
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 
 function mostrarOcultarCondMix() {
+    var formaSol = document.getElementById("formaSolOrd2").value;
     var seleccion = document.getElementById("tipoSentencia").value;
     var cajaTexto = document.getElementById("divConConcOrd2");
 
-    if (seleccion === "Condenatoria")
-    {
+    // Mostrar el div si formaSol es "Sentencia" y seleccion es "Condenatoria" o "Mixta"
+    if (formaSol === "Sentencia" && (seleccion === "Condenatoria" || seleccion === "Mixta")) {
         cajaTexto.style.display = "block";
-    } else if (seleccion === "Mixta")
-    {
+    } else if (formaSol === "Convenio conciliatorio") {
         cajaTexto.style.display = "block";
     } else {
-        cajaTexto.style.display = "none";
+        ocultarYRestablecer(cajaTexto);  
     }
 }
 // --------------------------------------------------------------------------------------------- INDIVIDUAL  (VALIDACIONES) ----------------------------------------------------------------------------------------------------
@@ -1839,15 +1800,35 @@ function mayusculas(campo) {
     campo.value = campo.value.replace(/[^A-Z]/g, '');
 }
 
-function validarYConvertir(input) {
-  const regex = /^[A-Z ]+$/; // Permite solo letras mayúsculas y espacios
+// Valida que las entradas no tengan acentos y las convierte en mayúsculas, permite espacios y comas
+
+function validarYConvertirEspacioComa(input) {
+  const regex = /^[A-Z ,]*$/;   // Permite solo letras mayúsculas y espacios
+  // Convertir a mayúsculas
   input.value = input.value.toUpperCase();
   if (!regex.test(input.value)) 
   {
      
         
-      alert("Solo se permiten letras");
-        input.value = '';
+      alert("Sólo se admiten letras y espacios, sin acentos.");
+        input.value = input.value.slice(0, -1);
+  } 
+  else 
+  {    
+      // Retorna el valor convertido si es válido
+    return input.value;
+  }
+}
+
+function validarYConvertirP(input) {
+  const regex = /^[A-Z ]*$/; // Permite solo letras mayúsculas y espacios
+  input.value = input.value.toUpperCase();
+  if (!regex.test(input.value)) 
+  {
+     
+        
+      alert("Sólo se permiten letras, sin acentos.");
+        input.value = input.value.slice(0, -1);
   } 
   else 
   {    
@@ -1856,3 +1837,89 @@ function validarYConvertir(input) {
   }
 }
 
+
+ function filtrarOpciones(sectorId) {
+            var input, filter, select, options, i;
+            input = document.getElementById(sectorId);  // El select
+            filter = input.value.toUpperCase();  // Convertimos el valor ingresado a mayúsculas
+            select = document.getElementById(sectorId);  
+            options = select.getElementsByTagName("option");
+
+            // Recorremos todas las opciones del select
+            for (i = 0; i < options.length; i++) {
+                var txtValue = options[i].textContent || options[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    options[i].style.display = "";  // Mostrar si coincide
+                } else {
+                    options[i].style.display = "none";  // Ocultar si no coincide
+                }
+            }
+        }
+        
+        
+        //fUNCIÓN PARA VALIDAR ENTEROS POSITIVOS
+ function funcionNeg(inputId) {
+    var valor = parseFloat(document.getElementById(inputId).value);
+
+    // Verificar si es entero y positivo
+    if (isNaN(valor) || valor < 0 || !Number.isInteger(valor)) {
+        Swal.fire({
+            icon: 'warning',
+            title: '¡Atención!',
+            text: 'Por favor ingrese solo números enteros positivos',
+            confirmButtonText: 'Aceptar'
+        });
+        document.getElementById(inputId).value = "";
+    }
+}
+
+        //fUNCIÓN PARA VALIDAR NUMEROS
+function funcionPesos(inputId) {
+    var valor = document.getElementById(inputId).value;
+
+    // Expresión regular para validar el formato 000000.00
+    var regex =  /^\d*\.?\d{0,2}$/;
+
+    // Verificar si el valor cumple con el formato requerido
+    if (valor !== "" && !regex.test(valor)) {
+        Swal.fire({
+            icon: 'warning',
+            title: '¡Atención!',
+            text: 'Por favor ingrese un monto válido en el formato 000000.00',
+            confirmButtonText: 'Aceptar'
+        });
+        document.getElementById(inputId).value = "";  // Limpiar el campo si no es válido
+    }
+}
+
+
+//fUNCIÓN PARA REESTABLECER TODOS LOS VALORES DENTRO DEL DIV A LOS VALORES POR DEFECTO
+function ocultarYRestablecer(div) {
+    // Ocultar el div
+    div.style.display = 'none';
+
+    // Recorrer todos los elementos dentro del div
+    var elementos = div.querySelectorAll('input, select, textarea');
+    
+    elementos.forEach(function(elemento) {
+        // Verificar que el elemento no tenga el atributo readonly y que no sea el select "procedimientos"
+        if (!elemento.hasAttribute('readonly') && elemento.id !== "procedimientos") {
+            // Restablecer los campos de texto, selectores, y textarea
+            if (elemento.tagName === 'INPUT' || elemento.tagName === 'TEXTAREA') {
+                if (['text', 'number', 'password', 'email'].includes(elemento.type)) {
+                    elemento.value = "";  // Restablecer campo de texto, números, etc.
+                } else if (elemento.type === 'checkbox' || elemento.type === 'radio') {
+                    elemento.checked = false;  // Restablecer checkboxes y radios
+                }
+            } else if (elemento.tagName === 'SELECT') {
+                // Restablecer selectores al primer valor
+                elemento.selectedIndex = 0;
+                
+                // Verificar si el selector está usando Select2
+                if ($(elemento).hasClass('select2-hidden-accessible')) {
+                    $(elemento).val(null).trigger('change');  // Restablecer el select si usa Select2
+                }
+            }
+        }
+    });
+}

@@ -10,9 +10,22 @@
     CargaCombosProcedimientos obj = new CargaCombosProcedimientos();
     CargaCombosO cco = new CargaCombosO();
 %>
+       <!-- Incluir el CSS de Select2 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css" rel="stylesheet" />
+<!-- Incluir el JavaScript de Select2 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
+
+
 <link REL="stylesheet" href="css/notas.css">
  <script src="js/jNotas.js" type="text/javascript"></script>
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ 
+  
+
+
+ 
+
+ 
 <div class="tabWrap">
     <input id="tab-02" name="tab" type="radio" />
     <label class="tab label-02" for="tab-02"><span>*</span>Vía de tramitación</label>
@@ -24,17 +37,17 @@
         <form action="GuardaProcedimiento" method="post" id="principal" >
             <center>
                 <label >Procedimiento a registrar</label>
-                <select name="procedimientos" id="procedimientos" onchange = "mostrarProcedimientos(); habilitarTER(); habilitar2TER();" required>
+                <select name="procedimientos" id="procedimientos" onchange = "mostrarProcedimientos(); habilitarTER(); habilitar2TER(); restablecerDivsOcultos();" required>
                     <option value="">---Seleccione un procedimiento---</option>
                     <option value="Ordinario">Ordinario</option>
-                    <option value="Individual">Individual</option>
-                    <option value="Colectivo">Colectivo</option>
+                    <option value="Individual">Especial Individual</option>
+                    <option value="Colectivo">Especial Colectivo</option>
                     <option value="Huelga">Huelga</option>
-                    <option value="Colectivo de Naturaleza Economica">Colectivo de Naturaleza Económica</option>
+                    <option value="ColNatEco">Colectivo de Naturaleza Económica</option>
                     <option value="Paraprocesal">Paraprocesal</option>
-                    <option value="Terceria">Terceria</option>
-                    <option value="Preferencia de Credito">Preferencia de Credito</option>
-                    <option value="Ejecucion">Ejecucion</option>
+                    <option value="Terceria">Tercerías</option>
+                    <option value="PrefCred">Preferencia de Crédito</option>
+                    <option value="Ejecucion">Ejecución</option>
                 </select>
             </center>
             <br><br>
@@ -43,7 +56,7 @@
                     <td>
                         <label data-title="">Órgano Jurisdiccional</label></td>
                     <td><input type="text" name="nombre" id="nombre" value="${sessionScope.nomOrg}" style="width: 500px" readonly required></td>
-                    <td><label data-title="Esta variable es para la codificación que realizará INEGI, no debe ser llenado por el informante. Su codificación contiene la clave geoestadística del estado, municipio + materia del OJ + número de OJ">Clave del organo jurisdiccional: </label></td>
+                    <td><label data-title="Esta variable es para la codificación que realizará INEGI, no debe ser llenado por el informante. Su codificación contiene la clave geoestadística del estado, municipio + materia del OJ + número de OJ">Clave del órgano jurisdiccional: </label></td>
                     <td><input  type="text" id="clave" name="clave" value="${sessionScope.clveOrg}" style="width: 150px" readonly required></td>
                 </tr>
                 <tr>        
@@ -65,7 +78,7 @@
                      <!-- TIPO DE ASUNTO -->
                     
                     <p>
-                            <label>Tipo de asunto</label>
+                            <label>TIPO DE ASUNTO</label>
                             <select name="asunto" id="asunto" style="width: 400px" onchange = "mostrarOcultarMotCirConcepPrest(); mostrarOcultarContrato(); mostrarOcultarMotCol();mostrarOcultarConceptos(); mostrarNat1(); mostrarNat2()">
                                     <option value="">--Seleccione un tipo de asunto--</option>
                                     <option value="Individual">Individual</option>
@@ -111,7 +124,7 @@
                             <div id="divTipoContrato" style = "display: none"> 
                                 <p>
                              
-                                        <label data-title="INEGI: Tipo de contrato, solo+ debe llenarse cuando en la fila  ¿El trabajador contó con contrato escrito? se haya seleccionado Sí.">Tipo de contrato </label>   
+                                        <label data-title="INEGI: Tipo de contrato, sólo debe llenarse cuando en la fila  ¿El trabajador contó con contrato escrito? se haya seleccionado Sí.">Tipo de contrato </label>   
                                     
                                         <select name="tipoContrato" id="tipoContrato" style="width: 500px">
                                             <option value="">--Seleccione tipo de contrato--</option>
@@ -126,14 +139,14 @@
                       <!-- RAMA DE LA INDUSTRIA INVOLUCRADA -->
                         <p>
                                 <label>Rama de la industria involucrada </label>                               
-                                <input type="text" id="industria" name="industria" oninput="validarYConvertir(this)" style="width: 400px">
+                                <input type="text" id="industria" name="industria" oninput="validarYConvertirP(this)" style="width: 400px">
                                 <br>
 
                        <!-- SECTOR DE LA RAMA INVOLUCRADA -->
                         
                                 <label>Sector de la rama o materia industrial involucrada </label>     
                           
-                                <select id="sector" name="sector" onchange="sectorSubsector('sector', 'subsector');" style="width: 300px" >
+                                <select id="sector" name="sector" onkeyup="filtrarOpciones('sector');" onchange="sectorSubsector('sector', 'subsector');" style="width: 300px" >
                                     <option value="">---Seleccione sector---</option>
                                     <%
                                         List<String> sectorS = obj.sector();
@@ -155,7 +168,7 @@
 
                        <!-- ENTIDAD -->
                         <p>
-                                <label>Entidad donde se sucitó el conflicto </label>     
+                                <label>Entidad donde se suscitó el conflicto </label>     
                          
                                 <select id="entidad" name="entidad" style="width: 420px" onchange="entiMunicipio('entidad', 'municipio') " >
                                     <option value="">---Seleccione entidad---</option>
@@ -167,7 +180,7 @@
                                     <% } %>
                                 </select>
                                 <br>
-                                <label >Municipio donde se sucitó el conflicto</label> 
+                                <label >Municipio donde se suscitó el conflicto</label> 
                                 <select id="municipio" name="municipio" style="width: 300px" >
                                     <option value="">---Seleccione Municipio---</option>
                                 </select>
@@ -191,8 +204,9 @@
                         </fieldset>
                         
                         
-                        <fieldset class="secuencial" style="line-break: loose" data-title="INEGI: Motivo del Conflicto solo deben llenarse cuando en la fila  ''Tipo de asunto'' se haya seleccionado 'individual'. Son opciones que permiten seleccionar más de una opción."'>
-                            <legend> MOTIVO DEL CONFLICTO (ASUNTOS INDIVIDUALES)</legend>
+                        <fieldset class="secuencial" style="line-break: loose" >
+                            <legend data-title="INEGI: Motivo del Conflicto solo deben llenarse cuando en la fila  ''Tipo de asunto'' se haya seleccionado 'individual'. Son opciones que permiten seleccionar más de una opción."'> 
+                                MOTIVO DEL CONFLICTO (ASUNTOS INDIVIDUALES)</legend>
                             <!-- TIPO DE ASUNTO -->
                             <!-- MOTIVOS, CIRCUNSTANCIAS, CONCEPTOS -->
                             <!--<fieldset>-->
@@ -215,8 +229,8 @@
                           
                             <div id="divEspMotOrd" style="display: none">
                                 <p>
-                                <label data-title="INEGI: En caso de seleccionar en la fila ''Otro motivo del conflicto (especifique)''  la opción de ''Sí'' deberá de registrar su respuesta en esta fila.">Especifique(otro motivo del conflicto)</label>
-                                <input type="text" name ="especMotOrd" id ="especMotOrd" oninput="validarYConvertir(this)" style="width: 900px">
+                                <label data-title="INEGI: En caso de seleccionar ''Otro motivo del conflicto'', deberá de registrar su respuesta en esta fila.">Especifique (otro motivo del conflicto)</label>
+                                <input type="text" name ="especMotOrd" id ="especMotOrd" oninput="validarYConvertirEspacioComa(this)" style="width: 900px">
                                 </p>
                             </div>
                         </fieldset>
@@ -241,8 +255,9 @@
                  
                     <div id="divCirc" style="display: none" >
                      
-                        <fieldset class="secuencial" style="line-break: loose" data-title="INEGI: ''Circunstancias vinculadas al motivo de conflicto'', solo deben llenarse cuando en la fila  ''Tipo de asunto'' se haya seleccionado ''Individual''. Son opciones que permiten seleccionar más de una opción.">
-                            <legend>CIRCUNSTANCIAS VINCULADAS AL MOTIVO DE CONFLICTO</legend>
+                        <fieldset class="secuencial" style="line-break: loose" >
+                            <legend data-title="INEGI: ''Circunstancias vinculadas al motivo de conflicto'', solo deben llenarse cuando en la fila  ''Tipo de asunto'' se haya seleccionado ''Individual''. Son opciones que permiten seleccionar más de una opción.">
+                                CIRCUNSTANCIAS VINCULADAS AL MOTIVO DE CONFLICTO</legend>
                             <div class="ch">
                                 <table>
                                     <tr>
@@ -257,7 +272,7 @@
                                         <td><input type="checkbox" id="check_circunstancias" name="check_circunstancias" class="opcion2" onchange="mostrarOcultarEspCir()" value="Discriminación en el empleo por origen étnico o nacional" />Discriminación en el empleo por origen étnico o nacional</td>
                                         <td><input type="checkbox" id="check_circunstancias" name="check_circunstancias" class="opcion2" onchange="mostrarOcultarEspCir()" value="Discriminación en el empleo por religión" />Discriminación en el empleo por religión</td>
                                         <td><input type="checkbox" id="check_circunstancias" name="check_circunstancias" class="opcion2" onchange="mostrarOcultarEspCir()" value="Discriminación en el empleo por condición migratoria" />Discriminación en el empleo por condición migratoria</td>
-                                        <td><input type="checkbox" id="check_circunstancias" name="check_circunstancias" class="opcion2" onchange="mostrarOcultarEspCir()" value="Otro tipo de discriminación (especifique)" />Otro tipo de discriminación(especifique)</td>
+                                        <td><input type="checkbox" id="check_circunstancias" name="check_circunstancias" class="opcion2" onchange="mostrarOcultarEspCir()" value="Otro tipo de discriminación (especifique)" />Otro tipo de discriminación (especifique)</td>
                                     </tr><!-- comment -->
                                     <tr>
                                         <td><input type="checkbox" id="check_circunstancias" name="check_circunstancias" class="opcion2" onchange="mostrarOcultarEspCir()" value="Trata laboral" />Trata laboral</td>
@@ -271,8 +286,8 @@
                             
                             <div id="divEspCirc" style="display: none" >
                                 <p>
-                                <label data-title="INEGI: En caso de seleccionar en la fila ''Otro tipo de discriminación (especifique)''  la opción de ''Sí'' deberá de registrar su respuesta en esta fila">Especifique(otro tipo de discriminación)</label>
-                                    <input type="text" name ="espCirc" id ="espCirc" oninput="validarYConvertir(this)" style="width: 950px">
+                                <label data-title="INEGI: En caso de seleccionar ''Otro tipo de discriminación (especifique)'', deberá de registrar su respuesta en esta fila">Especifique (otro tipo de discriminación)</label>
+                                    <input type="text" name ="espCirc" id ="espCirc" oninput="validarYConvertirEspacioComa(this)" style="width: 950px">
                                     </p>
                             </div>
                     </div>
@@ -284,8 +299,9 @@
 
                
                     <div id="divConcep" style="display: none">
-                        <fieldset class="secuencial" style="line-break: loose" data-title="INEGI: ''Concepto reclamado'', solo deben llenarse cuando en la fila  ''Tipo de asunto'' se haya seleccionado ''individual''. Son opciones que permiten seleccionar más de una opción.">
-                            <legend>CONCEPTO RECLAMADO (ASUNTOS - INDIVIDUALES)</legend>
+                        <fieldset class="secuencial" style="line-break: loose" >
+                            <legend data-title="INEGI: ''Concepto reclamado'', solo deben llenarse cuando en la fila  ''Tipo de asunto'' se haya seleccionado ''individual''. Son opciones que permiten seleccionar más de una opción.">
+                                CONCEPTO RECLAMADO (ASUNTOS - INDIVIDUALES)</legend>
                             <div class="ch">
                                 <table>
                                     <tr>
@@ -303,8 +319,8 @@
 </tr>
                                     </table>
                     <div id="divEspConcep" style="display: none">
-                        <p><label data-title="INEGI: En caso de seleccionar en la fila ''Otro concepto reclamado (especifique)''  la opción de ''Sí'' deberá de registrar su respuesta en esta fila.">Especifique(otro concepto reclamado)</label></center>
-                        <input type="text" name ="espConcep" id ="espConcep" oninput="validarYConvertir(this)" style="width: 950px">
+                        <p><label data-title="INEGI: En caso de seleccionar ''Otro concepto reclamado (especifique)'', deberá de registrar su respuesta en esta fila.">Especifique (otro concepto reclamado)</label></center>
+                        <input type="text" name ="espConcep" id ="espConcep" oninput="validarYConvertirEspacioComa(this)" style="width: 950px">
                         </p>
                     </div>
                         </fieldset>
@@ -315,8 +331,9 @@
                    
                     <div id="divPrest" style="display: none">
                         
-                        <fieldset class="secuencial" style="line-break: loose" data-title="INEGI: ''Tipo de prestaciones'', solo debe llenarse cuando en la fila  ''Concepto reclamado'' se haya seleccionado ''Sí'' en ''Pago de Prestaciones'', asimismo debe registrar la opción sí o no, dependiendo del tipo de prestación solicitada. Son opciones que permiten seleccionar más de una opción.">
-                            <legend>TIPO DE PRESTACIONES</legend>
+                        <fieldset class="secuencial" style="line-break: loose" >
+                            <legend data-title="INEGI: ''Tipo de prestaciones'', solo debe llenarse cuando en la fila  ''Concepto reclamado'' se haya seleccionado ''Sí'' en ''Pago de Prestaciones'', asimismo debe registrar la opción sí o no, dependiendo del tipo de prestación solicitada. Son opciones que permiten seleccionar más de una opción.">
+                                TIPO DE PRESTACIONES</legend>
                             <input type="checkbox" id="check_prestaciones" name="check_prestaciones" class="opcion4" onchange = "mostrarOcultarEspPrest()" value="Aguinaldo" />Aguinaldo
                             <input type="checkbox" id="check_prestaciones" name="check_prestaciones" class="opcion4" onchange = "mostrarOcultarEspPrest()" value="Vacaciones" />Vacaciones
                             <input type="checkbox" id="check_prestaciones" name="check_prestaciones" class="opcion4" onchange = "mostrarOcultarEspPrest()" value="Prima vacacional" />Prima vacacional
@@ -325,8 +342,8 @@
                         
                     <div id="divEspPrest" style="display: none">
                         <p>
-                        <label data-title="INEGI: En caso de seleccionar en la fila ''Otro tipo de prestaciones (especifique)''  la opción de ''Sí'' deberá de registrar su respuesta en esta fila.">Especifique(otro tipo de prestaciones)</label>
-                        <input type="text" name ="espPrest" id ="espPrest" oninput="validarYConvertir(this)" style="width: 950px">
+                        <label data-title="INEGI: En caso de seleccionar en la fila ''Otro tipo de prestaciones (especifique)''  la opción de ''Sí'' deberá de registrar su respuesta en esta fila.">Especifique (otro tipo de prestaciones)</label>
+                        <input type="text" name ="espPrest" id ="espPrest" oninput="validarYConvertirEspacioComa(this)" style="width: 950px">
                         </p>
                     </div>
                         </fieldset>
@@ -340,14 +357,14 @@
                       <fieldset class="secuencial" style="line-break: loose">
                           <P>
                     <label data-title="INEGI: solo deben llenarse cuando en la fila ''Tipo de asunto'' se haya seleccionado ''colectivo''." >Motivo del conflicto (asuntos-colectivos)</label>
-                    <input type="text" name ="motConfCol" id ="motConfCol" oninput="validarYConvertir(this)" style="width: 950px">
+                    <input type="text" name ="motConfCol" id ="motConfCol" oninput="validarYConvertirEspacioComa(this)" style="width: 950px">
                           </P>
                       </fieldset>
                 </div>
 
            
                 <fieldset class="secuencial" style="line-break: loose">
-                            <legend>Incompetencia</legend>
+                            <legend>INCOMPETENCIA</legend>
                             <p>          
                              <label >Incompetencia</label>
                 <select id="incompetenciaOrd" name="incompetenciaOrd" style="width: 1150px" onchange="mostrarOcultarIncompOrd(); mostrarOcultarNoIncomp();">
@@ -361,7 +378,7 @@
                     <p>
                     <label data-title="INEGI: Si en la fila ''Incompetencia'', seleccionan ''Sí'', se deberá llenar la fila ''Tipo de incompetencia'' y terminar con el registro de información.">Tipo de incompetencia</label>
                     <select id="incompOrd" name="incompOrd" style="width: 200%">
-                        <option>---Seleccione una incompetencia---</option>
+                        <option value="">---Seleccione una incompetencia---</option>
                         <option>Por ser competencia federal</option>
                         <option>Por ser competencia de otra jurisdicción local</option>
                         <option>Por corresponder a otra circunscripción territorial (región, partido o distrito)</option>
@@ -374,7 +391,7 @@
                 <div id="divEspIncOrd" style="display: none">
                     <p>
                     <label data-title="INEGI: En caso de seleccionar en la fila ''Tipo de incompetencia'' la opción de ''Otro tipo de incompetencia (especifique)'' deberá de registrar su respuesta en esta fila.">Especifique (otro tipo de incompetencia)</label>
-                    <input type="text" name ="espIncOrd" id ="espIncOrd" oninput="validarYConvertir(this)" style="width: 200%">
+                    <input type="text" name ="espIncOrd" id ="espIncOrd" oninput="validarYConvertirEspacioComa(this)" style="width: 200%">
                     </p>
                 </div>
                             
@@ -383,8 +400,10 @@
                
                
                 <div id="divNoIncompetencia" style="display: none">
+                    
                    
                     <fieldset class="secuencial" style="line-break: loose">
+                        <legend>DEMANDA</legend>
                         <p>    
                     <label >Fecha de presentación de la demanda</label>
                     <input type="date" name ="fPresDemandOrd" id ="fPresDemandOrd" style="width: 60%" onfocus="fechaMax(this)" onkeypress="fechaMax(this)"">
@@ -402,15 +421,15 @@
                     
                     <div id="divConsConcilSi" style="display: none">
                         <p>
-                        <label data-title="INEGI: Clave/identificador de la constancia, solo debe llenarse cuando en la fila  ''¿Se anexó constancia de no conciliación expedida por el Centro de Conciliación?'' se haya seleccionado ''Sí''.">Clave/identificador de la constancia</label>
-                        <input type="text" name ="consConcil" id ="consConcil" oninput="validarYConvertir(this)" style="width: 400%">
+                        <label data-title="INEGI: Clave/identificador de la constancia, solo debe llenarse cuando se haya seleccionado ''¿Se anexó constancia de no conciliación expedida por el Centro de Conciliación?''">Clave/identificador de la constancia</label>
+                        <input type="text" name ="consConcil" id ="consConcil" style="width: 400%">
                         </p>
                     </div>
 
                     <br>
                     <div id="divConsConcilNo" style="display: none">
                         <p>
-                        <label data-title="INEGI Solo debe llenarse cuando en la fila ''¿Se anexó constancia de no conciliación expedida por el Centro de Conciliación?'' se haya seleccionado  ''No''.">¿El asunto se encuentra vinculado a los supuestos de excepción de la conciliación prejudicial?</label>
+                        <label data-title="INEGI Solo debe llenarse cuando no se haya seleccionado ''¿Se anexó constancia de no conciliación expedida por el Centro de Conciliación?''.">¿El asunto se encuentra vinculado a los supuestos de excepción de la conciliación prejudicial?</label>
                         <select id="asuVincPerj" name="asuVincPerj" style="width: 80%">
                             <option>---Seleccione una opción---</option>
                             <option>Sí</option>
@@ -443,6 +462,7 @@
                     </fieldset>
                    
                     <fieldset class="secuencial" style="line-break: loose">
+                        <legend>ESTATUS DE LA DEMANDA</legend>
                         <p>
                         <label data-title="INEGI: En caso de seleccionar las opciones ''Desechada'', ''Archivo'' o ''No se dio trámite al escrito de demanda'', no deberá de continuar con el llenado de información por haberse concluido el expediente.">Estatus de la demanda</label>
                         <select id="estatusDemOrd" name="estatusDemOrd" style="width: 300%" onchange="mostrarOcultarCauImpDem(); mostrarOcultarAdmitida();">
@@ -471,6 +491,7 @@
   
                     <div id="divAdmitidaOrd" style="display: none">
                          <fieldset class="secuencial" style="line-break: loose">
+                             <legend>PARTES REGISTRADAS EN EL EXPEDIENTE</legend>
                              <p>
                                 <label>Fecha de admisión de la demanda</label>
                                 <input type="date" id="fechaAdmDemOrd" name="fechaAdmDemOrd" style="width: 950px" onfocus="fechaMax(this)" onkeypress="fechaMax(this)">
@@ -478,13 +499,16 @@
 
                              <p>
                                 <label>Cantidad de actores</label>
-                                <input type="number" id="actoresOrd" name="actoresOrd" style="width: 950px">
+                                <input type="number" id="actoresOrd" name="actoresOrd" style="width: 950px" min="0" oninput="funcionNeg(this.id)">
                              </p>
                              
                              <p>
                                 <label>Cantidad de demandados</label>
-                                <input type="number" id="demandadosOrd" name="demandadosOrd" style="width: 950px">
+                                <input type="number" id="demandadosOrd" name="demandadosOrd" style="width: 950px" min="0" oninput="funcionNeg(this.id)">
                              </p>
+                         </fieldset>
+                        <fieldset class='secuencial' style="line-break: loose">
+                            <legend>DATOS PROCESALES</legend>
                              
                              <p>
                                 <label>¿Hubo celebración de audiencia preliminar?</label>
@@ -497,7 +521,7 @@
 
                         <div id="divFechaAudPrelOrd" style="display: none">
                             <p>
-                            <label data-title="INEGI: Fecha de audiencia preliminar, solo debe llenarse cuando en la fila ''¿Hubo celebración de audiencia preliminar?'' se haya seleccionado ''Sí''.">Fecha de audiencia preliminar</label>
+                            <label data-title="INEGI: Fecha de audiencia preliminar, solo debe llenarse cuando se haya seleccionado ''¿Hubo celebración de audiencia preliminar?''">Fecha de audiencia preliminar</label>
                             <input type="date" id="fechaAudPrel" name="fechaAudPrel" style="width: 950px" onfocus="fechaMax(this)" onkeypress="fechaMax(this)">
                             </p>
                         </div>
@@ -514,12 +538,12 @@
                     
                         <div id="divFechaAudJuiOrd" style="display: none">
                             <p>
-                               <label data-title="INEGI:  Fecha de audiencia de juicio, solo debe llenarse cuando en la fila  ''¿Hubo celebración de audiencia de juicio?'' se haya seleccionado ''Sí''.">Fecha de audiencia de juicio</label>
+                               <label data-title="INEGI:  Fecha de audiencia de juicio, solo debe llenarse cuando''¿Hubo celebración de audiencia de juicio?'' se haya seleccionado ''Sí''.">Fecha de audiencia de juicio</label>
                                <input type="date" id="fechaAudJui" name="fechaAudJui" style="width: 950px" onfocus="fechaMax(this)" onkeypress="fechaMax(this)">
                             </p>
                         </div>
-                         </fieldset>   
-                    <fieldset class="secuencial" style="line-break: loose">
+                        
+                             
                         
 
                           <p>
@@ -534,7 +558,7 @@
                      
                         <div id="divUltActProcOrd" style="display: none">
                             <p>
-                            <label data-title="INEGI: Fecha del último acto procesal, solo debe llenarse cuando en la fila  ''Estatus del expediente'' se haya seleccionado "En proceso de resolución"">Fecha del último acto procesal</label>
+                            <label data-title="INEGI: Fecha del último acto procesal, solo debe llenarse cuando en ''Estatus del expediente'' se haya seleccionado ''En proceso de resolución''.">Fecha del último acto procesal</label>
                             <input type="date" id="fechaUltActProc" name="fechaUltActProc" style="width: 950px" onfocus="fechaMax(this)" onkeypress="fechaMax(this)">
                             </p>
                         </div>
@@ -554,6 +578,7 @@
 
                  
                             <div id="divEscritaPreliminar" style="display: none">
+                                <div>
                                 <p>
                                  <label>Forma de solución</label>
                                  <select id="formaSolOrd" name="formaSolOrd" style="width: 950px" onchange="mostrarOcultarMontoOrd();mostrarOcultarEspSolucion();">
@@ -571,6 +596,15 @@
                                 <input type="text" id="espSolOrd" name="espSolOrd" oninput="validarYConvertir(this)" style="width: 950px">
                                  </p>
                             </div>
+                                
+                                <div id="divEspSolOrd" style="display: none">
+                                <p>
+                                <label>Especifique (otra forma de solución)</label>
+                                <input type="text" id="espSolOrd2" oninput="validarYConvertirEspacioComa(this)" name="espSolOrd2" style="width: 950px">
+                                </p>
+                            </div> 
+                                
+                                </div>
                                  
       
                             <p>
@@ -581,25 +615,25 @@
                  
                            <div id="divConConcOrd" style="display: none">
                                <p>
-                                <label>Monto estipulado en la forma de solución 1</label>
-                                <input type="text" id="montoOrd1" name="montoOrd1" style="width: 950px" pattern="^[0-9]+$" title="Ingrese solo digitos">
+                                <label>Monto estipulado en la forma de solución: &nbsp;&nbsp;&nbsp;&nbsp; $</label>
+                                <input type="text" id="montoOrd1" name="montoOrd1" style="width: 950px" 
+       pattern="^\d+(\.\d{1,2})?$" title="Ingrese solo dígitos en el formato 000000.00" 
+       oninput="funcionPesos('montoOrd1')" />
+
                                </p>
                             </div>
                             
                             </div>                        
                                                
            
-                            <div id="divEspSolOrd" style="display: none">
-                                <p>
-                                <label>Especifique (otra forma de solución)</label>
-                                <input type="text" id="espSolOrd2" oninput="validarYConvertir(this)" name="espSolOrd2" style="width: 950px">
-                                </p>
-                            </div> 
+                            
                             
                             <div id="divAudJuicio" style="display: none">
+                                
+                                <div>
                                 <p>
-                                <label>Forma de solucion</label>
-                                <select id="formaSolOrd2" name="formaSolOrd2" style="width: 950px" onchange="mostrarOcultarMontoOrd2();mostrarOcultarEspSolucion2(); mostrarOcultarTipoSent();">
+                                <label>Forma de solución</label>
+                                <select id="formaSolOrd2" name="formaSolOrd2" style="width: 950px" onchange="mostrarOcultarCondMix();mostrarOcultarEspSolucion2(); mostrarOcultarTipoSent();">
                                 <option>---Seleccione solución---</option>
                                 <option>Sentencia</option>
                                 <option>Convenio conciliatorio</option>
@@ -609,11 +643,19 @@
                             </select>
                                 </p>
                                 
+                                <div id="divEspSolOrd2" style="display: none">
+                                 <p>
+                                <label >Especifique (otra forma de solución)</label>
+                                <input type="text" id="espSolOrd3" name="espSolOrd3" oninput="validarYConvertirEspacioComa(this)" style="width: 950px">
+                                 </p>
+                            </div> 
+                                </div>
+                                
                                 <p>
                                  <label>Fecha en la que se dictó resolución</label>
                                 <input type="date" id="fechaResolucionOrd2" name="fechaResolucionOrd2" style="width: 950px" onfocus="fechaMax(this)" onkeypress="fechaMax(this)">
                                 </p>
-                            </div>
+                            
                             
                             <div id="divTipoSentOrd" style="display: none">
                                 <p>
@@ -627,21 +669,16 @@
                                 </p>
                             </div>
                             
-  
-                             <div id="divEspSolOrd2" style="display: none">
-                                 <p>
-                                <label >Especifique (otra forma de solución)</label>
-                                <input type="text" id="espSolOrd3" name="espSolOrd3" oninput="validarYConvertir(this)" style="width: 950px">
-                                 </p>
-                            </div> 
-                            
                    
                             <div id="divConConcOrd2" style="display: none">
                                 <p>
-                                <label>Monto estipulado en la forma de solución 2</label>
-                                <input type="text" id="montoOrd2" name="montoOrd2" style="width: 950px" pattern="^[0-9]+$" title="Ingrese solo digitos">
-                                </p>
+                                <label>Monto estipulado en la forma de solución: &nbsp;&nbsp;&nbsp;&nbsp; $</label>
+                                <input type="text" id="montoOrd2" name="montoOrd2" style="width: 950px" 
+       pattern="^\d+(\.\d{1,2})?$" title="Ingrese solo dígitos en el formato 000000.00" 
+       oninput="funcionPesos('montoOrd2')" />
+
                             </div>
+                    </div>
                             
                            
                             
@@ -1819,7 +1856,7 @@
                 </fieldset>
                 
                 <fieldset class="secuencial" style="line-break: loose">
-                     <legend>Motivo del conflicto colectivo de naturaleza económica</legend>
+                     <legend>MOTIVO DEL CONFLICTO COLECTIVO DE NATURALEZA ECONÓMICA</legend>
                       <div class="ch"><input type="checkbox" id="check_motivosCNE" name="check_motivosCNE" class="opcion11" onchange="espeMotCNE(); suspCNE();" value="Modificación de condiciones de trabajo" />Modificación de condiciones de trabajo</div>
                       <div class="ch"><input type="checkbox" id="check_motivosCNE" name="check_motivosCNE" class="opcion11" onchange="espeMotCNE(); suspCNE();" value="Implantación de nuevas condiciones de trabajo" />Implantación de nuevas condiciones de trabajo</div>
                       <div class="ch"><input type="checkbox" id="check_motivosCNE" name="check_motivosCNE" class="opcion11" onchange="espeMotCNE(); suspCNE();" value="Suspensión temporal de las relaciones colectivas de trabajo" />Suspensión temporal de las relaciones colectivas de trabajo</div>
@@ -2297,7 +2334,7 @@
                 <div id="divPromoventeEspecifiquePC" style="display: none">
                     <p>
                     <label>Especifique (otro tipo de promovente)</label>
-                    <input type="text" id="promoventeEspecifique" name="promoventeEspecifique" oninput="this.value = this.value.toUpperCase()" style="width: 950px" >
+                    <input type="text" id="promoventeEspecifique" name="promoventeEspecifique" oninput="this.value = this.value.toUpperCase(); validarYConvertirEspacioComa(this)" style="width: 950px" >
                     </p>
                 </div>
                 
@@ -2327,7 +2364,7 @@
                
             </div><!-- #################################################### -->
            
-            <!-- FORMULARIO PARA PROCESO EJECUCION -->
+            <!-- ----------------------------FORMULARIO PARA PROCESO EJECUCION ----------------------------------------------------------------------------------------------------->
             <!--<form  action="GuardaProcedimiento" method="post" id="ejecucion">-->
                  <div id="divEjecucion" style="display: none">
                   <fieldset class="secuencial">

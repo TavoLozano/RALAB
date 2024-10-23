@@ -27,16 +27,17 @@ public class CargaCombosO
             conn=conexion.conectar();
             consulta="SELECT entidad\n" +
 "FROM (\n" +
-"    SELECT DISTINCT ON (entidad) *\n" +
+"    SELECT DISTINCT ON (entidad) entidad, id_ent_mpio, clave_entidad -- Especificar las columnas que necesitas\n" +
 "    FROM public.tc_entidad_mpio\n" +
 ") AS distinct_entidad\n" +
-"where id_ent_mpio not like 'null'\n" +
+"WHERE id_ent_mpio IS NOT NULL -- Reemplazar 'LIKE null' por 'IS NOT NULL'\n" +
+"  AND clave_entidad <> '-1'\n" +
 "ORDER BY \n" +
 "    CASE \n" +
 "        WHEN entidad = 'No identificado' THEN 1\n" +
 "        ELSE 0\n" +
 "    END,\n" +
-"    entidad";
+"    entidad;";
             stmt = conn.prepareStatement(consulta);
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -80,6 +81,7 @@ public class CargaCombosO
 "ORDER BY \n" +
 "    CASE \n" +
 "        WHEN municipio = 'No identificado' THEN 1\n" +
+"        WHEN municipio = 'Otro' THEN 2\n" +                
 "        ELSE 0\n" +
 "    END,\n" +
 "    municipio";
@@ -117,7 +119,7 @@ public class CargaCombosO
         try
         {
             conn=conexion.conectar();
-            consulta="SELECT descripcion FROM TC_CIRCUNSCRIPCION where id_circunscripcion<5";
+            consulta="SELECT descripcion FROM TC_CIRCUNSCRIPCION where id_circunscripcion<5 and id_circunscripcion>0";
             stmt = conn.prepareStatement(consulta);
             rs = stmt.executeQuery();
             while (rs.next()) {

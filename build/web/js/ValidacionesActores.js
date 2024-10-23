@@ -1,12 +1,14 @@
  $(document).ready(function () {
  $('#procedimientosACT').change(function () {
         var expediente= $('#procedimientosACT').val();
+        var cve_organo= $('#claveOrgACT').val();
         
         $.ajax({
             type: 'post',
             url: 'ObtenExpedientes',
             data: {
-                expediente: expediente
+                expediente: expediente,
+                cve_organo:cve_organo
             },
             success: function (response) {
                 console.log("Respuesta del servidor al borrar: ", response);
@@ -586,8 +588,8 @@ function validarYConvertir(input) {
   {
      
         
-      alert("Solo se permiten letras y numeros");
-        input.value = '';
+      alert("Sólo se permiten letras y números");
+        input.value = input.value.slice(0, -1);
   } 
   else 
   {    
@@ -600,7 +602,7 @@ function validarYConvertirNSS(input) {
   const regex = /^[0-9]+$/; // Permite solo lnumeros
   if (!regex.test(input.value)) 
   {
-      alert("Solo se permiten  numeros");
+      alert("Sólo se permiten  números");
         input.value = '';
   } 
   else 

@@ -1,26 +1,35 @@
-
-import Combos.CargaCombosDemandado;
+import Combos.CargaCombosChecks;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
-public class ObtenExpedientes2 extends HttpServlet {
+public class ObtenValoresBusqueda extends HttpServlet {
 
-    
+     List<String> lista;
+     String expEdit;
+     String organo;
+     CargaCombosChecks obj=new CargaCombosChecks();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String cve_organo = request.getParameter("cve_organo");
-        String expediente = request.getParameter("expediente");
-            CargaCombosDemandado obj = new CargaCombosDemandado();
-            List<String> lista;
-            lista = obj.listaExpedientes2(expediente, cve_organo);
-            out.println("<option value=''>--- Seleccione un expediente --</option>");
+            /* TODO output your page here. You may use following sample code. */
+              if (request.getParameter("expEdit") != null) {
+                expEdit = request.getParameter("expEdit");
+                organo = request.getParameter("organo");
+                
+                System.out.println("expediente: " + expEdit);
+                 System.out.println("organo: " + organo);
+               
+                out.println("<option value=''>--Seleccione un expediente--</option>");
+            }
+
+       //     lista = cat.consultaMunicipio(expEdit, organo);
+                lista = obj.listaExpedientes(organo, expEdit);
             for (String ls : lista) {
                 out.println("<option value='" + ls + "'>" + ls + "</option>");
             }

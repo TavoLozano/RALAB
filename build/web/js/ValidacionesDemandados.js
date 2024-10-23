@@ -1,12 +1,14 @@
 $(document).ready(function () {
  $('#procedimientosDEM').change(function () {
         var expediente= $('#procedimientosDEM').val();
+        var cve_organo= $('#claveOrgDEM').val();
         
         $.ajax({
             type: 'post',
             url: 'ObtenExpedientes2',
             data: {
-                expediente: expediente
+                expediente: expediente,
+                cve_organo: cve_organo
             },
             success: function (response) {
                 console.log("Respuesta del servidor al borrar: ", response);

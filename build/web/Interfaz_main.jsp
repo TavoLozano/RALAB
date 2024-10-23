@@ -16,11 +16,33 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>VIA DE TRAMITACIÓN</title>
+               
+        <!-- Incluir el CSS de Select2 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css" rel="stylesheet" />
+
+<!-- Incluir el JavaScript de Select2 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
+
+<style>
+/* Ocultar los select normales por defecto */
+select {
+    visibility: hidden;
+}
+
+/* Mostrar el select cuando se aplique Select2 */
+.select2-container {
+    visibility: visible;
+}
+</style>
+  
+        
+        
         <link REL="stylesheet" href="css/estiloProcedimiento.css">
         <link REL="stylesheet" href="css/menu.css">
         <link REL="stylesheet" href="css/estiloOrganoJ.css">
         <link REL="stylesheet" href="css/pestanas.css">
         <link REL="stylesheet" href="css/notas.css">
+  
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/ValidacionesProcedimientos.js" type="text/javascript"></script>
         <script src="js/ValidacionesActores.js" type="text/javascript"></script>
@@ -28,6 +50,7 @@
         <script src="js/ValidacionesAudiencias.js" type="text/javascript"></script>
         <script src="js/jNotas.js" type="text/javascript"></script>
         <script defer src="js/fecha.js"></script>
+       
 
         
     
@@ -39,7 +62,20 @@
         CargaCombosO cco = new CargaCombosO();
         CargaCombosActores cca = new CargaCombosActores();
     %>
-
+    <script>
+$(document).ready(function() {
+    // Aplica Select2 a todos los select y personaliza el mensaje "No results found"
+    $('select').select2({
+        language: {
+            noResults: function() {
+                return "No hay opciones que coincidan con tu búsqueda"; // Texto personalizado
+            }
+        },
+        placeholder: "Selecciona una opción",
+        allowClear: true
+    });
+});
+</script>
     <body>
 
         <header id="main-header1">
@@ -1551,7 +1587,7 @@
             
         </div>
            
-       <!-- <script>
+        <script>
         function nextTab(tabNumber) {
             document.getElementById('tab-0' + tabNumber).checked = true;
         }
@@ -1563,7 +1599,10 @@
       campoTexto.value = valorSeleccionado;
       campoTexto.style.display="block";
     });
-    </script>-->
+    </script>
     </body>
+    
+
+
  
 </html>

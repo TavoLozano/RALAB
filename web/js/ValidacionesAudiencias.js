@@ -89,12 +89,14 @@ function funEspAudiencias4() {
 $(document).ready(function () {
  $('#procedimientosAUD').change(function () {
         var expediente= $('#procedimientosAUD').val();
+        var cve_organo= $('#claveOrgAUD').val();
         
         $.ajax({
             type: 'post',
             url: 'ObtenExpediente3',
             data: {
-                expediente: expediente
+                expediente: expediente,
+                cve_organo: cve_organo
             },
             success: function (response) {
                 console.log("Respuesta del servidor al borrar: ", response);

@@ -15,10 +15,11 @@ public class ObtenExpedientes extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         try (PrintWriter out = response.getWriter()) {
+            String cve_organo = request.getParameter("cve_organo");
             String expediente = request.getParameter("expediente");
             CargaCombosActores obj = new CargaCombosActores();
             List<String> lista;
-            lista = obj.listaExpedientes(expediente);
+            lista = obj.listaExpedientes(expediente, cve_organo);
             out.println("<option value=''>--- Seleccione un expediente --</option>");
             for (String ls : lista) {
                 out.println("<option value='" + ls + "'>" + ls + "</option>");

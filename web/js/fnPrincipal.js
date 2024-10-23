@@ -54,13 +54,13 @@ $(document).ready(function () {
 function funcionLatitud(input)
 {
     var  lat = parseFloat(document.getElementById("latitud").value);
-    const regex = /^-?\d*\.?\d*$/;
+    const regex = /^-?\d+(\.\d{1,10})?$/;
     if(!regex.test(input.value))
     {
         Swal.fire({
             icon: 'warning',
             title: '¡Atención!',
-            text: 'Ingrese solo números',
+            text: 'Ingrese solo números, con máximo 10 decimales',
             confirmButtonText: 'Aceptar'
         });
        
@@ -85,13 +85,13 @@ function funcionLatitud(input)
 function funcionLongitud(input)
 {
     var  lon = parseFloat(document.getElementById("longitud").value);
-    const regex = /^-?\d*\.?\d*$/;
+    const regex = /^-?\d+(\.\d{1,10})?$/;
     if(!regex.test(input.value))
     {
        Swal.fire({
             icon: 'warning',
             title: '¡Atención!',
-            text: 'Ingrese solo números',
+            text: 'Ingrese solo números, con máximo 10 decimales',
             confirmButtonText: 'Aceptar'
         });
         input.value = '';
@@ -156,6 +156,26 @@ function validarNumero(input) {
   }
 }
 
+function validarYConvertirTextNum(input) {
+  const regex = /^[A-Z0-9 ]+$/; // Permite solo letras mayúsculas y espacios
+  input.value = input.value.toUpperCase();
+  if (!regex.test(input.value)) 
+  {
+       Swal.fire({
+            icon: 'warning',
+            title: '¡Atención!',
+            text: 'Por favor, escriba sólo texto sin acentos',
+            confirmButtonText: 'Aceptar'
+        });
+        input.value = input.value.slice(0, -1);
+  } 
+  else 
+  {    
+      const textoMayusculas = input.toUpperCase();
+      return regex.test(textoMayusculas) ? textoMayusculas : "Texto inválido";
+  }
+}
+
 function validarYConvertir(input) {
   const regex = /^[A-Z ]+$/; // Permite solo letras mayúsculas y espacios
   input.value = input.value.toUpperCase();
@@ -164,10 +184,30 @@ function validarYConvertir(input) {
        Swal.fire({
             icon: 'warning',
             title: '¡Atención!',
-            text: 'Por favor, escriba solo texto y sin acentos',
+            text: 'Por favor, escriba sólo texto sin acentos',
             confirmButtonText: 'Aceptar'
         });
-        input.value = '';
+        input.value = input.value.slice(0, -1);
+  } 
+  else 
+  {    
+      const textoMayusculas = input.toUpperCase();
+      return regex.test(textoMayusculas) ? textoMayusculas : "Texto inválido";
+  }
+}
+
+function validarYConvertirEspacioComa(input) {
+  const regex = /^[A-Z]+( [A-Z]+)*(,[A-Z]+( [A-Z]+)*)*$/; // Permite solo letras mayúsculas y espacios
+  input.value = input.value.toUpperCase();
+  if (!regex.test(input.value)) 
+  {
+       Swal.fire({
+            icon: 'warning',
+            title: '¡Atención!',
+            text: 'Por favor, escriba sólo texto sin acentos',
+            confirmButtonText: 'Aceptar'
+        });
+        input.value = input.value.slice(0, -1);
   } 
   else 
   {    
@@ -184,10 +224,10 @@ function validarYConvertirSEDE(input) {
          Swal.fire({
             icon: 'warning',
             title: '¡Atención!',
-            text: 'Por favor, escriba solo texto y sin acento',
+            text: 'Por favor, escriba sólo texto sin acentos',
             confirmButtonText: 'Aceptar'
         });
-        input.value = '';
+        input.value = input.value.slice(0, -1);
   } 
   else 
   {    

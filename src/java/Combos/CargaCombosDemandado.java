@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CargaCombosDemandado {
       ConectaBD conexion=new ConectaBD();
-    public List<String> listaExpedientes(String tipo)
+    public List<String> listaExpedientes2(String tipo, String cve_organo)
      {
          
         List<String> resultados=new ArrayList<>();
@@ -22,8 +22,9 @@ public class CargaCombosDemandado {
         try
         {
             conn=conexion.conectar();
-            consulta="SELECT clave_expediente FROM TR_EXPEDIENTE E, TC_PROCEDIMIENTO P "
+            consulta="SELECT DISTINCT clave_expediente FROM TR_EXPEDIENTE E, TC_PROCEDIMIENTO P "
                     + "WHERE P.ID_TIPO_PROCEDIMIENTO = ID_TIPO_EXPEDIENTE "
+                    + "AND E.ID_ORGANOJ = '"+cve_organo+"'"
                     + "AND P.DESCRIPCION = '" + tipo + "'";
             stmt = conn.prepareStatement(consulta);
             rs = stmt.executeQuery();

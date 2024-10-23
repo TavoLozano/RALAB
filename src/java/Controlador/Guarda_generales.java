@@ -27,25 +27,25 @@ public class Guarda_generales extends HttpServlet {
             SQL_Generales obj=new SQL_Generales();
             int id_g = obj.consecutivoG()+1;
             String id_organoj = request.getParameter("cajaTexto");
-            int juezIndH = Integer.parseInt(request.getParameter("jih"));
-            int juezIndM = Integer.parseInt(request.getParameter("jim"));
-            int juezColH = Integer.parseInt(request.getParameter("jch"));
-            int juezColM = Integer.parseInt(request.getParameter("jcm"));
-            int juezMixH = Integer.parseInt(request.getParameter("jmh"));
-            int juezMixM = Integer.parseInt(request.getParameter("jmm"));
-            int juezSubH = Integer.parseInt(request.getParameter("sjh"));
-            int juezSubM = Integer.parseInt(request.getParameter("sjm"));
-            int juezTotal = Integer.parseInt(request.getParameter("tj"));
+            int juezIndH = Integer.parseInt(request.getParameter("jih").trim());
+            int juezIndM = Integer.parseInt(request.getParameter("jim").trim());
+            int juezColH = Integer.parseInt(request.getParameter("jch").trim());
+            int juezColM = Integer.parseInt(request.getParameter("jcm").trim());
+            int juezMixH = Integer.parseInt(request.getParameter("jmh").trim());
+            int juezMixM = Integer.parseInt(request.getParameter("jmm").trim());
+            int juezSubH = Integer.parseInt(request.getParameter("sjh").trim());
+            int juezSubM = Integer.parseInt(request.getParameter("sjm").trim());
+            int juezTotal = Integer.parseInt(request.getParameter("tj").trim());
             
-            int ord = Integer.parseInt(request.getParameter("ord"));
-            int ind = Integer.parseInt(request.getParameter("ind"));
-            int col = Integer.parseInt(request.getParameter("col"));
-            int huelga = Integer.parseInt(request.getParameter("huelga"));
-            int cne = Integer.parseInt(request.getParameter("cne"));
-            int pv = Integer.parseInt(request.getParameter("pv"));
-            int ter = Integer.parseInt(request.getParameter("ter"));
-            int cred = Integer.parseInt(request.getParameter("cred"));
-            int eje = Integer.parseInt(request.getParameter("eje"));
+            int ord = Integer.parseInt(request.getParameter("ord").trim());
+            int ind = Integer.parseInt(request.getParameter("ind").trim());
+            int col = Integer.parseInt(request.getParameter("col").trim());
+            int huelga = Integer.parseInt(request.getParameter("huelga").trim());
+            int cne = Integer.parseInt(request.getParameter("cne").trim());
+            int pv = Integer.parseInt(request.getParameter("pv").trim());
+            int ter = Integer.parseInt(request.getParameter("ter").trim());
+            int cred = Integer.parseInt(request.getParameter("cred").trim());
+            int eje = Integer.parseInt(request.getParameter("eje").trim());
             
             
             Sentencia_guardar_generales gestorBD = new Sentencia_guardar_generales();

@@ -80,13 +80,13 @@
                     </td>
                     
                      <td><label for="colonia">Colonia <span class="req">* </label></td>
-                    <td><input type="text" name="colonia" oninput="validarYConvertir(this)" required focusVisible="true"></td>
+                    <td><input type="text" name="colonia" oninput="validarYConvertirTextNum(this)" required focusVisible="true"></td>
                 </tr>
                 <tr>
                      <td><label for="latitud">Latitud </label></td>
-                     <td><input type="text" id="latitud" pattern="^-?\d*\.?\d+$" name="latitud" onchange="funcionLatitud(this)"> </td>
+                     <td><input type="text" id="latitud" pattern="^-?\d*\.?\d+$" name="latitud" onblur="funcionLatitud(this)"> </td>
                     <td><label for="longitud">Longitud </label></td>
-                    <td><input type="text" id="longitud" pattern="^-?\d*\.?\d+$" name="longitud"  onchange="funcionLongitud(this)" ></td>
+                    <td><input type="text" id="longitud" pattern="^-?\d*\.?\d+$" name="longitud"  onblur="funcionLongitud(this)" ></td>
                     <td></td>
 <!--                    <td><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3811821.5591925285!2d-99.7520803486136!3d21.093341805310025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1712094975426!5m2!1ses-419!2smx" 
                                  width="200" height="200" style="border:0;" allowfullscreen="busca Long y Lat" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></td>-->
@@ -95,7 +95,7 @@
                    </fieldset>
                         
                  <fieldset>
-                <legend>Circunscripción</legend>        
+                <legend>Circunscripción y Jurisdicción del OJ</legend>        
                 <table cellspacing="3" cellpadding="3" border="0" >  
                 <tr>
                     <td><label for="circunscripcion">Circunscripción <span class="req">*</label></td>
@@ -133,7 +133,7 @@
                                     <option>---Día inicio---</option>
                                     <option>Lunes</option>
                                     <option>Martes</option>
-                                    <option>Miercoles</option>
+                                    <option>Miércoles</option>
                                     <option>Jueves</option>
                                     <option>Viernes</option>
                                     <option>Sábado</option>
@@ -147,7 +147,7 @@
                                     <option>---Día fin---</option>
                                     <option>Lunes</option>
                                     <option>Martes</option>
-                                    <option>Miercoles</option>
+                                    <option>Miércoles</option>
                                     <option>Jueves</option>
                                     <option>Viernes</option>
                                     <option>Sábado</option>
@@ -159,7 +159,7 @@
                         <table style="width:49%;"><tr>
                                 <caption style="color: var(--colorLabel); background: var(--colorMeanTrans);">Horario de atención</caption>
                             <td><label>Hora inicio:</label></td>
-                            <td><input type="time" name="horario1"></td></tr>
+                            <td><input type="time" name="horario1"></td>
                             <tr>
                             <td><label>Hora fin:</label></td>
                             <td><input type="time" name="horario2" compararHoras()></td>
