@@ -1632,7 +1632,7 @@ function habilitarTER() {
     var seleccion = document.getElementById("procedimientos").value;
     var cajaTexto = document.getElementById("claveExp");
 
-    if (seleccion === "Terceria") {
+    if (seleccion === "Tercerías") {
         cajaTexto.style.display = "none";
         $('#claveExp').prop("required", false);
     } else {
@@ -1645,7 +1645,7 @@ function habilitar2TER() {
     var seleccion = document.getElementById("procedimientos").value;
     var cajaTexto = document.getElementById("fecha");
 
-    if (seleccion === "Terceria") {
+    if (seleccion === "Tercerías") {
         cajaTexto.style.display = "none"
         $('#fecha').prop("required", false);
     } else {
@@ -1689,7 +1689,8 @@ function mostrarEstatusFecha() {
     }
 }
 
-function mostrarPromoventeEspecifique() {
+function mostrarPromoventeEspecifique() 
+{
     var seleccion = document.getElementById("promovente").value;
     var cajaTexto = document.getElementById("divPromoventeEspecifiquePC");
 
@@ -1837,6 +1838,7 @@ function validarYConvertirP(input) {
   }
 }
 
+//////////////////////////////////////////metodos para edicion////////////////////////////////////
 
  function filtrarOpciones(sectorId) {
             var input, filter, select, options, i;

@@ -28,7 +28,7 @@
   <ul class="menu">
       <li title="PÁGINA PRINCIPAL"><a href="index.jsp"><img src="IMAGENES/hogar.png" height="30"></a></li>
       <li title="ÓRGANOS JURISDICCIONALES"><a href="tablaO.jsp"><img src="IMAGENES/edificio.png" height="30"></a></li>
-      <li title="EXPEDIENTES"><a href="Interfaz_main.jsp"><img src="IMAGENES/expediente.png" height="30"></a>
+      <li title="EXPEDIENTES"><a href="tablaP.jsp"><img src="IMAGENES/expediente.png" height="30"></a>
       <li title="EXPORTAR"><a href="Exportar.jsp"><img src="IMAGENES/exportar.png" height="30"></a></li>
       <li title="IMPORTAR"><a href="Importar.jsp"><img src="IMAGENES/importar.png" height="30"></a></li>
       <li title="DASHBOARD"><a href="Dashboard.jsp"><img src="IMAGENES/supervision.png" height="30"></a></li>

@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-@WebServlet(name = "GuardaProcedimiento", urlPatterns = {"/GuardaProcedimiento"})
+@WebServlet(name = "Actualiza_pref_cred", urlPatterns = {"/Actualiza_pref_cred"})
 public class Actualiza_pref_cred extends HttpServlet {
      
                Sentencia_actualiza_prefCred gestorBD=new Sentencia_actualiza_prefCred();
@@ -25,7 +25,7 @@ public class Actualiza_pref_cred extends HttpServlet {
               Integer id_expediente=null; Integer id_tipo_expediente=null; String id_organoj=null; String clave_expediente=null;       
               String fecha_apertura_exped=null; String fecha_present_promo=null; String fecha_admision_promo=null;
               Integer id_promovente=null; Integer id_estatus_exped=null;  String fecha_dicto_solucion=null; String comentarios=null;
-              
+                String[] motivosSolicitudPromoSeleccionados;
               //********************************************************************************************************
                
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -36,17 +36,18 @@ public class Actualiza_pref_cred extends HttpServlet {
         HttpSession se= request.getSession();
         try 
         {
-              String procedimiento=request.getParameter("procedimientos");
-               id_expediente=combos.consecutivoExpediente()+1; 
+              //String procedimiento=request.getParameter("procedimientos");
+              
                id_organoj=request.getParameter("clave");
                clave_expediente=request.getParameter("claveExp");
                fecha_apertura_exped=request.getParameter("fecha");
+               id_expediente=gestorBD.actualizaMotivos(clave_expediente);
+              
              
                /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                                                                                       PREFERENCIA DE CREDITO
                ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-               if(procedimiento.equals("Preferencia de Credito"))
-               {
+             
                      id_tipo_expediente=8;
                      fecha_present_promo=request.getParameter("fechaPresProm");
                      fecha_admision_promo=request.getParameter("fechaAdmProm");
@@ -60,13 +61,23 @@ public class Actualiza_pref_cred extends HttpServlet {
                      {
                          fecha_dicto_solucion=request.getParameter("fechaDictRes");
                      }                   
-               }          
+                 motivosSolicitudPromoSeleccionados=request.getParameterValues("motivos_PC");
                 comentarios=request.getParameter("comentarios");
          
                 /* #################################SE REALIZA LA INSERCIÓN #######################################*/                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            // ----ORDINARIO---------ORDINARIO---------ORDINARIO---------ORDINARIO---------ORDINARIO---------ORDINARIO---------ORDINARIO---------|| 
-                if(gestorBD.registrarProcedimiento(id_expediente, id_tipo_expediente, id_organoj, clave_expediente, fecha_apertura_exped, fecha_present_promo, fecha_admision_promo, id_promovente, id_estatus_exped, fecha_dicto_solucion, comentarios))
-               {
-                    response.sendRedirect("/Proyecto_RALAB/Interfaz_main.jsp");       
+                if(gestorBD.registrarProcedimiento(id_tipo_expediente, clave_expediente, fecha_apertura_exped, fecha_present_promo, fecha_admision_promo, id_promovente, id_estatus_exped,  fecha_dicto_solucion, comentarios))
+               {                   
+                   gestorBD.borrarMotivos(id_expediente);                   
+                   if(motivosSolicitudPromoSeleccionados!=null )
+                            {
+                                int idMotivoCRED;
+                                for(int i=0; i<motivosSolicitudPromoSeleccionados.length; i++)
+                                {
+                                    idMotivoCRED=combos.indiceMotivoPromo(motivosSolicitudPromoSeleccionados[i]);
+                                    gestorBD.registraMotivoEje(idMotivoCRED, id_expediente);
+                                }                               
+                            } 
+                    response.sendRedirect("/Proyecto_RALAB/tablaP.jsp?actualiza=Si");       
                }
               //reiniciando las variabkles
               id_expediente=null; id_tipo_expediente=null; id_organoj=null;  clave_expediente=null; fecha_apertura_exped=null;      

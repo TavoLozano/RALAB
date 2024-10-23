@@ -206,6 +206,443 @@ public class CargaCombosActores {
         }
          return resultados;
      }
+      //****************************************************************
+       public List<String> listaDefensa()
+     {
+        List<String> resultados=new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String consulta;
+        try
+        {
+            conn=conexion.conectar();
+            consulta="SELECT descripcion FROM TC_DEFENSA WHERE id_defensa > 0";
+            stmt = conn.prepareStatement(consulta);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String dato = rs.getString("descripcion"); 
+                resultados.add(dato);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar las conexiones y recursos
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+         return resultados;
+     }
+      //****************************************************************
+         public List<String> listaActor()
+     {
+        List<String> resultados=new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String consulta;
+        try
+        {
+            conn=conexion.conectar();
+            consulta="SELECT descripcion\n" +
+"       FROM TC_ACTOR\n" +
+"       WHERE id_tipo_actor IN (1, 3, 4, 7) ORDER BY\n" +
+"                   CASE \n" +
+"                    WHEN id_tipo_actor = 1 THEN 1\n" +
+"                    WHEN id_tipo_actor = 3 THEN 2\n" +
+"                    WHEN id_tipo_actor = 4 THEN 3 \n" +
+"                    WHEN id_tipo_actor = 7 THEN 4				\n" +
+"                    END";
+            stmt = conn.prepareStatement(consulta);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String dato = rs.getString("descripcion"); 
+                resultados.add(dato);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar las conexiones y recursos
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+         return resultados;
+     }
+      //****************************************************************
+          public List<String> listaActor2()
+     {
+        List<String> resultados=new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String consulta;
+        try
+        {
+            conn=conexion.conectar();
+            consulta="SELECT descripcion\n" +
+"       FROM TC_ACTOR\n" +
+"       WHERE id_tipo_actor IN (1, 6, 7) ORDER BY\n" +
+"                   CASE \n" +
+"                    WHEN id_tipo_actor = 1 THEN 1\n" +
+"                    WHEN id_tipo_actor = 6 THEN 2\n" +
+"                    WHEN id_tipo_actor = 7 THEN 3                    	\n" +
+"                    END";
+            stmt = conn.prepareStatement(consulta);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String dato = rs.getString("descripcion"); 
+                resultados.add(dato);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar las conexiones y recursos
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+         return resultados;
+     }
+      //****************************************************************
+           public List<String> listaActor3()
+     {
+        List<String> resultados=new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String consulta;
+        try
+        {
+            conn=conexion.conectar();
+            consulta="SELECT descripcion\n" +
+"       FROM TC_ACTOR\n" +
+"       WHERE id_tipo_actor IN (3, 4, 2, 7) ORDER BY\n" +
+"                   CASE \n" +
+"                    WHEN id_tipo_actor = 3 THEN 1\n" +
+"                    WHEN id_tipo_actor = 4 THEN 2\n" +
+"                    WHEN id_tipo_actor = 2 THEN 3 \n" +
+"                    WHEN id_tipo_actor = 7 THEN 4				\n" +
+"                    END";
+            stmt = conn.prepareStatement(consulta);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String dato = rs.getString("descripcion"); 
+                resultados.add(dato);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar las conexiones y recursos
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+         return resultados;
+     }
+      //****************************************************************
+            public List<String> listaActor4()
+     {
+        List<String> resultados=new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String consulta;
+        try
+        {
+            conn=conexion.conectar();
+            consulta="SELECT descripcion\n" +
+"       FROM TC_ACTOR\n" +
+"       WHERE id_tipo_actor IN (3, 5, 7) ORDER BY\n" +
+"                   CASE \n" +
+"                    WHEN id_tipo_actor = 3 THEN 1\n" +
+"                    WHEN id_tipo_actor = 5 THEN 2\n" +
+"                    WHEN id_tipo_actor = 7 THEN 3                   				\n" +
+"                    END";
+            stmt = conn.prepareStatement(consulta);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String dato = rs.getString("descripcion"); 
+                resultados.add(dato);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar las conexiones y recursos
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+         return resultados;
+     }
+      //****************************************************************
+             public List<String> listaActor5()
+     {
+        List<String> resultados=new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String consulta;
+        try
+        {
+            conn=conexion.conectar();
+            consulta="SELECT descripcion\n" +
+"       FROM TC_ACTOR\n" +
+"       WHERE id_tipo_actor IN (3, 5, 2, 7) ORDER BY\n" +
+"                   CASE \n" +
+"                    WHEN id_tipo_actor = 3 THEN 1\n" +
+"                    WHEN id_tipo_actor = 5 THEN 2\n" +
+"                    WHEN id_tipo_actor = 2 THEN 3 \n" +
+"                    WHEN id_tipo_actor = 7 THEN 4				\n" +
+"                    END";
+            stmt = conn.prepareStatement(consulta);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String dato = rs.getString("descripcion"); 
+                resultados.add(dato);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar las conexiones y recursos
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+         return resultados;
+     }
+      //****************************************************************
+       public List<String> listaSexo()
+     {
+        List<String> resultados=new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String consulta;
+        try
+        {
+            conn=conexion.conectar();
+            consulta="SELECT descripcion FROM TC_SEXO";
+            stmt = conn.prepareStatement(consulta);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String dato = rs.getString("descripcion"); 
+                resultados.add(dato);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar las conexiones y recursos
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+         return resultados;
+     }
+      //****************************************************************
+        public List<String> listaJornada()
+     {
+        List<String> resultados=new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String consulta;
+        try
+        {
+            conn=conexion.conectar();
+            consulta="SELECT descripcion FROM TC_JORNADA";
+            stmt = conn.prepareStatement(consulta);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String dato = rs.getString("descripcion"); 
+                resultados.add(dato);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar las conexiones y recursos
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+         return resultados;
+     }
+      //****************************************************************
+          public List<String> listaSindicato()
+     {
+        List<String> resultados=new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String consulta;
+        try
+        {
+            conn=conexion.conectar();
+            consulta="SELECT descripcion FROM TC_SINDICATO WHERE id_tipo_sindicato > 0";
+            stmt = conn.prepareStatement(consulta);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String dato = rs.getString("descripcion"); 
+                resultados.add(dato);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar las conexiones y recursos
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+         return resultados;
+     }
+      //****************************************************************
+           public List<String> listaOrgObr()
+     {
+        List<String> resultados=new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String consulta;
+        try
+        {
+            conn=conexion.conectar();
+            consulta="SELECT descripcion FROM TC_ORG_OBR WHERE id_org_obr > 0";
+            stmt = conn.prepareStatement(consulta);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String dato = rs.getString("descripcion"); 
+                resultados.add(dato);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar las conexiones y recursos
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+         return resultados;
+     }
+      //****************************************************************
+          public List<String> respuestaSimple()
+     {
+        List<String> resultados=new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String consulta;
+        try
+        {
+            conn=conexion.conectar();
+            consulta="SELECT descripcion FROM TC_RESPUESTA_SIMPLE WHERE id_respuesta > 0";
+            stmt = conn.prepareStatement(consulta);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String dato = rs.getString("descripcion"); 
+                resultados.add(dato);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar las conexiones y recursos
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+         return resultados;
+     }
+      //****************************************************************
+          public List<String> tipoPatron()
+     {
+        List<String> resultados=new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String consulta;
+        try
+        {
+            conn=conexion.conectar();
+            consulta="SELECT descripcion FROM TC_PATRON WHERE id_tipo_patron > 0";
+            stmt = conn.prepareStatement(consulta);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String dato = rs.getString("descripcion"); 
+                resultados.add(dato);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar las conexiones y recursos
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+         return resultados;
+     }
+      //****************************************************************
+             
+      
         public int indiceEntidadMunicipio(String entidad, String municipio) throws SQLException
      {
          ConectaBD c=new ConectaBD();

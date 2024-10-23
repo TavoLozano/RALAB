@@ -50,7 +50,7 @@
                     </div>
                 </li>
                 <li class="menu-item" title="EXPEDIENTES" >
-                    <a href="Interfaz_main.jsp"><img src="IMAGENES/expediente.png" height="30">EXPEDIENTES</a>
+                    <a href="tablaP.jsp"><img src="IMAGENES/expediente.png" height="30">EXPEDIENTES</a>
                      <div class="submenu">
                         <p>Agrega, edita, consulta o elimina expedientes asociados a un órgano jurisdiccional, por vía de tramitación.</p>
                     </div>

@@ -25,6 +25,7 @@ public class CargaCombosAudiencias {
             }
             return valor;        
      }
+    //*****************************************************************************************************
     public int indiceExpediente(String expediente) throws SQLException
      {
          ConectaBD c=new ConectaBD();

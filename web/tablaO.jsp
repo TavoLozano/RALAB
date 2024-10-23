@@ -49,7 +49,7 @@
                    
                 </li>
                 <li class="menu-item" title="EXPEDIENTES">
-                    <a href="Interfaz_main.jsp"><img src="IMAGENES/expediente.png" height="30">EXPEDIENTES</a>
+                    <a href="tablaP.jsp"><img src="IMAGENES/expediente.png" height="30">EXPEDIENTES</a>
                     <div class="submenu">
                         <p>Agrega, edita, consulta o elimina los Órganos Jurisdiccionales almacenados en la base de datos.</p>
                     </div>
