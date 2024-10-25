@@ -172,5 +172,14 @@
             <input type="reset" value="Limpiar"></center>
 
         </form>
+                        
+                        <script>
+    const formulario = document.getElementById('form');
+    const guardar = document.getElementById('Guardar');
+
+    formulario.addEventListener('input', () => {
+        guardar.style.backgroundColor = 'blue';
+    });
+</script>
     </body>
 </html>

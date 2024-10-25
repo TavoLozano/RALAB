@@ -1811,7 +1811,12 @@ function validarYConvertirEspacioComa(input) {
   {
      
         
-      alert("Sólo se admiten letras y espacios, sin acentos.");
+      Swal.fire({
+            icon: 'warning',
+            title: '¡Atención!',
+            text: 'Sólo se admiten letras y espacios, sin acentos.',
+            confirmButtonText: 'Aceptar'
+        });
         input.value = input.value.slice(0, -1);
   } 
   else 
@@ -1828,7 +1833,12 @@ function validarYConvertirP(input) {
   {
      
         
-      alert("Sólo se permiten letras, sin acentos.");
+      Swal.fire({
+            icon: 'warning',
+            title: '¡Atención!',
+            text: 'Sólo se admiten letras y espacios, sin acentos.',
+            confirmButtonText: 'Aceptar'
+        });
         input.value = input.value.slice(0, -1);
   } 
   else 

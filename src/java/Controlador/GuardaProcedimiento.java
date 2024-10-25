@@ -730,7 +730,7 @@ public class GuardaProcedimiento extends HttpServlet {
                               int idMotivoCNE;
                               for(int i=0; i<valoresSeleccionados.length;i++)
                               {
-                                  idMotivoCNE = combos.indiceMotivoConflicot(valoresSeleccionados[i]);
+                                  idMotivoCNE = combos.indiceMotivoConflicto(valoresSeleccionados[i]);
                                   gestorBD.registraMotivosOrd(id_nat_conflicto, id_expediente);
                               }
                           }
@@ -778,7 +778,7 @@ public class GuardaProcedimiento extends HttpServlet {
                                int idMotivoCOL;
                                 for(int i=0; i<valoresSeleccionados.length;i++)
                                 {
-                                     idMotivoCOL=combos.indiceMotivoConflicot(valoresSeleccionados[i]);
+                                     idMotivoCOL=combos.indiceMotivoConflicto(valoresSeleccionados[i]);
                                      gestorBD.registraMotivosOrd(idMotivoCOL, id_expediente);
                                 }
                           }
@@ -817,7 +817,7 @@ public class GuardaProcedimiento extends HttpServlet {
                                int idMotivo;
                                 for(int i=0; i<valoresSeleccionados.length;i++)
                                 {
-                                     idMotivo=combos.indiceMotivoConflicot(valoresSeleccionados[i]);
+                                     idMotivo=combos.indiceMotivoConflicto(valoresSeleccionados[i]);
                                      gestorBD.registraMotivosOrd(idMotivo, id_expediente);
                                 }
                           }
@@ -864,7 +864,7 @@ public class GuardaProcedimiento extends HttpServlet {
                                 int idMotivo;
                                 for(int i=0; i<valoresSeleccionados.length;i++)
                                 {
-                                     idMotivo=combos.indiceMotivoConflicot(valoresSeleccionados[i]);
+                                     idMotivo=combos.indiceMotivoConflicto(valoresSeleccionados[i]);
                                      gestorBD.registraMotivosOrd(idMotivo, id_expediente);
                                 }
                             }

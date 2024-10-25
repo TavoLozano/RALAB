@@ -101,18 +101,19 @@
                   obj.conectar();
               %>
              
-              <table>
-                  <tr>
-                      <td>
                            <form action="Interfaz_main.jsp" method='get'>
                            <input type='submit' value='+ Nuevo'/>
                            </form>
-                      </td>
+              <filedset class="secuencial">   
+                  <legend>Editar expedientes</legend>
+              <table>
+                  <tr>
+                      
                       <td>
                            <form action="Expediente_8_editar.jsp" method='get'>
                                 
                                 <select name="organo" id="organo" style="width: 600px" onchange="busqueda('organo', 'expEdit', 'valor')" required>
-                                  <option value="">---Seleccione organo---</option>
+                                  <option value="">---Seleccione órgano jurisdiccional---</option>
                                  <%
                                    SQL_Generales consulta = new SQL_Generales();
                                    List<String> result = consulta.consultaOrganos();
@@ -155,7 +156,6 @@
                              </select> 
                         
                              <input type='submit' value='Editar'/>
-                              <input type="reset" value="Limpiar">
                              
                          </form>
                    </td>
@@ -164,32 +164,39 @@
                    </td>
                  </tr>
               </table>
+                             <center><input type="reset" value="Limpiar"></center>
+                             </filedset>      
             <BR>
           
         <table border="1" style="float: center;" width="30%" class="summary_table">
         <tr>
             <th>No. </th>
-            <th>Tipo de procedimiento </th>
+            <th>Vía de tramitación </th>
             <th>Clave del órgano jurisdiccional </th>
             <th>Clave del expediente </th>
-            <th>Incompetencia </th>
+            <th>Incompetencia* </th>
             <th>Estatus del expediente</th> 
         </tr>     
         <tr>
          <%   
-            ps=obj.con.prepareStatement("SELECT id_expediente, id_tipo_expediente, id_organoj, clave_expediente, preg_incompetencia, id_estatus_exped FROM TR_EXPEDIENTE");
+            ps=obj.con.prepareStatement("SELECT id_expediente, TC_PROCEDIMIENTO.DESCRIPCION AS tipo_expediente, id_organoj, clave_expediente, " +
+    "preg_incompetencia, TC_ESTATUS_EXPEDIENTE.DESCRIPCION AS estatus_exped " +
+    "FROM TR_EXPEDIENTE " +
+    "LEFT JOIN TC_PROCEDIMIENTO ON TC_PROCEDIMIENTO.id_tipo_procedimiento = TR_EXPEDIENTE.id_tipo_expediente " +
+    "LEFT JOIN TC_ESTATUS_EXPEDIENTE ON TC_ESTATUS_EXPEDIENTE.ID_ESTATUS_EXPEDIENTE = TR_EXPEDIENTE.ID_ESTATUS_EXPED");
             rs=ps.executeQuery();
             while (rs.next()) {
         %>
-                  <td><center> <%= rs.getString("id_expediente")%></center></td>
-                  <td><center> <%= rs.getString("id_tipo_expediente")%></center></td>
-                  <td><center> <%= rs.getString("id_organoj")%></center> </td>
-                  <td><center> <%= rs.getString("clave_expediente")%></center></td>
-                  <td><center> <%= rs.getString("preg_incompetencia")%></center></td>
-                  <td><center> <%= rs.getString("id_estatus_exped")%></center></td>       
+                  <td><center> <%= rs.getString("id_expediente").toUpperCase().trim()%></center></td>
+                  <td><center> <%= rs.getString("tipo_expediente").toUpperCase().trim()%></center></td>
+                  <td><center> <%= rs.getString("id_organoj").toUpperCase().trim()%></center> </td>
+                  <td><center> <%= rs.getString("clave_expediente").toUpperCase().trim()%></center></td>
+                  <td><center><%= ("null".equalsIgnoreCase(rs.getString("preg_incompetencia")) || rs.getString("preg_incompetencia").trim().isEmpty()) ? "---" : rs.getString("preg_incompetencia").toUpperCase() %></center></td>
+                  <td><center> <%= rs.getString("estatus_exped").toUpperCase().trim()%></center></td>       
         </tr>
           <% } %>
         </table>
+        <label style="font-size: 10px;">* Para procedimientos no contenciosos, el valor asignado es "---".</label>
            
             </center>
         </div> 
