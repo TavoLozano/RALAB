@@ -18,6 +18,7 @@
         <link REL="stylesheet" href="css/menu.css">
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/fnPrincipal.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
        
     </head>
     <body>
@@ -291,11 +292,70 @@ request.setAttribute("horaFin", horaFin);
                         </fieldset>
   <br>
                         <center>   <input type="submit" id="Actualizar" value="Siguiente">
-            <input type="reset" value="Limpiar"></center>
+            <input type="reset" value="Restaurar"></center>
 
         </form>
                  
     </body>
+    
+<script>
+    const formulario = document.getElementById('form');
+    const guardarBtn = document.getElementById('Actualizar');
+    const colorCambio = '#3085d6'; // Color azul cuando hay cambios
+    let haCambiado = false; // Variable para detectar cambios
+
+    // Guardar el estado inicial de los inputs como un atributo data-original-value
+    function guardarEstadoInicial() {
+        const inputs = formulario.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.setAttribute('data-original-value', input.value.trim());
+        });
+    }
+
+    // Cambia el color del botón al detectar cambios en los inputs
+    formulario.addEventListener('input', () => {
+        haCambiado = true; // Cambiamos la variable a true
+        guardarBtn.style.backgroundColor = colorCambio; // Cambiar a azul si hay cambios
+    });
+
+    // Restablecer el color del botón al usar el botón reset
+    formulario.addEventListener('reset', () => {
+        setTimeout(() => {
+            guardarBtn.style.backgroundColor = ''; // Color original
+            guardarEstadoInicial(); // Actualizar el estado inicial
+        }, 0);
+    });
+
+    // Mostrar la ventana emergente antes de enviar el formulario
+    formulario.addEventListener('submit', function(event) {
+        // Evitar el envío automático del formulario
+        event.preventDefault();
+
+        // Solo muestra la advertencia si se han realizado cambios
+        if (haCambiado) {
+            // Mostrar la ventana de confirmación con SweetAlert2
+            Swal.fire({
+                title: '¿Desea aplicar los cambios?',
+                text: "Esta acción almacenará los cambios de manera permanente.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: colorCambio,
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, actualizar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    formulario.submit(); // Enviar el formulario si se confirma
+                }
+            });
+        }
+    });
+
+    // Inicializar guardando el estado inicial del formulario
+    guardarEstadoInicial();
+</script>
+
+    
     <script>
         function mostrarFechaHora() {
            const fecha = new Date();
@@ -303,6 +363,6 @@ request.setAttribute("horaFin", horaFin);
             campoTexto.value = fecha.toLocaleString();
         }
       
-        setInterval(mostrarFechaHora,1000)
+        setInterval(mostrarFechaHora,1000);
     </script>
 </html>
