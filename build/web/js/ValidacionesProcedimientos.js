@@ -67,38 +67,40 @@ $().ready(function () {
 //    $('colores').multiselect();
 });
 //-----------------------------------------------------------------------------------------------------------------------------------------------
-
-
+// Lista para almacenar los divs ocultos inicialmente
 var divsOcultosInicialmente = [];
-    // Especificar todos los divs que se pueden ocultar
-var divsProc = [
-        "divOrdinario",
-        "divIndividual",
-        "divColectivo",
-        "divHuelga",
-        "divColNatEco",
-        "divParaprocesal",
-        "divTerceria",
-        "divPrefCred",
-        "divEjecucion"
-    ];
 
+// Mapeo entre las opciones del select y los ids de los divs
+var divsProc = {
+    "Ordinario": "divOrdinario",
+    "Especial individual": "divIndividual",
+    "Especial colectivo": "divColectivo",
+    "Huelga": "divHuelga",
+    "Colectivo de naturaleza económica": "divColNatEco",
+    "Paraprocesal o voluntario": "divParaprocesal",
+    "Tercerías": "divTerceria",
+    "Preferencia de crédito": "divPrefCred",
+    "Ejecución": "divEjecucion"
+};
+
+// Función para detectar los divs ocultos inicialmente
 function detectarDivsOcultos() {
- var todosLosDivs = document.querySelectorAll('div');  // Selecciona todos los divs
+    var todosLosDivs = document.querySelectorAll('div');  // Selecciona todos los divs
     todosLosDivs.forEach(function(div) {
-        // Verificar si el div está oculto y no está en la lista de excluidos
-        if (window.getComputedStyle(div).display === 'none' && !divsProc.includes(div.id)) {
-            divsOcultosInicialmente.push(div);  // Almacenar el div si está oculto y no está excluido
+        // Verificar si el div está oculto y no pertenece a divsProc
+        if (window.getComputedStyle(div).display === 'none' && !Object.values(divsProc).includes(div.id)) {
+            divsOcultosInicialmente.push(div);  // Almacenar los divs ocultos que no están en el mapeo
         }
     });
 }
 
-// Llamar a esta función al cargar el JSP
+// Llamar a esta función al cargar la página (JSP)
 window.onload = detectarDivsOcultos;
 
+// Función para restablecer los divs ocultos inicialmente
 function restablecerDivsOcultos() {
     divsOcultosInicialmente.forEach(function(div) {
-        // Evitar restablecer selects con select2
+        // Evitar restablecer selects que tienen la clase de select2
         var elementos = div.querySelectorAll('select');
         var tieneSelect2 = Array.from(elementos).some(function(el) {
             return $(el).hasClass('select2-hidden-accessible');
@@ -109,26 +111,25 @@ function restablecerDivsOcultos() {
             ocultarYRestablecer(div);  // Restablecer el display a 'none'
         }
     });
-
 }
 
-
-//MUESTRA EL FORMULARIO CON BASE AL RPOCEDIMIENTO SELECCIONADO EN EL COMBOBOX
+// Función para mostrar el div correspondiente al procedimiento seleccionado en el combobox
 function mostrarProcedimientos() {
     var seleccion = document.getElementById("procedimientos").value;
 
-    // Ocultar y restablecer todos los divs que no son seleccionados
-    divsProc.forEach(function(divId) {
+    // Ocultar todos los divs mapeados
+    Object.values(divsProc).forEach(function(divId) {
         var divElement = document.getElementById(divId);
-
-        if (divId !== "div" + seleccion) {
-            ocultarYRestablecer(divElement);  // Ocultar y restablecer los no seleccionados
-        } else {
-            divElement.style.display = "block";  // Mostrar el div seleccionado
+        if (divElement) {
+            ocultarYRestablecer(divElement);  // Ocultar y restablecer todos los divs
         }
     });
-}
 
+    // Mostrar el div correspondiente a la opción seleccionada
+    if (divsProc[seleccion]) {
+        document.getElementById(divsProc[seleccion]).style.display = "block";
+    }
+}
 
 
 // -------------------------------------------------------VALIDACIONES PARA EL PROCEDIMIENTO ORDINARIO --------------------------------------------------------------------------------------
